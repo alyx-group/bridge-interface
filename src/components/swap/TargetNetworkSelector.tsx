@@ -35,9 +35,9 @@ const FlyoutMenu = styled.div`
   padding: 16px;
   position: absolute;
   top: 64px;
-  left: -2px;
+  left: 0px;
   
-  width: 137px;
+  width: 133px;
   z-index: 99;
 
   & > *:not(:last-child) {
@@ -47,6 +47,7 @@ const FlyoutMenu = styled.div`
     top: 50px;
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
+    width: 127px;
     position: relative;
     top: 10px;
     left: -2px;
@@ -61,7 +62,7 @@ const FlyoutRow = styled.div<{ active: boolean }>`
   display: flex;
   font-weight: 500;
   justify-content: space-between;
-  padding: 6px 10px;
+  padding: 6px 6px;
   /* margin: 6px 10px; */
   text-align: left;
   width: 90%;
