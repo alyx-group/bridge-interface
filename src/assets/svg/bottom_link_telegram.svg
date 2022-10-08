@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <style>.a{fill:none;}.b{fill:#fafbfd;fill-rule:evenodd;}</style>
+    </defs>
+    <g transform="translate(-0.476 -0.447)">
+        <rect class="a" width="40" height="40" rx="12" transform="translate(0.476 0.447)" />
+        <g transform="translate(9.087 10.602)">
+            <path class="b" d="M24.5,41.578a1.376,1.376,0,0,0,1.074-.537l2.864-2.785L24.866,36.1" transform="translate(-15.641 -23.049)" />
+            <path class="b" d="M21.38,30.974l8.656,6.4c.988.545,1.7.263,1.947-.917l3.524-16.6c.361-1.446-.551-2.1-1.5-1.673L13.32,26.153c-1.412.566-1.4,1.354-.257,1.705l5.309,1.657L30.664,21.76c.58-.352,1.113-.163.676.225" transform="translate(-12.23 -18.045)" />
+        </g>
+    </g>
+</svg>
