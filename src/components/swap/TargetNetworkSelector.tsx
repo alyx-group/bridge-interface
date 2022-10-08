@@ -15,38 +15,11 @@ import { useAppSelector } from 'state/hooks'
 import styled from 'styled-components'
 import { ExternalLink, MEDIA_WIDTHS } from 'theme'
 import { switchToNetwork } from 'utils/switchToNetwork'
-const ActiveRowLinkList = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 8px;
-  & > a {
-    align-items: center;
-    color: ${({ theme }) => theme.text2};
-    display: flex;
-    flex-direction: row;
-    font-size: 14px;
-    font-weight: 500;
-    justify-content: space-between;
-    padding: 8px 0 4px;
-    text-decoration: none;
-  }
-  & > a:first-child {
-    border-top: 1px solid ${({ theme }) => theme.text2};
-    margin: 0;
-    margin-top: 6px;
-    padding-top: 10px;
-  }
-`
-const ActiveRowWrapper = styled.div`
-  /* background-color: ${({ theme }) => theme.bg2}; */
-  /* border-radius: 8px;
-  cursor: pointer;
-  padding: 8px 0 8px 0;
-  width: 100%; */
-`
+
 const FlyoutHeader = styled.div`
   color: ${({ theme }) => theme.text2};
   font-weight: 400;
+  font-size: 14px;
 `
 const FlyoutMenu = styled.div`
   align-items: flex-start;
@@ -62,9 +35,9 @@ const FlyoutMenu = styled.div`
   padding: 16px;
   position: absolute;
   top: 64px;
-  left: -69px;
+  left: -2px;
   
-  width: 272px;
+  width: 137px;
   z-index: 99;
 
   & > *:not(:last-child) {
@@ -76,7 +49,7 @@ const FlyoutMenu = styled.div`
   ${({ theme }) => theme.mediaWidth.upToSmall`
     position: relative;
     top: 10px;
-    left: -72px;
+    left: -2px;
   `};
 `
 const FlyoutRow = styled.div<{ active: boolean }>`
@@ -96,26 +69,18 @@ const FlyoutRow = styled.div<{ active: boolean }>`
     background-color: ${({ active, theme }) => theme.bg3};
   }
 `
-const FlyoutRowActiveIndicator = styled.div`
-  background-color: ${({ theme }) => theme.green1};
-  border-radius: 50%;
-  height: 9px;
-  width: 9px;
-`
-const LinkOutCircle = styled(ArrowDownCircle)`
-  transform: rotate(230deg);
-  width: 16px;
-  height: 16px;
-`
+
 const Logo = styled.img`
   height: 25px;
   width: 25px;
-  /* margin-right: 8px; */
+  margin-right: 8px;
 `
 const NetworkLabel = styled.div`
-  flex: 0 1 auto;
+  /* padding-left: 30px; */
+  flex: 1 0 auto;
 `
-const SelectorLabel = styled(NetworkLabel)`
+const SelectorLabel = styled.div`
+  flex: 0 1 auto;
   // display: none;
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     display: block;
@@ -279,7 +244,7 @@ export default function NetworkSelector({ supportedChains, onSwitchChain }: Netw
       {open && (
         <FlyoutMenu>
           <FlyoutHeader>
-            <Trans>Select target network</Trans>
+            <Trans>Select To Chain</Trans>
           </FlyoutHeader>
           {supportedChains?.map((chainId) => (
             <Chain key={chainId} targetChain={chainId} />

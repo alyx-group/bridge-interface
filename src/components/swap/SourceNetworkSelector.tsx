@@ -16,39 +16,10 @@ import styled from 'styled-components'
 import { ExternalLink, MEDIA_WIDTHS } from 'theme'
 import { switchToNetwork } from 'utils/switchToNetwork'
 import SourceAddress from './SourceAddress'
-
-const ActiveRowLinkList = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 8px;
-  & > a {
-    align-items: center;
-    color: ${({ theme }) => theme.text2};
-    display: flex;
-    flex-direction: row;
-    font-size: 14px;
-    font-weight: 500;
-    justify-content: space-between;
-    padding: 8px 0 4px;
-    text-decoration: none;
-  }
-  & > a:first-child {
-    border-top: 1px solid ${({ theme }) => theme.text2};
-    margin: 0;
-    margin-top: 6px;
-    padding-top: 10px;
-  }
-`
-const ActiveRowWrapper = styled.div`
-  background-color: ${({ theme }) => theme.bg2};
-  border-radius: 8px;
-  cursor: pointer;
-  padding: 8px 0 8px 0;
-  width: 100%;
-`
 const FlyoutHeader = styled.div`
   color: ${({ theme }) => theme.text2};
   font-weight: 400;
+  font-size: 14px;
 `
 const FlyoutMenu = styled.div`
   align-items: flex-start;
@@ -63,9 +34,9 @@ const FlyoutMenu = styled.div`
   overflow: auto;
   padding: 16px;
   position: absolute;
-  width: 272px;
+  width: 137px;
   z-index: 99;
-  left: -69px;
+  left: -2px;
 
   & > *:not(:last-child) {
     margin-bottom: 12px;
@@ -95,27 +66,18 @@ const FlyoutRow = styled.div<{ active: boolean }>`
     background-color: ${({ active, theme }) => theme.bg2};
   }
 `
-const FlyoutRowActiveIndicator = styled.div`
-  background-color: ${({ theme }) => theme.green1};
-  border-radius: 50%;
-  height: 9px;
-  width: 9px;
-`
-const LinkOutCircle = styled(ArrowDownCircle)`
-  transform: rotate(230deg);
-  width: 16px;
-  height: 16px;
-`
+
 const Logo = styled.img`
   height: 25px;
   width: 25px;
   margin-right: 8px;
 `
 const NetworkLabel = styled.div`
-  flex: 0 1 auto;
+  flex: 1 0 auto;
 `
-const SelectorLabel = styled(NetworkLabel)`
+const SelectorLabel = styled.div`
   // display: none;
+  flex: 0 1 auto;
   margin-left: 4px;
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     display: block;
@@ -182,18 +144,6 @@ const StyledChevronDown = styled(ChevronDown)`
     display: none;
   `}
 `
-const BridgeText = ({ chainId }: { chainId: SupportedL2ChainId }) => {
-  switch (chainId) {
-    default:
-      return <Trans>Bridge</Trans>
-  }
-}
-const ExplorerText = ({ chainId }: { chainId: SupportedL2ChainId }) => {
-  switch (chainId) {
-    default:
-      return <Trans>Explorer</Trans>
-  }
-}
 
 interface NetworkSelectorProps {
   supportedChains: number[] | undefined
@@ -274,7 +224,7 @@ export default function NetworkSelector({ supportedChains }: NetworkSelectorProp
           {open && !isMobile && (
             <FlyoutMenu>
               <FlyoutHeader>
-                <Trans>Select source network</Trans>
+                <Trans>Select From Chain</Trans>
               </FlyoutHeader>
               {supportedChains?.map((chainId) => (
                 <Chain key={chainId} targetChain={chainId} />
@@ -295,7 +245,7 @@ export default function NetworkSelector({ supportedChains }: NetworkSelectorProp
             {open && (
               <FlyoutMenu>
                 <FlyoutHeader>
-                  <Trans>Select source network</Trans>
+                  <Trans>Select To Chain</Trans>
                 </FlyoutHeader>
                 {supportedChains?.map((chainId) => (
                   <Chain key={chainId} targetChain={chainId} />
