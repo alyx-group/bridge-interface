@@ -60,7 +60,7 @@ import AppBody from '../AppBody'
 
 import SwapLeft from './left'
 import CurrencyInput from './currencyInput'
-import { isMobile } from 'react-device-detect'
+import { isMobile, useDeviceData, deviceType } from 'react-device-detect'
 import ApproveFlow from './transferOrApprove'
 
 const SwapRight = styled.div`
@@ -284,6 +284,7 @@ export default function Home({ history }: RouteComponentProps) {
       </ButtonError>
     </ButtonWrapper>
   )
+  // useDeviceData()
   if (isMobile) {
     return (
       <>

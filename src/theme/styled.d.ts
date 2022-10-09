@@ -76,7 +76,8 @@ declare module 'styled-components/macro' {
       upToSmall: ThemedCssFunction<DefaultTheme>
       upToMedium: ThemedCssFunction<DefaultTheme>
       upToLarge: ThemedCssFunction<DefaultTheme>
-      upToExtraLarge: ThemedCssFunction<DefaultTheme>
+      upTo1600: ThemedCssFunction<DefaultTheme>
+      upTo2200: ThemedCssFunction<DefaultTheme>
     }
 
     // css snippets

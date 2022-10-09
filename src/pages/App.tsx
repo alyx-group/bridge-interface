@@ -18,6 +18,7 @@ import { ApplicationModal } from '../state/application/actions'
 import { useModalOpen, useToggleModal } from '../state/application/hooks'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import Home from './Home'
+import { isMobile, useDeviceData, deviceType } from 'react-device-detect'
 
 const AppWrapper = styled.div`
   /* display: flex; */
@@ -30,10 +31,13 @@ const AppWrapper = styled.div`
   margin: 0;
   /* border: 3px solid green; */
   height: 50px;
-  ${({ theme }) => theme.mediaWidth.upToExtraLarge`
-    zoom: 100%;
+  zoom: 85%;
+  ${({ theme }) => theme.mediaWidth.upTo1600`
+    zoom: 90%;
   `};
-  zoom: 80%;
+  ${({ theme }) => theme.mediaWidth.upTo2200`
+    zoom: 95%;
+  `};
 `
 const BackgroundGradient = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
@@ -98,6 +102,9 @@ ${({ theme }) => theme.mediaWidth.upToSmall`
 // }
 // Deferrable<TransactionRequest>
 export default function App() {
+  const deviceData = useDeviceData("")
+  console.log("window.innerHeight", window.innerHeight)
+  console.log("window.innerWidth", window.innerWidth)
   // const { chainId, library } = useActiveWeb3React()
   // const bridgeContract = useBridgeContract(chainId)
   // console.log('bridgeContract?.functions', bridgeContract)
