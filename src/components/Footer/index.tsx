@@ -12,7 +12,7 @@ const FooterFrame = styled.div`
   bottom: 0;
   /* padding: 1rem; */
   z-index: 21;
-  position: relative;
+  position: fixed;
   bottom: 0;
   /* border: solid 3px green; */
 /* 
@@ -41,7 +41,7 @@ export default function Footer() {
 
   return (
     <FooterFrame>
-      <CopyRight padding={"30px"} justify="center">
+      <CopyRight padding={"5px"} justify="center">
         <Text color={"#707070"} fontSize="10px" fontFamily="montserrat">Copyright © 2022 Alyx Bridge. All rights reserved. </Text>
       </CopyRight>
     </FooterFrame>

@@ -20,24 +20,29 @@ import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import Home from './Home'
 import { isMobile, useDeviceData, deviceType } from 'react-device-detect'
 
-const AppWrapper = styled.div`
-  /* display: flex; */
-  /* flex-flow: column; */
-  /* align-items: flex-start; */
-  /* width: 100%; */
+const AppWrapper = styled.div<{
+  minHeigth?: string;
+}>`
+  display: flex;
+  flex-flow: column;
+  min-height: ${({ minHeigth }) => minHeigth};
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
   /* margin-top: -10px;
   padding-right: 10px;
   padding-bottom: 20px; */
   margin: 0;
-  /* border: 3px solid green; */
-  height: 50px;
-  zoom: 85%;
-  ${({ theme }) => theme.mediaWidth.upTo1600`
+  /* border: 1px solid green; */
+  /* zoom: 85%; */
+  /* ${({ theme }) => theme.mediaWidth.upTo1600`
     zoom: 90%;
   `};
   ${({ theme }) => theme.mediaWidth.upTo2200`
     zoom: 95%;
-  `};
+  `}; */
 `
 const BackgroundGradient = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
@@ -50,8 +55,8 @@ const BackgroundGradient = styled.div`
 const BodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* width: 100%; */
-  padding: 70px 0px 16px 0px;
+  width: 100%;
+  /* padding: 70px 0px 16px 0px; */
   align-items: center;
   align-self: center;
   flex: 1;
@@ -66,11 +71,13 @@ const BodyWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   ${({ theme }) => theme.flexRowNoWrap}
-  /* width: 100%; */
-  justify-content: space-between;
-  /* position: fixed; */
+  width: 100%;
+  /* justify-content: space-between; */
+  position: fixed;
   top: 0;
-  z-index: 2;
+  background-color: #000000;
+  height: 69px;
+  z-index: 100;
   /* border: 3px solid red; */
   /* height: 90px; */
 `
@@ -102,9 +109,9 @@ ${({ theme }) => theme.mediaWidth.upToSmall`
 // }
 // Deferrable<TransactionRequest>
 export default function App() {
-  const deviceData = useDeviceData("")
-  console.log("window.innerHeight", window.innerHeight)
+  const { innerHeight, innerWidth } = window
   console.log("window.innerWidth", window.innerWidth)
+  console.log("window.innerHeight", window.innerHeight)
   // const { chainId, library } = useActiveWeb3React()
   // const bridgeContract = useBridgeContract(chainId)
   // console.log('bridgeContract?.functions', bridgeContract)
@@ -124,7 +131,7 @@ export default function App() {
       {/* <Route component={GoogleAnalyticsReporter} /> */}
       <Route component={DarkModeQueryParamReader} />
       <Web3ReactManager>
-        <AppWrapper>
+        <AppWrapper minHeigth={innerHeight+"px"}>
           {/* <BackgroundGradient></BackgroundGradient> */}
           <HeaderWrapper>
             <Header />

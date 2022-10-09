@@ -11,7 +11,7 @@ import Column from "components/Column"
 import Row from "components/Row"
 
 const Wrapper = styled.div`
-  flex: 1;
+  /* flex: 2; */
   /* background-color: green; */
   display: flex;
   flex-direction: column;
@@ -25,8 +25,11 @@ const Wrapper = styled.div`
 const PaddingLeft = styled(Wrapper)`
     padding-left: 200px;
 `
-const Triangle = styled.img`
+const Triangle = styled.img<{
+    width?: string
+}>`
     width: 587px;
+    /* width: ${({ width }) => width}; */
     position: absolute;
     z-index: -1;
     ${({ theme }) => theme.mediaWidth.upToSmall`
@@ -101,40 +104,61 @@ const Top = styled.div`
     padding: 0;
 `
 const PaddingTop = styled.div<{
-    top?: string|null
+    top?: string | null
 }>`
-    padding-top: ${props => props.top??"650px"};
+    padding-top: ${props => props.top ?? "650px"};
 `
+const communityLinks = [
+    {
+        name: "Telegram",
+        logo: TelegramLogo,
+        detail: "Join the community",
+        href: "https://t.me/AlyxChain"
+    },
+    {
+        name: "Discord",
+        logo: DiscordLogo,
+        detail: "Join the community",
+        href: "https://discord.com/invite/b8jzADM477"
+    },
+    {
+        name: "Twitter",
+        logo: TwitterLogo,
+        detail: "Follow last news",
+        href: "https://twitter.com/Alyx_Chain"
+    },
+    {
+        name: "Medium",
+        logo: MediumLogo,
+        detail: "Read Alyx articles",
+        href: "https://medium.com/@alyxchain"
+    },
+]
+const style = {
+    padding: "10px 0 0 0"
+}
+
+export function LogoTitle() {
+    
+
+    return (
+        <>
+            <Text fontSize={"40px"} letterSpacing={"3px"}>Alyx Bridge</Text>
+            <PText fontSize={"14px"} letterSpacing={"1.2px"}>Mint & Burn cross-chain protocol</PText>
+            <CommunityLinks style={style}>
+                {
+                    communityLinks.map(link => (
+                        <CommunityLink href={link.href} key={link.name}>
+                            <CommunityLogoWrapper></CommunityLogoWrapper>
+                            <CommunityLogo src={link.logo}></CommunityLogo>
+                        </CommunityLink>
+                    ))
+                }
+            </CommunityLinks>
+        </>
+    )
+}
 export default function SwapLeft() {
-    const style = {
-        padding: "10px 0 0 0"
-    }
-    const communityLinks = [
-        {
-            name: "Telegram",
-            logo: TelegramLogo,
-            detail: "Join the community",
-            href: "https://t.me/AlyxChain"
-        },
-        {
-            name: "Discord",
-            logo: DiscordLogo,
-            detail: "Join the community",
-            href: "https://discord.com/invite/b8jzADM477"
-        },
-        {
-            name: "Twitter",
-            logo: TwitterLogo,
-            detail: "Follow last news",
-            href: "https://twitter.com/Alyx_Chain"
-        },
-        {
-            name: "Medium",
-            logo: MediumLogo,
-            detail: "Read Alyx articles",
-            href: "https://medium.com/@alyxchain"
-        },
-    ]
     if (isMobile) {
         return (
             <Wrapper>
@@ -164,7 +188,7 @@ export default function SwapLeft() {
     }
     return (
         <Wrapper>
-            <PaddingLeft>
+            {/* <PaddingLeft> */}
                 {/* <Triangle src={LogoTriangle}></Triangle> */}
                 <Triangle src={LogoDiamond}></Triangle>
                 <PaddingTop></PaddingTop>
@@ -180,7 +204,7 @@ export default function SwapLeft() {
                         ))
                     }
                 </CommunityLinks>
-            </PaddingLeft>
+            {/* </PaddingLeft> */}
         </Wrapper>
     )
 }

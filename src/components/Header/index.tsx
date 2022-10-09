@@ -20,6 +20,9 @@ import Web3Status from '../Web3Status'
 
 
 const Transition = styled.div`
+  display: flex;
+  justify-content: center;
+  z-index: 100;
   width: 100%;
   .active {
     visibility: visible;
@@ -31,14 +34,17 @@ const Transition = styled.div`
     transform: translate(0, -100%);
   }
 `
-const HeaderFrame = styled.div<{ showBackground: boolean }>`
+const HeaderFrame = styled.div<{ 
+  showBackground: boolean;
+  width?: string;
+  }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  width: 100%;
+  width: 70%;
   top: 0;
   position: relative;
   z-index: 21;
@@ -50,7 +56,6 @@ const HeaderFrame = styled.div<{ showBackground: boolean }>`
   box-shadow: 0px 0px 0px 1px ${({ theme, showBackground }) => (showBackground ? theme.bg2 : 'transparent;')};
   transition: background-position 0.1s, box-shadow 0.1s;
   background-blend-mode: hard-light;
-  background-color: #000000;
   height: 69px;
 
   ${({ theme }) => theme.mediaWidth.upToLarge`
@@ -60,12 +65,14 @@ const HeaderFrame = styled.div<{ showBackground: boolean }>`
   ${({ theme }) => theme.mediaWidth.upToMedium`
     padding:  1rem;
     grid-template-columns: 1fr 1fr;
+    
   `};
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     padding:  5px;
     grid-template-columns: 1fr 1fr;
     height: 54px;
+    width: 100%;
   `};
 `
 const LogoText = styled(Text)`
@@ -88,7 +95,7 @@ const HeaderControls = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-self: center;
+  justify-self: flex-end;
 `
 
 const HeaderElement = styled.div`
@@ -189,8 +196,9 @@ const Title = styled.a`
   display: flex;
   align-items: center;
   pointer-events: auto;
-  justify-self: center;
+  justify-self: flex-start;
   margin-right: 12px;
+  
   /* border: 3px solid green; */
   text-decoration: none;
   color: white;
@@ -213,6 +221,7 @@ const UniIcon = styled.div`
   border-radius: 13px;
   width: 45px;
   height: 45px;
+
   ${({ theme }) => theme.mediaWidth.upToSmall`
     border-radius: 50%;
     width: 24px;

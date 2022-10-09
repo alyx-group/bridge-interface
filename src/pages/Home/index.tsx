@@ -58,18 +58,20 @@ import {
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import AppBody from '../AppBody'
 
-import SwapLeft from './left'
+import SwapLeft, { LogoTitle } from './left'
 import CurrencyInput from './currencyInput'
 import { isMobile, useDeviceData, deviceType } from 'react-device-detect'
 import ApproveFlow from './transferOrApprove'
+import LogoDiamond from '../../assets/images/diamond.gif'
+
 
 const SwapRight = styled.div`
-  flex: 1;
+  /* flex: 3; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 100px 0 0 10px;
+  padding: 100px 0 0 0px;
   gap: 50px;
   /* background-color: greenyellow; */
   width: auto;
@@ -115,6 +117,18 @@ const Reminder = styled.div<{
   /* text-decoration: dotted; */
 `
 
+const Triangle = styled.img<{
+  width?: string
+}>`
+  /* max-width: 487px; */
+  width: ${({ width }) => width};
+  /* position: absolute; */
+  z-index: -1;
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+      width: 280px;
+      // height: 280px;
+  `};
+`
 
 const supportedChains = [1, 128, 56]
 const supportedTargets = [1, 128, 56]
@@ -353,67 +367,75 @@ export default function Home({ history }: RouteComponentProps) {
             <Trans>Please Connect Wallet</Trans>
           </ButtonLight>
         ) : (
-          <>
-            <Row>
-              <SwapLeft></SwapLeft>
-              <SwapRight>
-                <ConfirmBridgeSwapModal
-                  isOpen={showConfirm}
-                  onAcceptChanges={() => { return }}
-                  attemptingTxn={attemptingTxn}
-                  txHash={txHash}
-                  recipient={recipient}
-                  allowedSlippage={allowedSlippage}
-                  onConfirm={handleSwap}
-                  swapErrorMessage={swapErrorMessage}
-                  onDismiss={handleConfirmDismiss}
-                />
-
-                <Row gap={"50px"}>
-                  <Column gap='5px'>
-                    <Text fontSize={"14px"}>From Chain</Text>
-                    <SourceNetworkSelector supportedChains={supportedChains} />
-                  </Column>
-                  <Column gap='5px'>
-                    <Text fontSize={"14px"}>Wallet Address</Text>
-                    <SourceAddress></SourceAddress>
-                  </Column>
-                </Row>
-                <Row>
-                  <CurrencyInput></CurrencyInput>
-                </Row>
-                <ArrowWrapper clickable={false}>
-                  <svg preserveAspectRatio="none" data-bbox="16.451 43.607 167.098 112.786" viewBox="16.451 43.607 167.098 112.786" height="38" width="57" fill="rgba(187,192,198, 0.8)" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="presentation" aria-hidden="true" aria-labelledby="svgcid-cwqqkl-k090dk"><title id="svgcid-cwqqkl-k090dk"></title>
-                    <g>
-                      <path d="M100.316 98.235l54.312-54.312 28.921 28.921L100 156.393 16.451 72.844l29.237-29.237 54.628 54.628z"></path>
-                    </g>
-                  </svg>
-                </ArrowWrapper>
-                {supportedTargets &&
-                  <Row gap={"50px"}>
-                    <Column gap="5px">
-                      <Text fontSize={"14px"}>To Chain</Text>
-                      <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
-                    </Column>
-                    <Column gap="5px">
-                      <Text fontSize={"14px"}>Wallet Address</Text>
-                      <TargetAddressInput onUserInput={handleAddressInput} />
-                    </Column>
-                  </Row>
-                }
-                <ApproveFlow TransferButton={TransferButton}></ApproveFlow>
-                <Column gap={"9px"} padding={"50px 0 0 217px"}>
-                  <ReminderTitle color="white"><Text fontSize="11px" fontFamily="montserrat_bold">Reminder:</Text></ReminderTitle>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain Fee is 0.5 %, Minimum Crosschain Fee is 1 USDC</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Fee is 1,000 USDC</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Minimum Crosschain Amount is 12 USDC</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Amount is 20,000,000 USDC</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Estimated Time of Crosschain Arrival is 10-30 min</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain amount larger than 5,000,000 USDC could take up to 12 hours</Text></Reminder>
+          <Row flex={1} width="100%" justify='center' gap='150px'>
+            <SwapLeft></SwapLeft>
+            <SwapRight>
+              <ConfirmBridgeSwapModal
+                isOpen={showConfirm}
+                onAcceptChanges={() => { return }}
+                attemptingTxn={attemptingTxn}
+                txHash={txHash}
+                recipient={recipient}
+                allowedSlippage={allowedSlippage}
+                onConfirm={handleSwap}
+                swapErrorMessage={swapErrorMessage}
+                onDismiss={handleConfirmDismiss}
+              />
+              {/* <Row justify='center' width="100%"> */}
+              {/* <Triangle src={LogoDiamond} width="40%"></Triangle> */}
+              {/* <Triangle src={LogoDiamond} width="50%"></Triangle> */}
+              {/* <Column gap={"30px"}> */}
+              <Row gap={"50px"}>
+                <Column gap='5px'>
+                  <Text fontSize={"14px"}>From Chain</Text>
+                  <SourceNetworkSelector supportedChains={supportedChains} />
                 </Column>
-              </SwapRight>
-            </Row>
-          </>
+                <Column gap='5px'>
+                  <Text fontSize={"14px"}>Wallet Address</Text>
+                  <SourceAddress></SourceAddress>
+                </Column>
+              </Row>
+              <Row>
+                <CurrencyInput></CurrencyInput>
+              </Row>
+              <ArrowWrapper clickable={false}>
+                <svg preserveAspectRatio="none" data-bbox="16.451 43.607 167.098 112.786" viewBox="16.451 43.607 167.098 112.786" height="38" width="57" fill="rgba(187,192,198, 0.8)" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="presentation" aria-hidden="true" aria-labelledby="svgcid-cwqqkl-k090dk"><title id="svgcid-cwqqkl-k090dk"></title>
+                  <g>
+                    <path d="M100.316 98.235l54.312-54.312 28.921 28.921L100 156.393 16.451 72.844l29.237-29.237 54.628 54.628z"></path>
+                  </g>
+                </svg>
+              </ArrowWrapper>
+              {supportedTargets &&
+                <Row gap={"50px"}>
+                  <Column gap="5px">
+                    <Text fontSize={"14px"}>To Chain</Text>
+                    <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
+                  </Column>
+                  <Column gap="5px">
+                    <Text fontSize={"14px"}>Wallet Address</Text>
+                    <TargetAddressInput onUserInput={handleAddressInput} />
+                  </Column>
+                </Row>
+              }
+              <ApproveFlow TransferButton={TransferButton}></ApproveFlow>
+              {/* </Column> */}
+              {/* </Row> */}
+
+              {/* <Row justify='center' width="100%"> */}
+              {/* <LogoTitle></LogoTitle> */}
+              <Column gap={"9px"} padding={"50px 0 0 217px"}>
+                <ReminderTitle color="white"><Text fontSize="11px" fontFamily="montserrat_bold">Reminder:</Text></ReminderTitle>
+                <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain Fee is 0.5 %, Minimum Crosschain Fee is 1 USDC</Text></Reminder>
+                <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Fee is 1,000 USDC</Text></Reminder>
+                <Reminder><Text fontSize="7px" fontFamily="montserrat">Minimum Crosschain Amount is 12 USDC</Text></Reminder>
+                <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Amount is 20,000,000 USDC</Text></Reminder>
+                <Reminder><Text fontSize="7px" fontFamily="montserrat">Estimated Time of Crosschain Arrival is 10-30 min</Text></Reminder>
+                <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain amount larger than 5,000,000 USDC could take up to 12 hours</Text></Reminder>
+              </Column>
+              {/* </Row> */}
+            </SwapRight>
+          </Row >
+
         )}
       </AppBody>
       <SwitchLocaleLink />
