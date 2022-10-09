@@ -19,10 +19,11 @@ export const Body = styled.main<{
   justify-items: center;
 
   position: relative;
-  top: 0px;
+  top: 150px;
+  
   /* background-color: red; */
   min-height: ${({ minHeigth }) => minHeigth};
-  
+  zoom: 80%;
 `
 
 export const BodyWrapper = styled.main<{ margin?: string; maxWidth?: string; minHeigth?: string; }>`
@@ -38,7 +39,8 @@ export const BodyWrapper = styled.main<{ margin?: string; maxWidth?: string; min
   align-items: center;
 
   /* border: 1px solid yellow; */
-  /* position: fixed; */
+  /* position: relative; */
+  /* top: 0; */
   min-height: ${({ minHeigth }) => minHeigth};
 `
 const BackGroundVedio = styled.video<{
@@ -88,12 +90,14 @@ export default function AppBody({ children, ...rest }: { children: React.ReactNo
     )
   }
   return (
-    <Body {...rest} minHeigth={(innerHeight - 72) + "px"}>
+    <Body minHeigth={(innerHeight - 72) + "px"}>
       <BackGroundVedio
         autoPlay loop muted>
         <source src='file.mp4' type='video/mp4'></source>
       </BackGroundVedio>
       {children}
+      {/* <BodyWrapper minHeigth={(innerHeight - 72) + "px"}{...rest}> */}
+      {/* </BodyWrapper> */}
     </Body>
   )
 }
