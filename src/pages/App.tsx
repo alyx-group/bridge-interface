@@ -36,7 +36,7 @@ const AppWrapper = styled.div<{
   padding-bottom: 20px; */
   margin: 0;
   /* border: 1px solid green; */
-  /* zoom: 85%; */
+  zoom: 80%;
   /* ${({ theme }) => theme.mediaWidth.upTo1600`
     zoom: 90%;
   `};
