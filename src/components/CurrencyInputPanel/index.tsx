@@ -266,7 +266,7 @@ export default function CurrencyInputPanel({
     return (
       <InputPanel id={id} hideInput={hideInput} {...rest}>
         <Container hideInput={hideInput} id='container'>
-          <Row padding="30px 0 0 0" gap='10px'>
+          <Row padding="15px 0 0 0" gap='10px'>
             {!hideInput && (
               <StyledNumericalInputWrapper>
                 <Text fontSize={"11px"}>Amount</Text>

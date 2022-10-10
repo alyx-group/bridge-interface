@@ -84,7 +84,7 @@ const SelectorLabel = styled.div`
     margin-right: 8px;
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    font-size: 10px;
+    font-size: 11px;
   `}
 `
 const SelectorControls = styled.div<{ interactive: boolean }>`

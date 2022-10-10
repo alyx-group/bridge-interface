@@ -24,6 +24,10 @@ export const Body = styled.main<{
   /* background-color: red; */
   min-height: ${({ minHeigth }) => minHeigth};
   zoom: 80%;
+  ${({theme}) => theme.mediaWidth.upToSmall`
+    top: 0px;
+    zoom: 100%;
+  `}
 `
 
 export const BodyWrapper = styled.main<{ margin?: string; maxWidth?: string; minHeigth?: string; }>`
@@ -62,7 +66,7 @@ const BackGroundVedio = styled.video<{
 const BackGroundImg = styled.img`
     /* width: 100%;  */
     width: inherit;
-    height: 1200px; 
+    height: 1150px; 
     object-fit: fill; 
     position: absolute;
     z-index: -1;

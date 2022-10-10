@@ -92,7 +92,7 @@ const ButtonWrapper = styled.div`
     width: 100%;
     height: 28px;
     margin: 0px;
-    padding-top: 80px;
+    padding-top: 60px;
     align-self: center;
     margin-left: 0px;
   `};
@@ -322,20 +322,20 @@ export default function Home({ history }: RouteComponentProps) {
                 onDismiss={handleConfirmDismiss}
               />
               <Column gap='15px' justifyContent="center" alignItems="center">
-                <Text fontSize={"13px"}>From Chain</Text>
+                <Text fontSize={"14px"}>From Chain</Text>
                 <SourceNetworkSelector supportedChains={supportedChains} />
                 {/* <SourceAddress></SourceAddress> */}
               </Column>
               <CurrencyInput></CurrencyInput>
               <ArrowWrapper clickable={false}>
-                <svg preserveAspectRatio="none" data-bbox="16.451 43.607 167.098 112.786" viewBox="16.451 43.607 167.098 112.786" height="30" width="46" fill="rgba(187,192,198, 0.8)" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="presentation" aria-hidden="true" aria-labelledby="svgcid-cwqqkl-k090dk"><title id="svgcid-cwqqkl-k090dk"></title>
+                <svg preserveAspectRatio="none" data-bbox="16.451 43.607 167.098 112.786" viewBox="16.451 43.607 167.098 112.786" height="30" width="46" fill="rgba(255,255,255, 1)" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="presentation" aria-hidden="true" aria-labelledby="svgcid-cwqqkl-k090dk"><title id="svgcid-cwqqkl-k090dk"></title>
                   <g>
                     <path d="M100.316 98.235l54.312-54.312 28.921 28.921L100 156.393 16.451 72.844l29.237-29.237 54.628 54.628z"></path>
                   </g>
                 </svg>
               </ArrowWrapper>
-              <Column padding='50px 0 0 0' gap="15px" justifyContent="center" alignItems="center">
-                <Text fontSize={"13px"}>To</Text>
+              <Column padding='40px 0 0 0' gap="15px" justifyContent="center" alignItems="center">
+                <Text fontSize={"14px"}>To</Text>
                 <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
                 <TargetAddressInput onUserInput={handleAddressInput} />
               </Column>
