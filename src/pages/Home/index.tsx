@@ -92,7 +92,7 @@ const ButtonWrapper = styled.div`
     width: 100%;
     height: 28px;
     margin: 0px;
-    padding-top: 60px;
+    padding-top: 40px;
     align-self: center;
     margin-left: 0px;
   `};
@@ -321,7 +321,7 @@ export default function Home({ history }: RouteComponentProps) {
                 swapErrorMessage={swapErrorMessage}
                 onDismiss={handleConfirmDismiss}
               />
-              <Column gap='15px' justifyContent="center" alignItems="center">
+              <Column gap='15px' justifyContent="center" alignItems="center" padding="50px 0 0 0">
                 <Text fontSize={"14px"}>From Chain</Text>
                 <SourceNetworkSelector supportedChains={supportedChains} />
                 {/* <SourceAddress></SourceAddress> */}
@@ -334,7 +334,7 @@ export default function Home({ history }: RouteComponentProps) {
                   </g>
                 </svg>
               </ArrowWrapper>
-              <Column padding='40px 0 0 0' gap="15px" justifyContent="center" alignItems="center">
+              <Column padding='20px 0 0 0' gap="15px" justifyContent="center" alignItems="center">
                 <Text fontSize={"14px"}>To</Text>
                 <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
                 <TargetAddressInput onUserInput={handleAddressInput} />

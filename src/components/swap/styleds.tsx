@@ -23,7 +23,7 @@ export const ArrowWrapper = styled.div<{ clickable: boolean }>`
   justify-content: center;
   align-items: center;
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    padding-top: 50px;
+    padding-top: 30px;
     width: 100%;
   `};
 `
