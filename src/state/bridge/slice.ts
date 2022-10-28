@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { SupportedChainId } from 'constants/chains'
+import { ALL_SUPPORTED_CHAIN_SHORT_NAMES_MAP_TO_CHAINID, SupportedChainId } from 'constants/chains'
 import qs from 'qs'
 
 import {
@@ -7,15 +7,15 @@ import {
   GetBridgeSupportedTargetNetworksResult,
   GetBridgeSupportedTokenResult,
   GetWithdrawTxHashResult,
-  BindAddressResult,
+  getBridgePairInfo
 } from './types'
 
 export const bridgeApi = createApi({
   reducerPath: 'bridgeApi',
   baseQuery: fetchBaseQuery({
-    // baseUrl: 'http://127.0.0.1:8080/v1/bridge', // local
-    baseUrl: 'https://api.esbridge.io/v1/bridge', // hsc1
-    // baseUrl: 'http://192.168.1.6:8080/v1/bridge', // t440
+    // baseUrl: 'http://127.0.0.1:8080/v1', // local
+    baseUrl: 'https://api.alyxbridge.com/v1', // alyx
+    // baseUrl: 'http://192.168.1.6:8080/v1', // t440
   }),
   endpoints: (build) => ({
     getBridgeSupportedChains: build.query<GetBridgeSupportedChainsResult, undefined>({
@@ -33,6 +33,21 @@ export const bridgeApi = createApi({
     getTargetChainWithdrawTxHash: build.query<GetWithdrawTxHashResult, { proof: string }>({
       query: (args) => `/withdraw/hash?${qs.stringify(args)}`,
     }),
+    getBridgePairInfo: build.query<getBridgePairInfo, {
+      source_chain: string;
+      token: string;
+      target_chain: string;
+    }>({
+      query: (args) => ({
+        url: `/pair`,
+        method: 'POST',
+        body: `${JSON.stringify({
+          source_chain: args.source_chain,
+          token: args.token,
+          target_chain: args.target_chain,
+        })}`,
+      })
+    }),
   }),
 })
 export const {
@@ -40,6 +55,7 @@ export const {
   useGetBridgeSupportedTargetNetworksQuery,
   useGetBridgeSupportedTokensQuery,
   useGetTargetChainWithdrawTxHashQuery,
+  useGetBridgePairInfoQuery,
 } = bridgeApi
 
 export const { } = bridgeApi.internalActions

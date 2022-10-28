@@ -1,6 +1,6 @@
 import ethereumLogoUrl from 'assets/images/ethereum-logo.png'
 import arbitrumLogoUrl from 'assets/svg/arbitrum_logo.svg'
-import hscLogoUrl from 'assets/svg/hsc-light.svg'
+import alyxLogoUrl from 'assets/images/logo-color.png'
 import hecoLogoUrl from 'assets/svg/huobi-light.svg'
 import bscLogoUrl from 'assets/svg/bsc-light.svg'
 import optimismLogoUrl from 'assets/svg/optimistic_ethereum.svg'
@@ -18,44 +18,44 @@ export enum SupportedChainId {
   OPTIMISM = 10,
   OPTIMISTIC_KOVAN = 69,
 
-  HSC = 70,
   HECO = 128,
   BSC = 56,
+  ALYX = 1314, 
 }
 
 export const ALL_SUPPORTED_CHAIN_SHORT_NAMES = {
   [SupportedChainId.MAINNET]: 'ethereum',
-  [SupportedChainId.HSC]: 'hsc',
+  [SupportedChainId.ALYX]: 'alyx',
   [SupportedChainId.HECO]: 'heco',
   [SupportedChainId.BSC]: 'bsc',
 }
 export const ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER = {
   [SupportedChainId.MAINNET]: 'Ethereum',
-  [SupportedChainId.HSC]: 'HSC',
+  [SupportedChainId.ALYX]: 'alyx',
   [SupportedChainId.HECO]: 'HECO',
   [SupportedChainId.BSC]: 'BSC',
 }
 export const ALL_SUPPORTED_CHAIN_SHORT_NAMES_MAP_TO_CHAINID = {
   'ethereum': SupportedChainId.MAINNET,
-  'hsc': SupportedChainId.HSC,
+  'alyx': SupportedChainId.ALYX,
   'heco': SupportedChainId.HECO,
   'bsc': SupportedChainId.BSC,
 }
 export const ALL_SUPPORTED_CHAIN_FULL_NAMES = {
   [SupportedChainId.MAINNET]: 'Ethereum',
-  [SupportedChainId.HSC]: 'Hoo Smart Chain',
+  [SupportedChainId.ALYX]: 'ALYX Chain',
   [SupportedChainId.HECO]: 'Huobi ECO Chain',
   [SupportedChainId.BSC]: 'Binance Smart Chain',
 }
 export const ALL_SUPPORTED_CHAIN_SHORT_FULL_NAME_MAP = {
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.MAINNET]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.MAINNET],
-  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.HSC]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.HSC],
+  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.ALYX]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.ALYX],
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.HECO]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.HECO],
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.BSC]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.BSC],
 }
 export const ALL_SUPPORTED_CHAIN_SHORT_NAME_MAP_TO_CAPITAL_LETTER = {
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.MAINNET]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.MAINNET],
-  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.HSC]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.HSC],
+  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.ALYX]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.ALYX],
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.HECO]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.HECO],
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.BSC]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.BSC],
 }
@@ -71,7 +71,7 @@ export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
   SupportedChainId.OPTIMISM,
   SupportedChainId.OPTIMISTIC_KOVAN,
 
-  SupportedChainId.HSC,
+  SupportedChainId.ALYX,
   SupportedChainId.HECO,
   SupportedChainId.BSC,
 ]
@@ -82,7 +82,7 @@ export const L1_CHAIN_IDS = [
   SupportedChainId.RINKEBY,
   SupportedChainId.GOERLI,
   SupportedChainId.KOVAN,
-  SupportedChainId.HSC,
+  SupportedChainId.ALYX,
   SupportedChainId.HECO,
   SupportedChainId.BSC,
 ] as const
@@ -154,13 +154,13 @@ export const CHAIN_INFO: ChainInfo = {
     logoUrl: ethereumLogoUrl,
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
   },
-  [SupportedChainId.HSC]: {
-    docs: 'https://docs.hoosmartchain.com/',
-    explorer: 'https://hooscan.com/',
+  [SupportedChainId.ALYX]: {
+    docs: 'https://docs.alyxchain.com/',
+    explorer: 'https://www.alyxscan.com/',
     infoLink: 'https://info.uniswap.org/#/',
-    label: 'HOO SMART CHAIN',
-    logoUrl: hscLogoUrl,
-    nativeCurrency: { name: 'HOO', symbol: 'HOO', decimals: 18 },
+    label: 'ALYX',
+    logoUrl: alyxLogoUrl,
+    nativeCurrency: { name: 'ALYX', symbol: 'ALYX', decimals: 18 },
   },
   [SupportedChainId.HECO]: {
     docs: 'https://docs.hecochain.com/',

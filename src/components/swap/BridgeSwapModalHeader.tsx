@@ -190,7 +190,7 @@ export default function BridgeSwapModalHeader() {
         </AutoColumn>
       </LightCard>
 
-      {targetChain === "HSC" &&
+      {targetChain === "ALYX" &&
         <LightCard padding="0.75rem 1rem" style={{ marginBottom: '0.25rem' }}>
           <AutoColumn gap={'8px'}>
             <RowBetween>

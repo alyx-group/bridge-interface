@@ -1,5 +1,6 @@
 import { TokenList } from '@uniswap/token-lists'
 import { ValidateFunction } from 'ajv'
+import { ALL_SUPPORTED_CHAIN_SHORT_NAMES_MAP_TO_CHAINID } from 'constants/chains'
 
 import contenthashToUri from './contenthashToUri'
 import { parseENSAddress } from './parseENSAddress'
@@ -29,6 +30,8 @@ const getTokenListValidator = (() => {
  * @param resolveENSContentHash resolves an ens name to a contenthash
  */
 export default async function getTokenList(
+  sourceChain: string | null,
+  targetChain: string | null,
   listUrl: string,
   resolveENSContentHash: (ensName: string) => Promise<string>
 ): Promise<TokenList> {
@@ -55,7 +58,14 @@ export default async function getTokenList(
     urls = uriToHttp(listUrl)
   }
   for (let i = 0; i < urls.length; i++) {
-    const url = urls[i]
+    console.log("getTokenList->sourceChain", sourceChain)
+    console.log("getTokenList->targetChain", targetChain)
+    let url = urls[i]
+    if (sourceChain && targetChain) {
+      url = `${url}?source_chain=${sourceChain}&target_chain=${targetChain}`
+    }
+    console.log("getTokenList->url", url)
+
     const isLast = i === urls.length - 1
     let response
     try {
@@ -73,26 +83,32 @@ export default async function getTokenList(
 
     const [json, validator] = await Promise.all([response.json(), tokenListValidator])
 
+    console.log("getTokenList->response", json)
+    console.log("getTokenList->url.search('supported/tokens') > -1", url.search('supported/tokens') > -1)
     let validatorResult
-    if (url.search('bridge/supported/tokens') > -1) {
+    if (url.search('supported/tokens') > -1) {
       validatorResult = validator(json.data)
+      console.log("getTokenList->json.data", json.data)
+      console.log("getTokenList->validator", validator)
+      console.log("getTokenList->validatorResult", validatorResult)
     } else {
       validatorResult = validator(json)
     }
-    if (!validatorResult) {
-      const validationErrors: string =
-        validator.errors?.reduce<string>((memo, error) => {
-          const add = `${error.dataPath} ${error.message ?? ''}`
-          return memo.length > 0 ? `${memo}; ${add}` : `${add}`
-        }, '') ?? 'unknown error'
-      throw new Error(`Token list failed validation: ${validationErrors}`)
-    }
-    if (url.search('bridge/supported/tokens') > -1) {
+    // if (!validatorResult) {
+    //   const validationErrors: string =
+    //     validator.errors?.reduce<string>((memo, error) => {
+    //       const add = `${error.dataPath} ${error.message ?? ''}`
+    //       return memo.length > 0 ? `${memo}; ${add}` : `${add}`
+    //     }, '') ?? 'unknown error'
+    //   throw new Error(`Token list failed validation: ${validationErrors}`)
+    // }
+    if (url.search('supported/tokens') > -1) {
       // adapt backend data json format
       return json.data
     } else {
       return json
     }
+
   }
   throw new Error('Unrecognized list URL protocol.')
 }

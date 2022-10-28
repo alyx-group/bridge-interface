@@ -126,12 +126,12 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
     'WETH',
     'Wrapped ETH'
   ),
-  [SupportedChainId.HSC]: new Token(
-    SupportedChainId.HSC,
+  [SupportedChainId.ALYX]: new Token(
+    SupportedChainId.ALYX,
     '0x3eff9d389d13d6352bfb498bcf616ef9b1beac87',
     18,
-    'wHOO',
-    'Wrapped HOO'
+    'WALYX',
+    'Wrapped ALYX'
   ),
   [SupportedChainId.HECO]: new Token(
     SupportedChainId.HECO,

@@ -115,7 +115,7 @@ export default function App() {
   // const { chainId, library } = useActiveWeb3React()
   // const bridgeContract = useBridgeContract(chainId)
   // console.log('bridgeContract?.functions', bridgeContract)
-  // bridgeContract?.callStatic["minDeposit"]('hsc', '0xD16bAbe52980554520F6Da505dF4d1b124c815a7').then(res => {
+  // bridgeContract?.callStatic["minDeposit"]('alyx', '0xD16bAbe52980554520F6Da505dF4d1b124c815a7').then(res => {
   //   const minDeposit = BigNumber.from(res).toBigInt()
   //   console.log('minDeposit', minDeposit)
   // })

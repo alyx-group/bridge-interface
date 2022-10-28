@@ -3,7 +3,7 @@ import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUnisw
 import { abi as QuoterABI } from '@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json'
 import { abi as MulticallABI } from '@uniswap/v3-periphery/artifacts/contracts/lens/UniswapInterfaceMulticall.sol/UniswapInterfaceMulticall.json'
 import ARGENT_WALLET_DETECTOR_ABI from 'abis/argent-wallet-detector.json'
-import HSC_BRIDGE_CONTRACT_ABI from 'abis/hsc-bridge-contract.json'
+import ALYX_BRIDGE_CONTRACT_ABI from 'abis/alyx-bridge-contract.json'
 import HECO_BRIDGE_CONTRACT_ABI from 'abis/heco-bridge-contract.json'
 import BSC_BRIDGE_CONTRACT_ABI from 'abis/heco-bridge-contract.json'
 import EIP_2612 from 'abis/eip_2612.json'
@@ -95,8 +95,8 @@ export function useV2RouterContract(): Contract | null {
 export function useBridgeContract(chainId: SupportedChainId | undefined): Contract | null {
   let abi = [] as any
   switch (chainId) {
-    case SupportedChainId.HSC:
-      abi = HSC_BRIDGE_CONTRACT_ABI
+    case SupportedChainId.ALYX:
+      abi = ALYX_BRIDGE_CONTRACT_ABI
       break;
     case SupportedChainId.HECO:
       abi = HECO_BRIDGE_CONTRACT_ABI
@@ -105,7 +105,7 @@ export function useBridgeContract(chainId: SupportedChainId | undefined): Contra
       abi = BSC_BRIDGE_CONTRACT_ABI
       break;
     case SupportedChainId.MAINNET:
-      abi = HSC_BRIDGE_CONTRACT_ABI
+      abi = ALYX_BRIDGE_CONTRACT_ABI
       break;
     default:
       break;

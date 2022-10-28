@@ -162,7 +162,7 @@ export default function NetworkSelector({ supportedChains }: NetworkSelectorProp
   // const isOnL2 = chainId ? L2_CHAIN_IDS.includes(chainId) : false
   const showSelector = Boolean(implements3085)
   // const showSelector = true
-  const mainnetInfo = CHAIN_INFO[SupportedChainId.HSC]
+  const mainnetInfo = CHAIN_INFO[SupportedChainId.ALYX]
 
   const conditionalToggle = useCallback(() => {
     if (showSelector) {
@@ -245,7 +245,7 @@ export default function NetworkSelector({ supportedChains }: NetworkSelectorProp
             {open && (
               <FlyoutMenu>
                 <FlyoutHeader>
-                  <Trans>Select To Chain</Trans>
+                  <Trans>Select From Chain</Trans>
                 </FlyoutHeader>
                 {supportedChains?.map((chainId) => (
                   <Chain key={chainId} targetChain={chainId} />

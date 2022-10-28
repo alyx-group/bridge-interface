@@ -1,9 +1,10 @@
 import { getVersionUpgrade, minVersionBump, VersionUpgrade } from '@uniswap/token-lists'
-import { SupportedChainId } from 'constants/chains'
+import { ALL_SUPPORTED_CHAIN_SHORT_NAMES, SupportedChainId } from 'constants/chains'
 import { UNSUPPORTED_LIST_URLS } from 'constants/lists'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useAppDispatch } from 'state/hooks'
 import { useAllLists } from 'state/lists/hooks'
+import { useSwapState } from 'state/swap/hooks'
 
 import { useFetchListCallback } from '../../hooks/useFetchListCallback'
 import useInterval from '../../hooks/useInterval'
@@ -20,14 +21,26 @@ export default function Updater(): null {
   // get all loaded lists, and the active urls
   const lists = useAllLists()
   const activeListUrls = useActiveListUrls()
+  const {
+    targetChain,
+  } = useSwapState()
+
+  const sourceChain = useMemo(() => {
+    let sourceChain: string | null = null
+    if (chainId) {
+      sourceChain = ALL_SUPPORTED_CHAIN_SHORT_NAMES[chainId]
+    }
+    return sourceChain
+  }, [chainId])
 
   const fetchList = useFetchListCallback()
   const fetchAllListsCallback = useCallback(() => {
     if (!isWindowVisible) return
-    Object.keys(lists).forEach((url) =>
-      fetchList(url).catch((error) => console.debug('interval list fetching error', error))
-    )
-  }, [fetchList, isWindowVisible, lists])
+    Object.keys(lists).forEach((url) => {
+      fetchList(sourceChain, targetChain, url,).catch((error) => console.debug('interval list fetching error', error))
+    })
+  }, [fetchList, sourceChain, targetChain, isWindowVisible, lists])
+
 
   // useEffect(() => {
   //   if (chainId && [SupportedChainId.OPTIMISM, SupportedChainId.OPTIMISTIC_KOVAN].includes(chainId)) {
@@ -38,27 +51,31 @@ export default function Updater(): null {
   //   }
   // }, [chainId, dispatch])
   // fetch all lists every 10 minutes, but only after we initialize library
-  useInterval(fetchAllListsCallback, library ? 1000 * 60 * 10 : null)
+  // useInterval(fetchAllListsCallback, library ? 1000 * 60 * 10 : null)
 
   // whenever a list is not loaded and not loading, try again to load it
   useEffect(() => {
-    Object.keys(lists).forEach((listUrl) => {
-      const list = lists[listUrl]
-      if (!list.current && !list.loadingRequestId && !list.error) {
-        fetchList(listUrl).catch((error) => console.debug('list added fetching error', error))
-      }
-    })
-  }, [dispatch, fetchList, library, lists])
+    console.log("fetchAllListsCallback->getTokenList->sourceChain,targetChain,lists", sourceChain, targetChain, lists)
+    if (sourceChain && targetChain && (sourceChain != targetChain)) {
+      console.log("fetchAllListsCallback->getTokenList->fetch")
+      Object.keys(lists).forEach((listUrl) => {
+        const list = lists[listUrl]
+        if (!list.current && !list.loadingRequestId && !list.error) {
+          fetchList(sourceChain, targetChain, listUrl,).catch((error) => console.debug('list added fetching error', error))
+        }
+      })
+    }
+  }, [dispatch, fetchList, sourceChain, targetChain, library, lists])
 
   // if any lists from unsupported lists are loaded, check them too (in case new updates since last visit)
   useEffect(() => {
     UNSUPPORTED_LIST_URLS.forEach((listUrl) => {
       const list = lists[listUrl]
       if (!list || (!list.current && !list.loadingRequestId && !list.error)) {
-        fetchList(listUrl).catch((error) => console.debug('list added fetching error', error))
+        fetchList(sourceChain, targetChain, listUrl).catch((error) => console.debug('list added fetching error', error))
       }
     })
-  }, [dispatch, fetchList, library, lists])
+  }, [dispatch, fetchList, sourceChain, targetChain, library, lists])
 
   // automatically update lists if versions are minor/patch
   useEffect(() => {

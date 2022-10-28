@@ -24,17 +24,17 @@ export enum ExplorerDataType {
  * @param type the type of the data
  */
 export function getExplorerLink(chainId: number, data: string, type: ExplorerDataType): string {
-  if (chainId === SupportedChainId.HSC) {
+  if (chainId === SupportedChainId.ALYX) {
     switch (type) {
       case ExplorerDataType.TRANSACTION:
-        return `https://hooscan.com/tx/${data}`
+        return `https://www.alyxscan.com/tx/${data}`
       case ExplorerDataType.ADDRESS:
       case ExplorerDataType.TOKEN:
-        return `https://hooscan.com/address/${data}`
+        return `https://www.alyxscan.com/address/${data}`
       case ExplorerDataType.BLOCK:
-        return `https://hooscan.com/block/${data}`
+        return `https://www.alyxscan.com/block/${data}`
       default:
-        return `https://hooscan.com/`
+        return `https://www.alyxscan.com/`
     }
   }
   if (chainId === SupportedChainId.HECO) {

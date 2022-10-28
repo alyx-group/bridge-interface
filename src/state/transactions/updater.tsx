@@ -35,7 +35,7 @@ export function shouldCheck(lastBlockNumber: number, tx: TxInterface): boolean {
 }
 
 const RETRY_OPTIONS_BY_CHAIN_ID: { [chainId: number]: RetryOptions } = {
-  [SupportedChainId.HSC]: { n: 10, minWait: 250, maxWait: 1000 },
+  [SupportedChainId.ALYX]: { n: 10, minWait: 250, maxWait: 1000 },
   [SupportedChainId.HECO]: { n: 10, minWait: 250, maxWait: 1000 },
   [SupportedChainId.BSC]: { n: 10, minWait: 250, maxWait: 1000 },
   [SupportedChainId.MAINNET]: { n: 10, minWait: 250, maxWait: 1000 },

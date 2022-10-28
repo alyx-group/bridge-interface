@@ -126,9 +126,9 @@ function CurrencyRow({
   let symbol = currency.symbol
   if (currency.isNative) {
     switch (chainId) {
-      case SupportedChainId.HSC:
-        name = 'HooSmartChain Native Token'
-        symbol = 'HOO'
+      case SupportedChainId.ALYX:
+        name = 'ALYX Native Token'
+        symbol = 'ALYX'
         break
       case SupportedChainId.HECO:
         name = 'Heco Native Token'

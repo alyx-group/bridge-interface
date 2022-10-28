@@ -337,7 +337,7 @@ export default function Header() {
                   <Trans>
                     {userEthBalance?.toSignificant(3) +
                       ' ' +
-                      CHAIN_INFO[chainId ? chainId : SupportedChainId.HSC].nativeCurrency.symbol}
+                      CHAIN_INFO[chainId ? chainId : SupportedChainId.ALYX].nativeCurrency.symbol}
                   </Trans>
                 </BalanceText>
               ) : null}

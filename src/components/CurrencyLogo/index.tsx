@@ -5,7 +5,7 @@ import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
-import HscLogo from '../../assets/images/hsc-logo.png'
+import AlyxLogo from '../../assets/images/logo-color.png'
 import HecoLogo from '../../assets/images/heco-logo.png'
 import BscLogo from '../../assets/images/bsc-logo.jpg'
 import useHttpLocations from '../../hooks/useHttpLocations'
@@ -58,8 +58,8 @@ export default function CurrencyLogo({
 
   if (currency?.isNative) {
     switch (chainId) {
-      case SupportedChainId.HSC:
-        return <StyledEthereumLogo src={HscLogo} alt="hoo logo" size={size} style={style} {...rest} />
+      case SupportedChainId.ALYX:
+        return <StyledEthereumLogo src={AlyxLogo} alt="alyx logo" size={size} style={style} {...rest} />
       case SupportedChainId.HECO:
         return <StyledEthereumLogo src={HecoLogo} alt="heco logo" size={size} style={style} {...rest} />
       case SupportedChainId.BSC:

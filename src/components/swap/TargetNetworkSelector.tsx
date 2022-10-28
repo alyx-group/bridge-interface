@@ -179,7 +179,7 @@ export default function NetworkSelector({ supportedChains, onSwitchChain }: Netw
   // const isOnL2 = chainId ? L2_CHAIN_IDS.includes(chainId) : false
   // const showSelector = Boolean(implements3085)
   const showSelector = true
-  const mainnetInfo = CHAIN_INFO[SupportedChainId.HSC]
+  const mainnetInfo = CHAIN_INFO[SupportedChainId.ALYX]
 
   if (!supportedChains.includes(selectedTargetChain)) {
     setSelectedTargetChain(supportedChains[0])
