@@ -165,6 +165,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
             </>
         )
     }
+    console.log("ApproveFlow->currencies[Field.INPUT]?.symbol", currencies[Field.INPUT]?.symbol)
     return (
         <>
             {

@@ -163,7 +163,7 @@ function CurrencyRow({
       <CurrencyLogo currency={currency} size={'24px'} />
       <Column>
         <Text title={currency.name} fontWeight={500}>
-          {index}:{symbol}
+          {symbol}
         </Text>
         <TYPE.darkGray ml="0px" fontSize={'12px'} fontWeight={300}>
           {!currency.isNative && !isOnSelectedList && customAdded ? (
