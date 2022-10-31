@@ -37,7 +37,9 @@ import {
 } from './actions'
 import { SwapState } from './reducer'
 import Web3ReactManager from 'components/Web3ReactManager'
-import { ALL_SUPPORTED_CHAIN_SHORT_NAMES_MAP_TO_CHAINID, SupportedChainId } from 'constants/chains'
+import { ALL_SUPPORTED_CHAIN_SHORT_NAMES, ALL_SUPPORTED_CHAIN_SHORT_NAMES_MAP_TO_CHAINID, SupportedChainId } from 'constants/chains'
+import { useGetBridgePairInfoQuery } from 'state/bridge/slice'
+import { isMobile } from 'react-device-detect'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -250,6 +252,34 @@ export function useDerivedSwapInfo(
     [Field.OUTPUT]: outputCurrency,
   }
 
+  const {
+    minimumCrossTransfer,
+    maximumCrossTransfer
+  }: {
+    minimumCrossTransfer: number,
+    maximumCrossTransfer: number,
+  } = useGetBridgePairInfoQuery({
+    source_chain: ALL_SUPPORTED_CHAIN_SHORT_NAMES[chainId ?? "undefined"],
+    token: inputCurrencyId ?? "undefined",
+    target_chain: targetChain ?? "undefined",
+  }, {
+    refetchOnMountOrArgChange: true,
+    selectFromResult: ({ data }) => {
+      if (data?.data) {
+        return {
+          minimumCrossTransfer: data.data.minimumCrossTransfer,
+          maximumCrossTransfer: data.data.maximumCrossTransfer,
+        }
+      } else {
+        return {
+          minimumCrossTransfer: 0,
+          maximumCrossTransfer: 0,
+        }
+      }
+    },
+    skip: !chainId || !inputCurrencyId || !targetChain,
+  })
+
   let inputError: string | undefined
   if (!account) {
     inputError = t`Connect Wallet`
@@ -289,6 +319,20 @@ export function useDerivedSwapInfo(
         // console.log('relevantTokenBalances', relevantTokenBalances[0]?.toExact())
         if (Number(typedValue) > Number(relevantTokenBalances[0]?.toExact())) {
           inputError = inputError ?? t`Out of Balance`
+        }
+        if (Number(typedValue) < minimumCrossTransfer) {
+          if (isMobile) {
+            inputError = inputError ?? t`Less than min amount`
+          } else {
+            inputError = inputError ?? t`Less than minimum cross transfer amount`
+          }
+        }
+        if (Number(typedValue) > maximumCrossTransfer) {
+          if (isMobile) {
+            inputError = inputError ?? t`Exceed max amount`
+          } else {
+            inputError = inputError ?? t`Exceed maximum cross transfer amount`
+          }
         }
       } else {
         inputError = inputError ?? t`Decimals Exceeded`

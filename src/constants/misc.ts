@@ -39,5 +39,5 @@ export const ZERO_PERCENT = new Percent('0')
 export const TWO_PERCENT = new Percent(JSBI.BigInt(200), BIPS_BASE)
 export const ONE_HUNDRED_PERCENT = new Percent('1')
 
-export const DEPOSIT_NATIVE_TOPIC = "0x060990f66d3ca9ca42bcc95796207b8b33e5f23c67a36ebe0dc6883a1b72a0dd"
-export const DEPOSIT_TOKEN_TOPIC = "0x63333d9ba80d323ed3a2c486809215e8f1fb8c645691606b862787fad572c1c7"
+export const DEPOSIT_NATIVE_TOPIC = "0xea0c19b2395cd73c067023f9d0320a2397edfd0061ff7e5aa33a05546a82a25e"
+export const DEPOSIT_TOKEN_TOPIC = "0xd6779b86b4fdf1b747b14eb5fc8092b1f1df889e5d16ff64d9e3b675e81b4db2"

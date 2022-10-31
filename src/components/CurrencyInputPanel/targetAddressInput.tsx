@@ -1,3 +1,5 @@
+import { useActiveWeb3React } from 'hooks/web3'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { isAddress } from '../../utils'
 
@@ -93,18 +95,25 @@ interface TargetAddressInputPanelProps {
 }
 
 export default function TargetAddressInput({ onUserInput, ...rest }: TargetAddressInputPanelProps) {
+  const { account } = useActiveWeb3React()
+  useEffect(() => {
+    if (account) {
+      onUserInput(account)
+    }
+  }, [account])
   return (
     <InputPanel>
       <Container hideInput={false}>
         <InputRow>
           <StyledInput
             // className="token-amount-input"
-            onChange={(event) => {
-              if (isAddress(event.target.value)) {
-                onUserInput(event.target.value)
-              }
-            }}
-            defaultValue={""}
+            // onChange={(event) => {
+            //   if (isAddress(event.target.value)) {
+            //     onUserInput(event.target.value)
+            //   }
+            // }}
+            disabled
+            defaultValue={account ?? ""}
           />
         </InputRow>
       </Container>

@@ -42,11 +42,17 @@ export function useApproveCallback(
     if (!currentAllowance) return ApprovalState.UNKNOWN
     // return ApprovalState.NOT_APPROVED
     // amountToApprove will be defined if currentAllowance is
-    return currentAllowance.lessThan(amountToApprove)
+    console.log("approvalState->pendingApproval", pendingApproval)
+    console.log("approvalState->pendingApproval", pendingApproval)
+    
+    const approvalState = currentAllowance.lessThan(amountToApprove)
       ? pendingApproval
         ? ApprovalState.PENDING
         : ApprovalState.NOT_APPROVED
       : ApprovalState.APPROVED
+
+    console.log("approvalState->approvalState", approvalState)
+    return approvalState
   }, [amountToApprove, currentAllowance, pendingApproval, spender])
 
   const tokenContract = useTokenContract(token?.address)
@@ -88,7 +94,7 @@ export function useApproveCallback(
       useExact = true
       return tokenContract.estimateGas.approve(spender, amountToApprove.quotient.toString())
     })
-   
+
     return tokenContract
       .approve(spender, useExact ? amountToApprove.quotient.toString() : MaxUint256, {
         gasLimit: calculateGasMargin(chainId, estimatedGas),
@@ -122,8 +128,8 @@ export function useApproveCallbackFromTrade(
       ? trade instanceof V2Trade
         ? V2_ROUTER_ADDRESS[chainId]
         : trade instanceof V3Trade
-        ? v3SwapRouterAddress
-        : undefined
+          ? v3SwapRouterAddress
+          : undefined
       : undefined
   )
 }
@@ -145,9 +151,9 @@ export function useApproveCallbackFromBridgeSwap() {
   return useApproveCallback(
     inputCurrency
       ? CurrencyAmount.fromRawAmount(
-          inputCurrency,
-          (Number(typedValue) * 10 ** inputCurrency?.decimals).toLocaleString('fullwide', { useGrouping: false })
-        )
+        inputCurrency,
+        (Number(typedValue) * 10 ** inputCurrency?.decimals).toLocaleString('fullwide', { useGrouping: false })
+      )
       : undefined,
     chainId ? bridgeAddress : undefined
   )
