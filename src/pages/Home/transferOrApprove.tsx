@@ -204,9 +204,11 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                             <Trans>You can now transfer { SelectedTokenSymbol }</Trans>
                                             
                                         ) : (
-                                            <Trans>
+                                            <span>
                                                 Allow alyx bridge protocol to use your { SelectedTokenSymbol }
-                                            </Trans>
+                                            </span>
+                                            // <Trans>
+                                            // </Trans>
                                         )}
                                     </span>
                                     {approvalState === ApprovalState.PENDING ? (
