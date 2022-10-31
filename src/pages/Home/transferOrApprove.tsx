@@ -133,11 +133,9 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {/* we need to shorten this string on mobile */}
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
-                                            // <Trans>You can now transfer {SelectedTokenSymbol}</Trans>
                                             <Trans>Approved</Trans>
                                         ) : (
                                             <Trans>
-                                                {/* Allow Alyx Bridge Protocol to use your {SelectedTokenSymbol} */}
                                                 Approve
                                             </Trans>
                                         )}
@@ -150,10 +148,10 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                     ) : (
                                         <MouseoverTooltip
                                             text={
-                                                <Trans>
+                                                <>
                                                     You must give Alyx Bridge contracts permission to use your{' '}
                                                     {SelectedTokenSymbol}. You only have to do this once per token.
-                                                </Trans>
+                                                </>
                                             }
                                         >
                                             <HelpCircle size="20" color={'white'} style={{ marginLeft: '8px', marginRight: '8px', marginTop:'4px' }} />
@@ -175,7 +173,6 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                 showApproveFlow ? (
                 // true ? (
                     <AutoRow style={{ flexWrap: 'nowrap', width: '408px', height: '45px', margin: '0 0 0 217px' }}>
-                        {SelectedTokenSymbol}
                         <AutoColumn style={{ width: '100%', }} gap="12px">
                             <ButtonConfirmed
                                 onClick={handleApprove}
@@ -201,11 +198,11 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {/* we need to shorten this string on mobile */}
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
-                                            <Trans>You can now transfer { SelectedTokenSymbol }</Trans>
+                                            <>You can now transfer { SelectedTokenSymbol }</>
                                             
                                         ) : (
                                             <span>
-                                                Allow alyx bridge protocol to use your { SelectedTokenSymbol }
+                                                Allow alyx bridge to use your { SelectedTokenSymbol }
                                             </span>
                                             // <Trans>
                                             // </Trans>
@@ -219,10 +216,10 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                     ) : (
                                         <MouseoverTooltip
                                             text={
-                                                <Trans>
+                                                <>
                                                     You must give Alyx Bridge contracts permission to use your{' '}
                                                     {SelectedTokenSymbol}. You only have to do this once per token.
-                                                </Trans>
+                                                </>
                                             }
                                         >
                                             <HelpCircle size="20" color={'white'} style={{ marginLeft: '8px' }} />
