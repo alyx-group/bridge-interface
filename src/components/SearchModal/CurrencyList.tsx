@@ -101,6 +101,7 @@ function TokenTags({ currency }: { currency: Currency }) {
 }
 
 function CurrencyRow({
+  index, 
   currency,
   onSelect,
   isSelected,
@@ -108,6 +109,7 @@ function CurrencyRow({
   style,
   showCurrencyAmount,
 }: {
+  index: number
   currency: Currency
   onSelect: () => void
   isSelected: boolean
@@ -146,6 +148,9 @@ function CurrencyRow({
         break
     }
   }
+  // if (index==0 && !isSelected){
+  //   onSelect()
+  // }
   // only show add or remove buttons if not on selected list
   return (
     <MenuItem
@@ -158,7 +163,7 @@ function CurrencyRow({
       <CurrencyLogo currency={currency} size={'24px'} />
       <Column>
         <Text title={currency.name} fontWeight={500}>
-          {symbol}
+          {index}:{symbol}
         </Text>
         <TYPE.darkGray ml="0px" fontSize={'12px'} fontWeight={300}>
           {!currency.isNative && !isOnSelectedList && customAdded ? (
@@ -263,14 +268,17 @@ export default function CurrencyList({
         )
       } else if (currency) {
         return (
-          <CurrencyRow
-            style={style}
-            currency={currency}
-            isSelected={isSelected}
-            onSelect={handleSelect}
-            otherSelected={otherSelected}
-            showCurrencyAmount={showCurrencyAmount}
-          />
+          <>
+            <CurrencyRow
+              index={index}
+              style={style}
+              currency={currency}
+              isSelected={isSelected}
+              onSelect={handleSelect}
+              otherSelected={otherSelected}
+              showCurrencyAmount={showCurrencyAmount}
+            />
+          </>
         )
       } else {
         return null

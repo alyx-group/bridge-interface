@@ -3,8 +3,10 @@ import { Currency, CurrencyAmount, Percent, Token } from '@uniswap/sdk-core'
 import { Pair } from '@uniswap/v2-sdk'
 import Column, { AutoColumn } from 'components/Column'
 import { LoadingOpacityContainer, loadingOpacityMixin } from 'components/Loader/styled'
+import { useTokenComparator } from 'components/SearchModal/sorting'
+import { useAllTokens, useCurrency } from 'hooks/Tokens'
 import { darken } from 'polished'
-import { ReactNode, useCallback, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Lock } from 'react-feather'
 import { Text } from 'rebass'
@@ -255,13 +257,27 @@ export default function CurrencyInputPanel({
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
-  // console.log("CurrencyInputPanel->selectedCurrencyBalance", selectedCurrencyBalance)
+  // console.log("CurrencyInputPanel->currency", currency)
   const theme = useTheme()
 
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)
   }, [setModalOpen])
 
+  const allTokens = useAllTokens()
+  // console.log("CurrencyInputPanel->allTokens", allTokens)
+  const tokenComparator = useTokenComparator(false)
+  const firstToken: Token = useMemo(() => {
+    return Object.values(allTokens).sort(tokenComparator)[0]
+  }, [allTokens, tokenComparator])
+  // console.log("CurrencyInputPanel->firstToken", firstToken)
+
+  useEffect(()=>{
+    if(onCurrencySelect && firstToken){
+      onCurrencySelect(firstToken)
+    }
+  },[onCurrencySelect, firstToken])
+  
   if (isMobile) {
     return (
       <InputPanel id={id} hideInput={hideInput} {...rest}>
@@ -370,7 +386,7 @@ export default function CurrencyInputPanel({
                       ? currency.symbol.slice(0, 4) +
                       '...' +
                       currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
-                      : currency?.symbol)}
+                      : currency?.symbol) || <Trans>Select</Trans>}
                   </StyledTokenName>
                 )}
               </Row>

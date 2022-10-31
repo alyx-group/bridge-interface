@@ -59,34 +59,41 @@ export default createReducer(initialState, (builder) =>
       }
     })
     .addCase(fetchTokenList.fulfilled, (state, { payload: { requestId, tokenList, url } }) => {
-      const current = state.byUrl[url]?.current
-      const loadingRequestId = state.byUrl[url]?.loadingRequestId
+      // const current = state.byUrl[url]?.current
+      // const loadingRequestId = state.byUrl[url]?.loadingRequestId
 
       // no-op if update does nothing
-      if (current) {
-        const upgradeType = getVersionUpgrade(current.version, tokenList.version)
+      // if (current) {
+      //   console.log("fetchTokenList.fulfilled", url, tokenList)
+      //   const upgradeType = getVersionUpgrade(current.version, tokenList.version)
 
-        if (upgradeType === VersionUpgrade.NONE) return
-        if (loadingRequestId === null || loadingRequestId === requestId) {
-          state.byUrl[url] = {
-            current,
-            pendingUpdate: tokenList,
-            loadingRequestId: null,
-            error: null,
-          }
-        }
-      } else {
-        // activate if on default active
-        if (DEFAULT_ACTIVE_LIST_URLS.includes(url)) {
-          state.activeListUrls?.push(url)
-        }
+      //   if (upgradeType === VersionUpgrade.NONE) return
+      //   if (loadingRequestId === null || loadingRequestId === requestId) {
+      //     state.byUrl[url] = {
+      //       current,
+      //       pendingUpdate: tokenList,
+      //       loadingRequestId: null,
+      //       error: null,
+      //     }
+      //   }
+      // } else {
+      //   // activate if on default active
+      //   if (DEFAULT_ACTIVE_LIST_URLS.includes(url)) {
+      //     state.activeListUrls?.push(url)
+      //   }
 
-        state.byUrl[url] = {
-          current: tokenList,
-          pendingUpdate: null,
-          loadingRequestId: null,
-          error: null,
-        }
+      //   state.byUrl[url] = {
+      //     current: tokenList,
+      //     pendingUpdate: null,
+      //     loadingRequestId: null,
+      //     error: null,
+      //   }
+      // }
+      state.byUrl[url] = {
+        current: tokenList,
+        pendingUpdate: null,
+        loadingRequestId: null,
+        error: null,
       }
     })
     .addCase(fetchTokenList.rejected, (state, { payload: { url, requestId, errorMessage } }) => {

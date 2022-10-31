@@ -252,8 +252,8 @@ function useBridgeSwapCallArguments(
           // BigNumber.from(typedValue).mul(10 ** inputCurrency?.decimals).toString()
           // const depositAmount = typedValue ? (Number(typedValue) * (10 ** inputCurrency?.decimals)).toLocaleString('fullwide', { useGrouping: false }) : 0
           const depositAmount = tryParseAmount(typedValue, inputCurrency)?.quotient.toString()
-          console.log("useBridgeSwapCallArguments->buyNative", buyNative)
-          console.log("formated depositAmount", depositAmount)
+          // console.log("useBridgeSwapCallArguments->buyNative", buyNative)
+          // console.log("formated depositAmount", depositAmount)
           if (depositAmount) {
             return {
               calldata: bridgeContract?.interface.encodeFunctionData("depositToken", [inputCurrencyId, depositAmount, targetAddress, targetChain, buyNative]),
@@ -722,8 +722,8 @@ export function useBridgeSwapCallback(
           call: { address, calldata, value },
         } = bestCallOption
         // console.log('estimatedCalls->address', address)
-        console.log('estimatedCalls->calldata', calldata)
-        console.log('bunative', buyNative)
+        // console.log('estimatedCalls->calldata', calldata)
+        // console.log('bunative', buyNative)
         // console.log('estimatedCalls->value', value)
 
         return library

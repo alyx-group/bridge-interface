@@ -179,7 +179,7 @@ export default function NetworkSelector({ supportedChains }: NetworkSelectorProp
       return null
     }
     const handleRowClick = () => {
-      console.log('SourceNetworkSelector->handleRowClick')
+      // console.log('SourceNetworkSelector->handleRowClick')
       switchToNetwork({ library, chainId: targetChain })
       toggle()
     }

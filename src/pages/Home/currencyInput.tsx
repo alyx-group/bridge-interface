@@ -27,7 +27,7 @@ export default function CurrencyInput() {
     parsedAmount,
     inputError: swapInputError,
   } = useDerivedSwapInfo(toggledVersion)
-
+  // console.log("CurrencyInput.currencies", currencies)
   const { wrapType, execute: onWrap, inputError: wrapInputError } = useWrapCallback(
     currencies[Field.INPUT],
     currencies[Field.OUTPUT],

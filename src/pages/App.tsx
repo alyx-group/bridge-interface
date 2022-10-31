@@ -110,8 +110,8 @@ ${({ theme }) => theme.mediaWidth.upToSmall`
 // Deferrable<TransactionRequest>
 export default function App() {
   const { innerHeight, innerWidth } = window
-  console.log("window.innerWidth", window.innerWidth)
-  console.log("window.innerHeight", window.innerHeight)
+  // console.log("window.innerWidth", window.innerWidth)
+  // console.log("window.innerHeight", window.innerHeight)
   // const { chainId, library } = useActiveWeb3React()
   // const bridgeContract = useBridgeContract(chainId)
   // console.log('bridgeContract?.functions', bridgeContract)

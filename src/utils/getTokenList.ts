@@ -58,13 +58,13 @@ export default async function getTokenList(
     urls = uriToHttp(listUrl)
   }
   for (let i = 0; i < urls.length; i++) {
-    console.log("getTokenList->sourceChain", sourceChain)
-    console.log("getTokenList->targetChain", targetChain)
+    // console.log("getTokenList->sourceChain", sourceChain)
+    // console.log("getTokenList->targetChain", targetChain)
     let url = urls[i]
     if (sourceChain && targetChain) {
       url = `${url}?source_chain=${sourceChain}&target_chain=${targetChain}`
     }
-    console.log("getTokenList->url", url)
+    // console.log("getTokenList->url", url)
 
     const isLast = i === urls.length - 1
     let response
@@ -83,14 +83,14 @@ export default async function getTokenList(
 
     const [json, validator] = await Promise.all([response.json(), tokenListValidator])
 
-    console.log("getTokenList->response", json)
-    console.log("getTokenList->url.search('supported/tokens') > -1", url.search('supported/tokens') > -1)
+    // console.log("getTokenList->response", json)
+    // console.log("getTokenList->url.search('supported/tokens') > -1", url.search('supported/tokens') > -1)
     let validatorResult
     if (url.search('supported/tokens') > -1) {
       validatorResult = validator(json.data)
-      console.log("getTokenList->json.data", json.data)
-      console.log("getTokenList->validator", validator)
-      console.log("getTokenList->validatorResult", validatorResult)
+      // console.log("getTokenList->json.data", json.data)
+      // console.log("getTokenList->validator", validator)
+      // console.log("getTokenList->validatorResult", validatorResult)
     } else {
       validatorResult = validator(json)
     }

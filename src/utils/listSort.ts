@@ -5,7 +5,7 @@ const DEFAULT_LIST_PRIORITIES = DEFAULT_LIST_OF_LISTS.reduce<{ [listUrl: string]
   return memo
 }, {})
 
-console.log("DEFAULT_LIST_PRIORITIES", DEFAULT_LIST_PRIORITIES)
+// console.log("DEFAULT_LIST_PRIORITIES", DEFAULT_LIST_PRIORITIES)
 // use ordering of default list of lists to assign priority
 export default function sortByListPriority(urlA: string, urlB: string) {
   if (DEFAULT_LIST_PRIORITIES[urlA] && DEFAULT_LIST_PRIORITIES[urlB]) {

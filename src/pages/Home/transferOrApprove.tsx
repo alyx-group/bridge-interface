@@ -169,6 +169,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
         <>
             {
                 showApproveFlow ? (
+                // true ? (
                     <AutoRow style={{ flexWrap: 'nowrap', width: '408px', height: '45px', margin: '0 0 0 217px' }}>
                         <AutoColumn style={{ width: '100%', }} gap="12px">
                             <ButtonConfirmed
@@ -196,6 +197,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
                                             <Trans>You can now transfer {currencies[Field.INPUT]?.symbol}</Trans>
+                                            
                                         ) : (
                                             <Trans>
                                                 Allow Alyx Bridge Protocol to use your {currencies[Field.INPUT]?.symbol}

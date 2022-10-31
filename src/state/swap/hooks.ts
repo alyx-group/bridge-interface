@@ -62,7 +62,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'ETH' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? 'ALYX' : '',
         })
       )
     },
@@ -91,7 +91,7 @@ export function useSwapActionHandlers(): {
     (targetChain: string) => {
       dispatch(switchTargetChain({ chain: targetChain }))
       if (bridgeContract?.callStatic["fee"]) {
-        console.log("fetching fee amount to target chain")
+        // console.log("fetching fee amount to target chain")
         bridgeContract?.callStatic["fee"](targetChain)?.then(res => {
           dispatch(setFee({ fee: JSBI.BigInt(res).toString() }))
         })

@@ -268,7 +268,7 @@ export default function Home({ history }: RouteComponentProps) {
   })
 
   const handleSwap = useCallback(() => {
-    console.log("handleSwap")
+    // console.log("handleSwap")
     if (!swapCallback) {
       return
     }
@@ -301,8 +301,8 @@ export default function Home({ history }: RouteComponentProps) {
       })
   }, [swapCallback, showConfirm, recipient, recipientAddress, account, trade])
 
-  console.log("parsedAmount", parsedAmount)
-  console.log("parsedAmount", parsedAmount?.toFixed(6), typeof Number(parsedAmount?.toFixed(6)))
+  // console.log("parsedAmount", parsedAmount)
+  // console.log("parsedAmount", parsedAmount?.toFixed(6), typeof Number(parsedAmount?.toFixed(6)))
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({ showConfirm: false, attemptingTxn, swapErrorMessage, txHash })
     // if there was a tx hash, we want to clear the input

@@ -55,17 +55,22 @@ export default function Updater(): null {
 
   // whenever a list is not loaded and not loading, try again to load it
   useEffect(() => {
-    console.log("fetchAllListsCallback->getTokenList->sourceChain,targetChain,lists", sourceChain, targetChain, lists)
+    // console.log("fetchAllListsCallback->getTokenList->sourceChain,targetChain,lists", sourceChain, targetChain, lists)
     if (sourceChain && targetChain && (sourceChain != targetChain)) {
-      console.log("fetchAllListsCallback->getTokenList->fetch")
+      // console.log("fetchAllListsCallback->getTokenList->fetch")
       Object.keys(lists).forEach((listUrl) => {
         const list = lists[listUrl]
-        if (!list.current && !list.loadingRequestId && !list.error) {
+        
+        // list.current = null
+        if (listUrl.includes("api.alyxbridge.com/v1/supported/tokens")) {
+          // console.log("fetchAllListsCallback->getTokenList->fetch->supported", list)
+          fetchList(sourceChain, targetChain, listUrl, true).catch((error) => console.debug('list added fetching error', error))
+        } else if (!list.current && !list.loadingRequestId && !list.error) {
           fetchList(sourceChain, targetChain, listUrl,).catch((error) => console.debug('list added fetching error', error))
         }
       })
     }
-  }, [dispatch, fetchList, sourceChain, targetChain, library, lists])
+  }, [dispatch, fetchList, sourceChain, targetChain, library])
 
   // if any lists from unsupported lists are loaded, check them too (in case new updates since last visit)
   useEffect(() => {

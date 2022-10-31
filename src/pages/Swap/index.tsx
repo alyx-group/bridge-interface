@@ -291,7 +291,7 @@ export default function Swap({ history }: RouteComponentProps) {
   }, [attemptingTxn, onUserInput, swapErrorMessage, txHash])
 
   const handleSwap = useCallback(() => {
-    console.log("handleSwap")
+    // console.log("handleSwap")
     if (!swapCallback) {
       return
     }
