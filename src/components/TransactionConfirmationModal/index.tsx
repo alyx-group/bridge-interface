@@ -141,9 +141,12 @@ function TransactionSubmittedContent({
       withTxHash: data?.data,
     }),
   })
-  if (withTxHash && withTxHash != "") {
-    setFetched(true)
-  }
+  useEffect(()=>{
+    if (withTxHash && withTxHash != "") {
+      setFetched(true)
+    }
+  },[withTxHash])
+  
   // const withTxHash = data? data.data: undefined
 
   // console.log('isFetching',isFetching)
