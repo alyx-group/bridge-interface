@@ -93,6 +93,8 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
             })
         }
     }, [approveCallback, gatherPermitSignature, signatureState, toggledVersion, trade?.inputAmount.currency.symbol])
+
+    const SelectedTokenSymbol = currencies[Field.INPUT]?.symbol
     if (isMobile) {
         const style = {
             "width": '300px',
@@ -130,11 +132,11 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {/* we need to shorten this string on mobile */}
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
-                                            // <Trans>You can now transfer {currencies[Field.INPUT]?.symbol}</Trans>
+                                            // <Trans>You can now transfer {SelectedTokenSymbol}</Trans>
                                             <Trans>Approved</Trans>
                                         ) : (
                                             <Trans>
-                                                {/* Allow Alyx Bridge Protocol to use your {currencies[Field.INPUT]?.symbol} */}
+                                                {/* Allow Alyx Bridge Protocol to use your {SelectedTokenSymbol} */}
                                                 Approve
                                             </Trans>
                                         )}
@@ -149,7 +151,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                             text={
                                                 <Trans>
                                                     You must give Alyx Bridge contracts permission to use your{' '}
-                                                    {currencies[Field.INPUT]?.symbol}. You only have to do this once per token.
+                                                    {SelectedTokenSymbol}. You only have to do this once per token.
                                                 </Trans>
                                             }
                                         >
@@ -165,7 +167,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
             </>
         )
     }
-    console.log("ApproveFlow->currencies[Field.INPUT]?.symbol", currencies[Field.INPUT]?.symbol)
+    console.log("ApproveFlow->SelectedTokenSymbol", SelectedTokenSymbol)
     return (
         <>
             {
@@ -197,11 +199,11 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {/* we need to shorten this string on mobile */}
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
-                                            <Trans>You can now transfer {currencies[Field.INPUT]?.symbol}</Trans>
+                                            <Trans>You can now transfer { SelectedTokenSymbol }</Trans>
                                             
                                         ) : (
                                             <Trans>
-                                                Allow Alyx Bridge Protocol to use your {currencies[Field.INPUT]?.symbol}
+                                                Allow alyx bridge protocol to use your { SelectedTokenSymbol }
                                             </Trans>
                                         )}
                                     </span>
@@ -215,7 +217,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                             text={
                                                 <Trans>
                                                     You must give Alyx Bridge contracts permission to use your{' '}
-                                                    {currencies[Field.INPUT]?.symbol}. You only have to do this once per token.
+                                                    {SelectedTokenSymbol}. You only have to do this once per token.
                                                 </Trans>
                                             }
                                         >
