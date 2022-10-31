@@ -109,13 +109,17 @@ function TransactionSubmittedContent({
   const transactions = useAppSelector((state) => state.transactions)
 
   const swap = useAppSelector((state) => state.swap)
-
+  
   const proof = useMemo(() =>{
     if (chainId && hash){
       const _deposits = transactions[chainId][hash].deposits
-      console.log('TransactionSubmittedContent->transactions[chainId][hash].deposits',transactions[chainId][hash].deposits)
+      // console.log('TransactionSubmittedContent->transactions[chainId][hash].deposits',transactions[chainId][hash].deposits)
       if (_deposits.length > 0){
-        return ALL_SUPPORTED_CHAIN_SHORT_NAMES[chainId]+"_"+swap.INPUT.currencyId+"_"+hash+"_"+_deposits[0].logIndex
+        const s = ALL_SUPPORTED_CHAIN_SHORT_NAMES[chainId]+"_"+swap.INPUT.currencyId+"_"+hash+"_"+_deposits[0].logIndex
+        if (swap.buyNative){
+          return s+"_true"
+        }
+        return s+"_false"
       }
       return ""
     }
@@ -126,10 +130,10 @@ function TransactionSubmittedContent({
   const targetChainId = swap.targetChain?ALL_SUPPORTED_CHAIN_SHORT_NAMES_MAP_TO_CHAINID[swap.targetChain]:undefined
   const [fetched, setFetched] = useState(false)
   
-  console.log('TransactionSubmittedContent->chainId',chainId)
-  console.log('TransactionSubmittedContent->hash',hash)
-  console.log('TransactionSubmittedContent->proof',proof)
-  console.log('TransactionSubmittedContent->fetched',fetched)
+  // console.log('TransactionSubmittedContent->chainId',chainId)
+  // console.log('TransactionSubmittedContent->hash',hash)
+  // console.log('TransactionSubmittedContent->proof',proof)
+  // console.log('TransactionSubmittedContent->fetched',fetched)
   const {withTxHash} = useGetTargetChainWithdrawTxHashQuery({proof}, {
     pollingInterval: ms`5s`,
     skip: proof === "" || fetched,
