@@ -176,7 +176,6 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                 // true ? (
                     <AutoRow style={{ flexWrap: 'nowrap', width: '408px', height: '45px', margin: '0 0 0 217px' }}>
                         {SelectedTokenSymbol}
-                        {{SelectedTokenSymbol}}
                         <AutoColumn style={{ width: '100%', }} gap="12px">
                             <ButtonConfirmed
                                 onClick={handleApprove}
