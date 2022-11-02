@@ -1,7 +1,7 @@
 import { useBridgeContract } from 'hooks/useContract'
 import { useActiveWeb3React } from 'hooks/web3'
 import { useEffect } from 'react'
-import { Field, setMinDeposit } from 'state/swap/actions'
+import { Field, setBuyNative, setMinDeposit } from 'state/swap/actions'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { useSwapState } from './hooks'
 import { useCurrency } from 'hooks/Tokens'
@@ -10,6 +10,7 @@ import {
 } from 'ethers'
 
 import * as ethers from 'ethers'
+import { ALL_SUPPORTED_CHAIN_FULL_NAMES, ALL_SUPPORTED_CHAIN_IDS, ALL_SUPPORTED_CHAIN_SHORT_NAMES, SupportedChainId } from 'constants/chains'
 
 export default function Updater(): null {
   const dispatch = useAppDispatch()
@@ -45,5 +46,12 @@ export default function Updater(): null {
     }
   }, [dispatch, inputCurrency, targetChain, bridgeContract])
 
+  useEffect(() => {
+    if (targetChain && targetChain === ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.ALYX]) {
+      dispatch(setBuyNative({ buyNative: true }))
+    } else {
+      dispatch(setBuyNative({ buyNative: false }))
+    }
+  }, [targetChain])
   return null
 }

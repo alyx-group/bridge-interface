@@ -433,7 +433,7 @@ export default function Home({ history }: RouteComponentProps) {
                   <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain amount larger than 5,000,000 USDC could take up to 12 hours</Text></Reminder>
                 </Column>
               }
-
+              
               <SwapLeft></SwapLeft>
             </Column>
           )

@@ -33,6 +33,7 @@ export default function BuyNativeCheck() {
 
     return isUSDT || isUSDC
   },[chainId, inputCurrencyId])
+    
   return (
     <>
       {/* {chainId === SupportedChainId.HECO && inputCurrencyId === "0x0298c2b32eae4da002a15f36fdf7615bea3da047" && */}
