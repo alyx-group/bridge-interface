@@ -147,6 +147,13 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
     'WBNB',
     'Wrapped BNB'
   ),
+  [SupportedChainId.POLYGON]: new Token(
+    SupportedChainId.POLYGON,
+    '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+    18,
+    'WMATIC',
+    'Wrapped Matic'
+  ),
   [SupportedChainId.OPTIMISM]: new Token(
     SupportedChainId.OPTIMISM,
     '0x4200000000000000000000000000000000000006',

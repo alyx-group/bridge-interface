@@ -1,6 +1,7 @@
 import ethereumLogoUrl from 'assets/images/ethereum-logo.png'
 import arbitrumLogoUrl from 'assets/svg/arbitrum_logo.svg'
 import alyxLogoUrl from 'assets/images/logo-color.png'
+import polygonLogoUrl from 'assets/images/polygon.png'
 import hecoLogoUrl from 'assets/svg/huobi-light.svg'
 import bscLogoUrl from 'assets/svg/bsc-light.svg'
 import optimismLogoUrl from 'assets/svg/optimistic_ethereum.svg'
@@ -18,47 +19,56 @@ export enum SupportedChainId {
   OPTIMISM = 10,
   OPTIMISTIC_KOVAN = 69,
 
-  HECO = 128,
   BSC = 56,
+  POLYGON = 137, 
+  HECO = 128,
   ALYX = 1314, 
 }
 
 export const ALL_SUPPORTED_CHAIN_SHORT_NAMES = {
   [SupportedChainId.MAINNET]: 'ethereum',
-  [SupportedChainId.ALYX]: 'alyx',
-  [SupportedChainId.HECO]: 'heco',
   [SupportedChainId.BSC]: 'bsc',
+  [SupportedChainId.HECO]: 'heco',
+  [SupportedChainId.ALYX]: 'alyx',
+  [SupportedChainId.POLYGON]: 'polygon',
 }
 export const ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER = {
   [SupportedChainId.MAINNET]: 'Ethereum',
-  [SupportedChainId.ALYX]: 'alyx',
-  [SupportedChainId.HECO]: 'HECO',
   [SupportedChainId.BSC]: 'BSC',
+  [SupportedChainId.HECO]: 'HECO',
+  [SupportedChainId.ALYX]: 'alyx',
+  [SupportedChainId.POLYGON]: 'Polygon',
 }
 export const ALL_SUPPORTED_CHAIN_SHORT_NAMES_MAP_TO_CHAINID = {
   'ethereum': SupportedChainId.MAINNET,
-  'alyx': SupportedChainId.ALYX,
-  'heco': SupportedChainId.HECO,
   'bsc': SupportedChainId.BSC,
+  'heco': SupportedChainId.HECO,
+  'alyx': SupportedChainId.ALYX,
+  'polygon': SupportedChainId.POLYGON,
 }
 export const ALL_SUPPORTED_CHAIN_FULL_NAMES = {
   [SupportedChainId.MAINNET]: 'Ethereum',
-  [SupportedChainId.ALYX]: 'ALYX Chain',
-  [SupportedChainId.HECO]: 'Huobi ECO Chain',
   [SupportedChainId.BSC]: 'Binance Smart Chain',
+  [SupportedChainId.HECO]: 'Huobi ECO Chain',
+  [SupportedChainId.ALYX]: 'ALYX Chain',
+  [SupportedChainId.POLYGON]: 'Polygon',
 }
 export const ALL_SUPPORTED_CHAIN_SHORT_FULL_NAME_MAP = {
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.MAINNET]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.MAINNET],
-  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.ALYX]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.ALYX],
-  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.HECO]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.HECO],
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.BSC]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.BSC],
+  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.HECO]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.HECO],
+  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.POLYGON]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.POLYGON],
+  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.ALYX]]: ALL_SUPPORTED_CHAIN_FULL_NAMES[SupportedChainId.ALYX],
 }
+
 export const ALL_SUPPORTED_CHAIN_SHORT_NAME_MAP_TO_CAPITAL_LETTER = {
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.MAINNET]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.MAINNET],
-  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.ALYX]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.ALYX],
-  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.HECO]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.HECO],
+  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.POLYGON]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.POLYGON],
   [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.BSC]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.BSC],
+  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.HECO]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.HECO],
+  [ALL_SUPPORTED_CHAIN_SHORT_NAMES[SupportedChainId.ALYX]]: ALL_SUPPORTED_CHAIN_SHORT_NAMES_WITH_CAPITAL_LETTER[SupportedChainId.ALYX],
 }
+
 export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
   SupportedChainId.MAINNET,
   SupportedChainId.ROPSTEN,
@@ -72,8 +82,9 @@ export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
   SupportedChainId.OPTIMISTIC_KOVAN,
 
   SupportedChainId.ALYX,
-  SupportedChainId.HECO,
   SupportedChainId.BSC,
+  SupportedChainId.POLYGON,
+  SupportedChainId.HECO,
 ]
 
 export const L1_CHAIN_IDS = [
@@ -82,9 +93,11 @@ export const L1_CHAIN_IDS = [
   SupportedChainId.RINKEBY,
   SupportedChainId.GOERLI,
   SupportedChainId.KOVAN,
-  SupportedChainId.ALYX,
-  SupportedChainId.HECO,
+
   SupportedChainId.BSC,
+  SupportedChainId.POLYGON,
+  SupportedChainId.HECO,
+  SupportedChainId.ALYX,
 ] as const
 
 export type SupportedL1ChainId = typeof L1_CHAIN_IDS[number]
@@ -177,6 +190,14 @@ export const CHAIN_INFO: ChainInfo = {
     label: 'BSC',
     logoUrl: bscLogoUrl,
     nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
+  },
+  [SupportedChainId.POLYGON]: {
+    docs: 'https://polygon.technology/developers',
+    explorer: 'https://polygonscan.com/',
+    infoLink: 'https://info.uniswap.org/#/',
+    label: 'Polygon',
+    logoUrl: polygonLogoUrl,
+    nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
   },
   [SupportedChainId.RINKEBY]: {
     docs: 'https://docs.uniswap.org/',

@@ -146,6 +146,8 @@ function Sock() {
 
 // eslint-disable-next-line react/prop-types
 function StatusIcon({ connector }: { connector: AbstractConnector }) {
+  // console.log("StatusIcon->connector", connector)
+  // console.log("StatusIcon->connector === injected", connector === injected)
   if (connector === injected) {
     return <Identicon />
   } else if (connector === walletconnect) {
@@ -194,7 +196,10 @@ function Web3StatusInner() {
   const hasPendingTransactions = !!pending.length
   const hasSocks = useHasSocks()
   const toggleWalletModal = useWalletModalToggle()
-
+  // console.log("Web3StatusInne->account", account)
+  // console.log("Web3StatusInne->hasPendingTransactions", hasPendingTransactions)
+  // console.log("Web3StatusInne->error", error)
+  // console.log("Web3StatusInne->connector", connector)
   if (account) {
     return (
       <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
@@ -252,7 +257,6 @@ export default function Web3Status() {
     <>
       <Web3StatusInner />
       {(contextNetwork.active || active) && (
-        // <></>
         <WalletModal ENSName={ENSName ?? undefined} pendingTransactions={pending} confirmedTransactions={confirmed} />
       )}
     </>

@@ -144,6 +144,10 @@ function CurrencyRow({
         name = 'Ethereum Native Token'
         symbol = 'ETH'
         break
+      case SupportedChainId.POLYGON:
+        name = 'Polygon Native Token'
+        symbol = 'MATIC'
+        break
       default:
         break
     }

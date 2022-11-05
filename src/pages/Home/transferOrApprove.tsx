@@ -59,13 +59,27 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
         allowedSlippage
     )
 
-    const showApproveFlow =
-        !isArgentWallet &&
+    // const showApproveFlow =
+    //     !isArgentWallet &&
+    //     // !swapInputError &&
+    //     (approvalState === ApprovalState.NOT_APPROVED ||
+    //         approvalState === ApprovalState.PENDING ||
+    //         (approvalSubmitted && approvalState === ApprovalState.APPROVED))
+
+    const showApproveFlow = useMemo(()=>{
+        // console.log("ApproveFlow->!isArgentWallet", !isArgentWallet)
+        // console.log("ApproveFlow->approvalState", approvalState)
+        // console.log("ApproveFlow->approvalSubmitted", approvalSubmitted)
+        if (approvalState == ApprovalState.APPROVED){
+            return false
+        }
+        return !isArgentWallet &&
         // !swapInputError &&
         (approvalState === ApprovalState.NOT_APPROVED ||
-            approvalState === ApprovalState.PENDING ||
-            (approvalSubmitted && approvalState === ApprovalState.APPROVED))
+            approvalState === ApprovalState.PENDING || approvalSubmitted)
 
+    }, [isArgentWallet, approvalState, approvalSubmitted])
+    
     // mark when a user has submitted an approval, reset onTokenSelection for input field
     useEffect(() => {
         if (approvalState === ApprovalState.PENDING) {
@@ -166,11 +180,12 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
             </>
         )
     }
-    console.log("ApproveFlow->SelectedTokenSymbol", SelectedTokenSymbol)
+    // console.log("ApproveFlow->SelectedTokenSymbol", SelectedTokenSymbol)
     return (
         <>
             {
                 showApproveFlow ? (
+                // false ? (
                 // true ? (
                     <AutoRow style={{ flexWrap: 'nowrap', width: '408px', height: '45px', margin: '0 0 0 217px' }}>
                         <AutoColumn style={{ width: '100%', }} gap="12px">

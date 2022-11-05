@@ -253,7 +253,7 @@ function useBridgeSwapCallArguments(
           // const depositAmount = typedValue ? (Number(typedValue) * (10 ** inputCurrency?.decimals)).toLocaleString('fullwide', { useGrouping: false }) : 0
           const depositAmount = tryParseAmount(typedValue, inputCurrency)?.quotient.toString()
           // console.log("useBridgeSwapCallArguments->buyNative", buyNative)
-          // console.log("formated depositAmount", depositAmount)
+          // console.log("useBridgeSwapCallArguments->formated depositAmount", depositAmount)
           if (depositAmount) {
             return {
               calldata: bridgeContract?.interface.encodeFunctionData("depositToken", [inputCurrencyId, depositAmount, targetAddress, targetChain, buyNative]),
@@ -268,7 +268,7 @@ function useBridgeSwapCallArguments(
   )
 
   // console.log('bridgeContract', bridgeContract)
-  // console.log('callData', calldata)
+  // console.log('useBridgeSwapCallArguments->callData', calldata)
   // console.log('value', value)
   // console.log('buyNative', buyNative)
 
@@ -661,11 +661,11 @@ export function useBridgeSwapCallback(
         //       !value || isZero(value)
         //         ? { from: account, to: address, data: calldata }
         //         : {
-        //             from: account,
-        //             to: address,
-        //             data: calldata,
-        //             value,
-        //           }
+        //           from: account,
+        //           to: address,
+        //           data: calldata,
+        //           value,
+        //         }
         //     // console.log('estimatedCalls->tx', tx)
         //     return library
         //       .estimateGas(tx)
@@ -693,13 +693,13 @@ export function useBridgeSwapCallback(
         //   })
         // )
 
-        // // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
-        // let bestCallOption: SuccessfulCall | SwapCallEstimate | undefined = estimatedCalls.find(
+        // // // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
+        // const bestCallOption0: SuccessfulCall | SwapCallEstimate | undefined = estimatedCalls.find(
         //   (el, ix, list): el is SuccessfulCall =>
         //     'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1])
         // )
 
-
+        //   console.log("bestCallOption0", bestCallOption0)
         // // check if any calls errored with a recognizable error
         // if (!bestCallOption) {
         //   const errorCalls = estimatedCalls.filter((call): call is FailedCall => 'error' in call)
@@ -732,7 +732,7 @@ export function useBridgeSwapCallback(
             from: account,
             to: address,
             data: calldata,
-            gasLimit: 4000000,
+            // gasLimit: 100000,
             value,
             // nonce: 89,
             // let the wallet try if we can't estimate the gas

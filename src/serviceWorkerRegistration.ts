@@ -80,7 +80,11 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
         navigator.serviceWorker.ready.then((registration) => {
           registration.unregister().then(() => {
             window.location.reload()
+          }).catch(err=>{
+            console.log('Registration unregister failed.')
           })
+        }).catch(err=>{
+          console.log('Navigator serviceWorker not ready.')
         })
       } else {
         // Service worker found. Proceed as normal.
@@ -117,6 +121,8 @@ export function register(config?: Config) {
             'This web app is being served cache-first by a service ' +
               'worker. To learn more, visit https://cra.link/PWA'
           )
+        }).catch(err=>{
+          console.log('Navigator serviceWorker not ready.')
         })
       } else {
         // Is not localhost. Just register service worker

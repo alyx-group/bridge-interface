@@ -236,6 +236,8 @@ function useERC20Permit(
               tokenAddress,
               permitType: permitInfo.type,
             })
+          }).catch(err=>{
+            console.log('eth_signTypedData_v4 failed '+err)
           })
       },
     }

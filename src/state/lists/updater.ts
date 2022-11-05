@@ -62,7 +62,8 @@ export default function Updater(): null {
         const list = lists[listUrl]
         
         // list.current = null
-        if (listUrl.includes("api.alyxbridge.com/v1/supported/tokens")) {
+        // if (listUrl.includes("api.alyxbridge.com/v1/supported/tokens")) {
+        if (listUrl.includes("/v1/supported/tokens")) {
           // console.log("fetchAllListsCallback->getTokenList->fetch->supported", list)
           fetchList(sourceChain, targetChain, listUrl, true).catch((error) => console.debug('list added fetching error', error))
         } else if (!list.current && !list.loadingRequestId && !list.error) {

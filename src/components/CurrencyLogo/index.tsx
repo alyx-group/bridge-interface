@@ -8,6 +8,7 @@ import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import AlyxLogo from '../../assets/images/logo-color.png'
 import HecoLogo from '../../assets/images/heco-logo.png'
 import BscLogo from '../../assets/images/bsc-logo.jpg'
+import PolygonLogo from '../../assets/images/polygon.png'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
 import Logo from '../Logo'
@@ -64,6 +65,8 @@ export default function CurrencyLogo({
         return <StyledEthereumLogo src={HecoLogo} alt="heco logo" size={size} style={style} {...rest} />
       case SupportedChainId.BSC:
         return <StyledEthereumLogo src={BscLogo} alt="bsc logo" size={size} style={style} {...rest} />
+      case SupportedChainId.POLYGON:
+        return <StyledEthereumLogo src={PolygonLogo} alt="polygon logo" size={size} style={style} {...rest} />
       default:
         break
     }

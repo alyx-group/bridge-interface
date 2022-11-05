@@ -31,7 +31,7 @@ export default function Updater(): null {
     // console.log('inputCurrency', inputCurrency)
     // console.log('typedValue', typedValue)
     if (inputCurrency) {
-      // console.log('get minDeposit', inputCurrency?.isToken, targetChain)
+      // console.log('getminDeposit->inputCurrency', inputCurrency?.isToken, targetChain)
       // console.log('targetChain', targetChain)
       if (inputCurrency.isToken && targetChain === 'alyx') {
         bridgeContract?.callStatic["minDeposit"]('alyx', inputCurrency.address).then(res => {
@@ -39,8 +39,10 @@ export default function Updater(): null {
           const minDeposit1 = BigNumber.from(res).mod(BigNumber.from(`${Math.pow(10, inputCurrency.decimals)}`))
           // console.log('get minDeposit done', minDeposit0, minDeposit1)
           const minDeposit = ethers.utils.formatUnits(BigNumber.from(res), inputCurrency.decimals)
-          // console.log('get minDeposit done', minDeposit)
-          // dispatch(setMinDeposit({ minDeposit: Number(minDeposit) }))
+          // console.log('getminDeposit->done', minDeposit)
+          dispatch(setMinDeposit({ minDeposit: Number(minDeposit) }))
+        }).catch(err=>{
+          console.log("failed to get minDeposit ", err)
         })
       }
     }

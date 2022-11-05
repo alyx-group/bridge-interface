@@ -128,7 +128,7 @@ export default createReducer<SwapState>(initialState, (builder) =>
       state.buyNative = buyNative
     })
     .addCase(setMinDeposit, (state, { payload: { minDeposit } }) => {
-      if (minDeposit) {
+      if (minDeposit != null) {
         state.minDeposit = minDeposit
       }
     })

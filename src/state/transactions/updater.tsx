@@ -38,6 +38,7 @@ const RETRY_OPTIONS_BY_CHAIN_ID: { [chainId: number]: RetryOptions } = {
   [SupportedChainId.ALYX]: { n: 10, minWait: 250, maxWait: 1000 },
   [SupportedChainId.HECO]: { n: 10, minWait: 250, maxWait: 1000 },
   [SupportedChainId.BSC]: { n: 10, minWait: 250, maxWait: 1000 },
+  [SupportedChainId.POLYGON]: { n: 10, minWait: 250, maxWait: 1000 },
   [SupportedChainId.MAINNET]: { n: 10, minWait: 250, maxWait: 1000 },
   [SupportedChainId.ARBITRUM_ONE]: { n: 10, minWait: 250, maxWait: 1000 },
   [SupportedChainId.ARBITRUM_RINKEBY]: { n: 10, minWait: 250, maxWait: 1000 },

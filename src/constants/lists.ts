@@ -14,8 +14,8 @@ const WRAPPED_LIST = 'wrapped.tokensoft.eth'
 
 // const BRIDGE_TOKENS = 'http://192.168.1.6:8080/v1/bridge/supported/tokens'
 // const BRIDGE_TOKENS = 'http://176.32.74.170:7000/v1/bridge/supported/tokens'
-const BRIDGE_TOKENS = 'http://api.alyxbridge.com/v1/supported/tokens'
-// const BRIDGE_TOKENS = 'http://127.0.0.1:8080/v1/supported/tokens'
+// const BRIDGE_TOKENS = 'http://api.alyxbridge.com/v1/supported/tokens'
+const BRIDGE_TOKENS = 'http://127.0.0.1:8080/v1/supported/tokens'
 // const BRIDGE_TOKENS = 'http://192.168.101.4:8080/v1/bridge/supported/tokens'
 // http://localhost:8080/v1/bridge/supported/tokens
 export const UNSUPPORTED_LIST_URLS: string[] = [

@@ -13,10 +13,23 @@ const StyledIdenticonContainer = styled.div`
 export default function Identicon() {
   const { account, library } = useActiveWeb3React()
 
+  // console.log("Identicon->account", account)
+  // console.log("Identicon->library", library)
+  // if(library){
+  //   console.log("Identicon->library.provider", library.provider)
+  // }
+  // console.log("Identicon->navigator.onLine", navigator.onLine)
+  
   // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451
   return (
     <StyledIdenticonContainer>
-      {account && library?.provider && <Davatar address={account} size={16} provider={library.provider} />}
+      
+      {
+        account &&
+        library?.provider && 
+        navigator.onLine &&
+        <Davatar address={account} size={16} provider={library.provider} />
+      }
     </StyledIdenticonContainer>
   )
 }

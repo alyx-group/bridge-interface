@@ -31,9 +31,11 @@ const NETWORK_URLS: { [key in SupportedChainId]: string } = {
   [SupportedChainId.OPTIMISTIC_KOVAN]: `https://optimism-kovan.infura.io/v3/${INFURA_KEY}`,
   [SupportedChainId.ARBITRUM_ONE]: `https://arbitrum-mainnet.infura.io/v3/${INFURA_KEY}`,
   [SupportedChainId.ARBITRUM_RINKEBY]: `https://arbitrum-rinkeby.infura.io/v3/${INFURA_KEY}`,
+  
   [SupportedChainId.ALYX]: `https://rpc.alyxchain.com`,
   [SupportedChainId.HECO]: `https://http-mainnet.hecochain.com`,
   [SupportedChainId.BSC]: `https://bsc-dataseed1.binance.org`,
+  [SupportedChainId.POLYGON]: `https://poly-rpc.gateway.pokt.network`,
 }
 
 export const network = new NetworkConnector({

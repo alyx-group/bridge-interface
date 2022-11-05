@@ -92,14 +92,15 @@ export function useSwapActionHandlers(): {
   const onSwitchTargetChain = useCallback(
     (targetChain: string) => {
       dispatch(switchTargetChain({ chain: targetChain }))
-      if (bridgeContract?.callStatic["fee"]) {
-        // console.log("fetching fee amount to target chain")
-        bridgeContract?.callStatic["fee"](targetChain)?.then(res => {
-          dispatch(setFee({ fee: JSBI.BigInt(res).toString() }))
-        })
-      } else {
-        dispatch(setFee({ fee: JSBI.BigInt(0).toString() }))
-      }
+      dispatch(setFee({ fee: JSBI.BigInt(0).toString() }))
+      // if (bridgeContract?.callStatic["fee"]) {
+      //   // console.log("fetching fee amount to target chain")
+      //   bridgeContract?.callStatic["fee"](targetChain)?.then(res => {
+      //     dispatch(setFee({ fee: JSBI.BigInt(res).toString() }))
+      //   })
+      // } else {
+      //   dispatch(setFee({ fee: JSBI.BigInt(0).toString() }))
+      // }
     },
     [dispatch, chainId, bridgeContract]
   )
@@ -302,7 +303,7 @@ export function useDerivedSwapInfo(
       inputError = inputError ?? t`Enter an valid amount`
     }
     if (buyNative) {
-      if (minDeposit) {
+      if (minDeposit != null) {
         if (Number(typedValue) < minDeposit) {
           inputError = inputError ?? t`Need at least ${minDeposit} ${inputCurrency?.symbol}`
         }

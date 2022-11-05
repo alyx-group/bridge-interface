@@ -23,6 +23,8 @@ export default function getLibrary(provider: any): Web3Provider {
       console.debug('Setting polling interval', networkPollingInterval)
       library.pollingInterval = networkPollingInterval
     }
+  }).catch(err=>{
+    console.log("detectNetwork failed", err)
   })
   return library
 }

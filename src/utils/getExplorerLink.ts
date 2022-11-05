@@ -63,6 +63,19 @@ export function getExplorerLink(chainId: number, data: string, type: ExplorerDat
         return `https://bscscan.com/`
     }
   }
+  if (chainId === SupportedChainId.POLYGON) {
+    switch (type) {
+      case ExplorerDataType.TRANSACTION:
+        return `https://polygonscan.com/tx/${data}`
+      case ExplorerDataType.ADDRESS:
+      case ExplorerDataType.TOKEN:
+        return `https://polygonscan.com/address/${data}`
+      case ExplorerDataType.BLOCK:
+        return `https://polygonscan.com/block/${data}`
+      default:
+        return `https://polygonscan.com/`
+    }
+  }
   if (chainId === SupportedChainId.MAINNET) {
     switch (type) {
       case ExplorerDataType.TRANSACTION:
@@ -73,7 +86,7 @@ export function getExplorerLink(chainId: number, data: string, type: ExplorerDat
       case ExplorerDataType.BLOCK:
         return `https://etherscan.io/block/${data}`
       default:
-        return `https://bscscan.com/`
+        return `https://etherscan.io/`
     }
   }
   if (chainId === SupportedChainId.ARBITRUM_ONE) {

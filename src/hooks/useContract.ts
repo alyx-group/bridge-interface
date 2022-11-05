@@ -3,9 +3,10 @@ import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUnisw
 import { abi as QuoterABI } from '@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json'
 import { abi as MulticallABI } from '@uniswap/v3-periphery/artifacts/contracts/lens/UniswapInterfaceMulticall.sol/UniswapInterfaceMulticall.json'
 import ARGENT_WALLET_DETECTOR_ABI from 'abis/argent-wallet-detector.json'
-import ALYX_BRIDGE_CONTRACT_ABI from 'abis/alyx-bridge-contract.json'
-import HECO_BRIDGE_CONTRACT_ABI from 'abis/heco-bridge-contract.json'
-import BSC_BRIDGE_CONTRACT_ABI from 'abis/heco-bridge-contract.json'
+import ALYX_BRIDGE_CONTRACT_ABI from 'abis/bridge-contract.json'
+import HECO_BRIDGE_CONTRACT_ABI from 'abis/bridge-contract.json'
+import BSC_BRIDGE_CONTRACT_ABI from 'abis/bridge-contract.json'
+import POLYGON_BRIDGE_CONTRACT_ABI from 'abis/bridge-contract.json'
 import EIP_2612 from 'abis/eip_2612.json'
 import ENS_PUBLIC_RESOLVER_ABI from 'abis/ens-public-resolver.json'
 import ENS_ABI from 'abis/ens-registrar.json'
@@ -103,6 +104,9 @@ export function useBridgeContract(chainId: SupportedChainId | undefined): Contra
       break;
     case SupportedChainId.BSC:
       abi = BSC_BRIDGE_CONTRACT_ABI
+      break;
+    case SupportedChainId.POLYGON:
+      abi = POLYGON_BRIDGE_CONTRACT_ABI
       break;
     case SupportedChainId.MAINNET:
       abi = ALYX_BRIDGE_CONTRACT_ABI
