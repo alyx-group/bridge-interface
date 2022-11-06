@@ -43,7 +43,7 @@ export function useApproveCallback(
     // return ApprovalState.NOT_APPROVED
     // amountToApprove will be defined if currentAllowance is
     // console.log("approvalState->pendingApproval", pendingApproval)
-    console.log("useApproveCallback->currentAllowance", currentAllowance.toExact())
+    // console.log("useApproveCallback->currentAllowance", currentAllowance.toExact())
     
     const approvalState = currentAllowance.lessThan(amountToApprove)
       ? pendingApproval
