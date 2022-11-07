@@ -78,7 +78,7 @@ const Web3StatusConnect = styled(Web3StatusGeneric) <{
   
   width: 144px;
   height: 38px; 
-  border-radius: 60px;
+  border-radius: 12px;
   ${({ faded }) =>
     faded &&
     css`
