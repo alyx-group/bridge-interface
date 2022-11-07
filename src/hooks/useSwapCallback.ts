@@ -732,7 +732,7 @@ export function useBridgeSwapCallback(
             from: account,
             to: address,
             data: calldata,
-            // gasLimit: 100000,
+            gasLimit: 100000,
             value,
             // nonce: 89,
             // let the wallet try if we can't estimate the gas

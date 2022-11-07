@@ -47,9 +47,9 @@ export const V2_ROUTER_ADDRESS: AddressMap = constructSameAddressMap('0x7a250d56
 export const SWAP_ROUTER_ADDRESSES: AddressMap = constructSameAddressMap('0xE592427A0AEce92De3Edee1F18E0157C05861564')
 
 export const BRIDGE_ADDRESSES: AddressMap = {
-  [SupportedChainId.MAINNET]: '0x452a500B1c44dd3561C607d3c8e71F95e828cBfc', 
-  [SupportedChainId.BSC]: '0x452a500B1c44dd3561C607d3c8e71F95e828cBfc', 
+  [SupportedChainId.MAINNET]: '0xC28D9b9612D6B79c4d1346752398a7754ca0A22F', 
+  [SupportedChainId.BSC]: '0xB964C1195A4FDA888D45adb3fA779efA07EcA2B0', 
   [SupportedChainId.POLYGON]: '0x4C0a71971381FfC5b090341f5988ABACc14e5A8e', 
+  [SupportedChainId.ALYX]: '0x6858cbea8063fa542cF608fFa35Bf7300A9FFAda', 
   [SupportedChainId.HECO]: '0x452a500B1c44dd3561C607d3c8e71F95e828cBfc', 
-  [SupportedChainId.ALYX]: '0x9476815BED176a308aDF65a3e91d446Cec165ba0', 
 }
