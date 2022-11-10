@@ -152,7 +152,8 @@ export function useApproveCallbackFromBridgeSwap() {
     inputCurrency
       ? CurrencyAmount.fromRawAmount(
         inputCurrency,
-        (Number(typedValue) * 10 ** inputCurrency?.decimals).toLocaleString('fullwide', { useGrouping: false })
+        // (Number(typedValue) * 10 ** inputCurrency?.decimals).toLocaleString('fullwide', { useGrouping: false,  })
+        Number((Number(typedValue) * 10 ** inputCurrency?.decimals).toFixed(0)).toLocaleString('fullwide', { useGrouping: false,  })
       )
       : undefined,
     chainId ? bridgeAddress : undefined
