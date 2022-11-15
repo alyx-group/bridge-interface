@@ -329,7 +329,7 @@ export default function Home({ history }: RouteComponentProps) {
   )
   const TransferButton = () => (
     <ButtonWrapper>
-      {targetChain && pairInfo && pairInfo.targetTokenBalance > 0 && !isMobile &&
+      {targetChain && pairInfo && !isMobile && pairInfo.targetChain != "alyx" &&
         <Text fontSize={"14px"} fontFamily="montserrat">
           {targetChain.slice(0, 1).toLocaleUpperCase() + targetChain.slice(1, targetChain.length)} Pool: {pairInfo.targetTokenBalance} {inputCurrency?.symbol}</Text>
       }
@@ -408,7 +408,7 @@ export default function Home({ history }: RouteComponentProps) {
                 <Text fontSize={"14px"}>To</Text>
                 <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
                 <TargetAddressInput onUserInput={handleAddressInput} />
-                {targetChain && pairInfo && pairInfo.targetTokenBalance > 0 &&
+                {targetChain && pairInfo && pairInfo.targetChain != "alyx" &&
                   <Text fontSize={"14px"}>
                     {targetChain.slice(0, 1).toLocaleUpperCase() + targetChain.slice(1, targetChain.length)} Pool: {pairInfo.targetTokenBalance} {inputCurrency?.symbol}</Text>
                 }

@@ -255,10 +255,12 @@ export function useDerivedSwapInfo(
 
   const {
     minimumCrossTransfer,
-    maximumCrossTransfer
+    maximumCrossTransfer,
+    targetTokenBalance
   }: {
     minimumCrossTransfer: number,
     maximumCrossTransfer: number,
+    targetTokenBalance: number,
   } = useGetBridgePairInfoQuery({
     source_chain: ALL_SUPPORTED_CHAIN_SHORT_NAMES[chainId ?? "undefined"],
     token: inputCurrencyId ?? "undefined",
@@ -270,11 +272,13 @@ export function useDerivedSwapInfo(
         return {
           minimumCrossTransfer: data.data.minimumCrossTransfer,
           maximumCrossTransfer: data.data.maximumCrossTransfer,
+          targetTokenBalance: data.data.targetTokenBalance,
         }
       } else {
         return {
           minimumCrossTransfer: 0,
           maximumCrossTransfer: 0,
+          targetTokenBalance: 0,
         }
       }
     },
@@ -320,6 +324,13 @@ export function useDerivedSwapInfo(
         // console.log('relevantTokenBalances', relevantTokenBalances[0]?.toExact())
         if (Number(typedValue) > Number(relevantTokenBalances[0]?.toExact())) {
           inputError = inputError ?? t`Out of Balance`
+        }
+        if (Number(typedValue) > targetTokenBalance) {
+          if (isMobile) {
+            inputError = inputError ?? t`Larger than target pool size`
+          } else {
+            inputError = inputError ?? t`Larger than target pool size`
+          }
         }
         if (Number(typedValue) < minimumCrossTransfer) {
           if (isMobile) {
