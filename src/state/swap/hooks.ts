@@ -325,7 +325,7 @@ export function useDerivedSwapInfo(
         if (Number(typedValue) > Number(relevantTokenBalances[0]?.toExact())) {
           inputError = inputError ?? t`Out of Balance`
         }
-        if (Number(typedValue) > targetTokenBalance) {
+        if (targetChain!="alyx" && Number(typedValue) > targetTokenBalance) {
           if (isMobile) {
             inputError = inputError ?? t`Larger than target pool size`
           } else {
