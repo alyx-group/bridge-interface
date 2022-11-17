@@ -107,14 +107,14 @@ function TransactionSubmittedContent({
   const { addToken, success } = useAddTokenToMetamask(currencyToAdd)
 
   const transactions = useAppSelector((state) => state.transactions)
-
+  
   const swap = useAppSelector((state) => state.swap)
   
   const proof = useMemo(() =>{
-    if (chainId && hash){
+    if (chainId && hash && transactions[chainId][hash]){
       const _deposits = transactions[chainId][hash].deposits
       // console.log('TransactionSubmittedContent->transactions[chainId][hash].deposits',transactions[chainId][hash].deposits)
-      if (_deposits.length > 0){
+      if (_deposits&&_deposits.length > 0){
         const s = ALL_SUPPORTED_CHAIN_SHORT_NAMES[chainId]+"_"+swap.INPUT.currencyId+"_"+hash+"_"+_deposits[0].logIndex
         if (swap.buyNative){
           return s+"_true"
