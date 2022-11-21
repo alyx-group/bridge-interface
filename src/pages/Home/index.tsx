@@ -374,7 +374,8 @@ export default function Home({ history }: RouteComponentProps) {
       <>
         <NetworkAlert />
         <AppBody>
-          {!account ? (
+          {/* {!account ? ( */}
+          {false ? (
             <ButtonLight>
               <Trans>Please Connect Wallet</Trans>
             </ButtonLight>
@@ -447,7 +448,8 @@ export default function Home({ history }: RouteComponentProps) {
     <>
       <NetworkAlert />
       <AppBody>
-        {!account ? (
+        {/* {!account ? ( */}
+        {false ? (
           <ButtonLight>
             <Trans>Please Connect Wallet</Trans>
           </ButtonLight>
