@@ -160,8 +160,8 @@ export default function NetworkSelector({ supportedChains }: NetworkSelectorProp
   const info = chainId ? CHAIN_INFO[chainId] : undefined
 
   // const isOnL2 = chainId ? L2_CHAIN_IDS.includes(chainId) : false
-  const showSelector = Boolean(implements3085)
-  // const showSelector = true
+  // const showSelector1 = Boolean(implements3085)
+  const showSelector = true
   const mainnetInfo = CHAIN_INFO[SupportedChainId.ALYX]
 
   const conditionalToggle = useCallback(() => {
@@ -175,7 +175,8 @@ export default function NetworkSelector({ supportedChains }: NetworkSelectorProp
   }
 
   function Chain({ targetChain }: { targetChain: number }) {
-    if (!library || !chainId || (!implements3085 && targetChain !== chainId)) {
+    // if (!library || !chainId || (!implements3085 && targetChain !== chainId)) {
+    if (!library || !chainId ) {
       return null
     }
     const handleRowClick = () => {
@@ -214,7 +215,8 @@ export default function NetworkSelector({ supportedChains }: NetworkSelectorProp
     <>
       {/* {!isLoading && ( */}
       {/* {chainId} */}
-      {chainId && supportedChains && supportedChains.indexOf(chainId) > -1 ? (
+      {/* {chainId && supportedChains && supportedChains.indexOf(chainId) > -1 ? ( */}
+      {chainId && supportedChains ? (
         <SelectorWrapper ref={node as any}>
           <SelectorControls onClick={conditionalToggle} interactive={showSelector}>
             <SelectorLogo interactive={showSelector} src={info.logoUrl || mainnetInfo.logoUrl} />
