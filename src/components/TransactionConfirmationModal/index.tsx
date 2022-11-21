@@ -135,7 +135,7 @@ function TransactionSubmittedContent({
   // console.log('TransactionSubmittedContent->proof',proof)
   // console.log('TransactionSubmittedContent->fetched',fetched)
   const {withTxHash} = useGetTargetChainWithdrawTxHashQuery({proof}, {
-    pollingInterval: ms`5s`,
+    pollingInterval: ms`30s`,
     skip: proof === "" || fetched,
     selectFromResult:  ({ data }) => ({
       withTxHash: data?.data,

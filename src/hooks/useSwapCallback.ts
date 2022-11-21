@@ -7,7 +7,7 @@ import { useMemo } from 'react'
 
 import { SWAP_ROUTER_ADDRESSES, } from '../constants/addresses'
 import { ZERO_ADDRESS } from '../constants/misc'
-import { tryParseAmount, useSwapState } from '../state/swap/hooks'
+import { tryParseAmount, useDerivedSwapInfo, useSwapState } from '../state/swap/hooks'
 import { Field } from '../state/swap/actions'
 import { TransactionType } from '../state/transactions/actions'
 import { useTransactionAdder } from '../state/transactions/hooks'
@@ -26,6 +26,7 @@ import isInputAmountValid from '../utils/isInputAmountValid'
 import { isAddress } from 'utils'
 import JSBI from 'jsbi'
 import { SupportedChainId } from 'constants/chains'
+import useToggledVersion from './useToggledVersion'
 
 enum SwapCallbackState {
   INVALID,
@@ -624,6 +625,15 @@ export function useBridgeSwapCallback(
     buyNative,
   } = useSwapState()
 
+  const toggledVersion = useToggledVersion()
+
+  const {
+    bestTrade: trade,
+    currencies,
+    currencyBalances,
+    parsedAmount,
+    inputError: swapInputError,
+  } = useDerivedSwapInfo(toggledVersion)
   const addTransaction = useTransactionAdder()
 
   // const { address: recipientAddress } = useENS(recipientAddressOrName)
@@ -746,7 +756,7 @@ export function useBridgeSwapCallback(
               {
                 type: TransactionType.BRIDGE_SWAP,
                 inputCurrencyId,
-                inputCurrencyAmountRaw: typedValue,
+                inputCurrencyAmountRaw: parsedAmount?.quotient.toString(),
                 targetAddress,
                 targetChain
               }

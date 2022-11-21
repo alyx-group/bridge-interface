@@ -123,7 +123,9 @@ const LabelRow = styled.div`
 `
 
 const FiatRow = styled(LabelRow)`
-  justify-content: flex-end;
+  justify-content: center;
+  align-content: center;
+  /* border: 3px solid green; */
 `
 
 const Aligner = styled.span`
@@ -272,12 +274,12 @@ export default function CurrencyInputPanel({
   }, [allTokens, tokenComparator])
   // console.log("CurrencyInputPanel->firstToken", firstToken)
 
-  useEffect(()=>{
-    if(onCurrencySelect && firstToken){
+  useEffect(() => {
+    if (onCurrencySelect && firstToken) {
       onCurrencySelect(firstToken)
     }
-  },[onCurrencySelect, firstToken])
-  
+  }, [onCurrencySelect, firstToken])
+
   if (isMobile) {
     return (
       <InputPanel id={id} hideInput={hideInput} {...rest}>
@@ -403,45 +405,46 @@ export default function CurrencyInputPanel({
               onUserInput={onUserInput}
               $loading={loading}
             />
+            {!hideInput && !hideBalance && (
+              <FiatRow>
+                {/* <RowBetween> */}
+                  {account ? (
+                    <RowFixed style={{ height: '24px' }}>
+                      <TYPE.body
+                        onClick={onMax}
+                        color={theme.text2}
+                        fontWeight={400}
+                        fontSize={14}
+                        style={{ display: 'inline', cursor: 'pointer' }}
+                      >
+                        {!hideBalance && currency && selectedCurrencyBalance ? (
+                          renderBalance ? (
+                            renderBalance(selectedCurrencyBalance)
+                          ) : (
+                            <Trans>
+                              Balance: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {currency.symbol}
+                            </Trans>
+                          )
+                        ) : null}
+                      </TYPE.body>
+                      {showMaxButton && selectedCurrencyBalance ? (
+                        <StyledBalanceMax onClick={onMax}>
+                          <Trans>(Max)</Trans>
+                        </StyledBalanceMax>
+                      ) : null}
+                    </RowFixed>
+                  ) : (
+                    <span />
+                  )}
+                  {/* <LoadingOpacityContainer $loading={loading}>
+                    <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />
+                  </LoadingOpacityContainer> */}
+                {/* </RowBetween> */}
+              </FiatRow>
+            )}
           </Column>
         )}
-        {/* {!hideInput && !hideBalance && (
-          <FiatRow>
-            <RowBetween>
-              {account ? (
-                <RowFixed style={{ height: '17px' }}>
-                  <TYPE.body
-                    onClick={onMax}
-                    color={theme.text2}
-                    fontWeight={400}
-                    fontSize={14}
-                    style={{ display: 'inline', cursor: 'pointer' }}
-                  >
-                    {!hideBalance && currency && selectedCurrencyBalance ? (
-                      renderBalance ? (
-                        renderBalance(selectedCurrencyBalance)
-                      ) : (
-                        <Trans>
-                          Balance: {formatCurrencyAmount(selectedCurrencyBalance, 4)} {currency.symbol}
-                        </Trans>
-                      )
-                    ) : null}
-                  </TYPE.body>
-                  {showMaxButton && selectedCurrencyBalance ? (
-                    <StyledBalanceMax onClick={onMax}>
-                      <Trans>(Max)</Trans>
-                    </StyledBalanceMax>
-                  ) : null}
-                </RowFixed>
-              ) : (
-                <span />
-              )}
-              <LoadingOpacityContainer $loading={loading}>
-                <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />
-              </LoadingOpacityContainer>
-            </RowBetween>
-          </FiatRow>
-        )} */}
+
       </Container>
       {onCurrencySelect && (
         <CurrencySearchModal

@@ -6,6 +6,7 @@ import styled, { ThemeContext } from 'styled-components'
 
 import { PopupContent } from '../../state/application/actions'
 import { useRemovePopup } from '../../state/application/hooks'
+import TransactionPopup from './TransactionPopup'
 
 const StyledClose = styled(X)`
   position: absolute;
@@ -71,12 +72,12 @@ export default function PopupItem({
   const theme = useContext(ThemeContext)
 
   let popupContent
-  // if ('txn' in content) {
-  //   const {
-  //     txn: { hash },
-  //   } = content
-  //   popupContent = <TransactionPopup hash={hash} />
-  // }
+  if ('txn' in content) {
+    const {
+      txn: { hash },
+    } = content
+    popupContent = <TransactionPopup hash={hash} />
+  }
 
   const faderStyle = useSpring({
     from: { width: '100%' },
@@ -84,11 +85,11 @@ export default function PopupItem({
     config: { duration: removeAfterMs ?? undefined },
   })
 
-  return (
+  return popupContent ? (
     <Popup>
       <StyledClose color={theme.text2} onClick={removeThisPopup} />
       {popupContent}
       {removeAfterMs !== null ? <AnimatedFader style={faderStyle} /> : null}
     </Popup>
-  )
+  ): null
 }
