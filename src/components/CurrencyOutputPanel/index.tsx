@@ -315,10 +315,10 @@ export default function CurrencyOutputPanel({
           {/* <Row padding="20px 0"justify='flex-end'> */}
           <BalanceWrapper>
             {!hideBalance && currency && selectedCurrencyBalance ? (
-              <Trans>
+              <Text>
                 Pool size: { poolSize } {/* {currency.symbol} */}
                 {/* Pool size: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {currency.symbol} */}
-              </Trans>
+              </Text>
             ) : null}
           </BalanceWrapper>
           {/* </Row> */}

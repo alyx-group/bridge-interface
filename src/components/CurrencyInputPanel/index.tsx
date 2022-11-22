@@ -315,9 +315,9 @@ export default function CurrencyInputPanel({
           {/* <Row padding="20px 0"justify='flex-end'> */}
           <BalanceWrapper>
             {!hideBalance && currency && selectedCurrencyBalance ? (
-              <Trans>
+              <Text>
                 Balance: { formatCurrencyAmount(selectedCurrencyBalance, 8) } {/* {currency.symbol} */}
-              </Trans>
+              </Text>
             ) : null}
           </BalanceWrapper>
           {/* </Row> */}
