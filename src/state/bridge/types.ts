@@ -6,22 +6,23 @@ export enum V3TradeState {
   SYNCING,
 }
 
+export interface BridgePairInfo {
+  sourceChain: string,
+  sourceToken: string,
+  sourceTokenDecimals: number,
+  targetChain: string,
+  targetToken: string,
+  targetTokenDecimals: number,
+  minimumCrossTransfer: number,
+  maximumCrossTransfer: number,
+  feeRate: number,
+  minimumCrossFee: number,
+  maximumCrossFee: number,
+  targetTokenBalance: number,
+}
 export interface getBridgePairInfo {
   code: number
-  data: {
-    sourceChain: string,
-    sourceToken: string,
-    sourceTokenDecimals: number,
-    targetChain: string,
-    targetToken: string,
-    targetTokenDecimals: number,
-    minimumCrossTransfer: number,
-    maximumCrossTransfer: number,
-    feeRate: number,
-    minimumCrossFee: number,
-    maximumCrossFee: number,
-    targetTokenBalance: number,
-  }
+  data: BridgePairInfo
   msg: string
 }
 

@@ -469,7 +469,7 @@ export default function Home({ history }: RouteComponentProps) {
                   } */}
                 </Row>
                 <Row gap='15px' justifyContent="center" alignItems="center" >
-                  <CurrencyOutput></CurrencyOutput>
+                  <CurrencyOutput ></CurrencyOutput>
                 </Row>
               </NetworkWrapper>
               <NetworkWrapper padding="15px 10px 15px 10px"  width={innerWidth * 88 / 100 + "px"} margin={"20px 0 0 0"}>

@@ -12,10 +12,10 @@ import { maxAmountSpend } from 'utils/maxAmountSpend'
 import CurrencyOutputPanel from '../../components/CurrencyOutputPanel'
 import { useActiveWeb3React } from '../../hooks/web3'
 import { Field } from '../../state/swap/actions'
+import { BridgePairInfo } from 'state/bridge/types'
 
 
 export default function CurrencyInput() {
-
   const {
     independentField,
     typedValue,
@@ -25,7 +25,7 @@ export default function CurrencyInput() {
   } = useSwapState()
 
   const toggledVersion = useToggledVersion()
-
+  
   const {
     bestTrade: trade,
     currencies,
@@ -145,6 +145,7 @@ export default function CurrencyInput() {
       showCommonBases={true}
       id="swap-currency-input"
       loading={independentField === Field.OUTPUT}
+      poolSize={pairInfo?.targetTokenBalance}
     ></CurrencyOutputPanel>
   )
 }

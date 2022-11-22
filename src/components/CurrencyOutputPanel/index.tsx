@@ -247,6 +247,7 @@ interface CurrencyOutputPanelProps {
   renderBalance?: (amount: CurrencyAmount<Currency>) => ReactNode
   locked?: boolean
   loading?: boolean
+  poolSize?: number|undefined
 }
 
 const BalanceWrapper = styled.div`
@@ -280,6 +281,7 @@ export default function CurrencyOutputPanel({
   hideInput = false,
   locked = false,
   loading = false,
+  poolSize,
   ...rest
 }: CurrencyOutputPanelProps) {
   const [modalOpen, setModalOpen] = useState(false)
@@ -314,7 +316,8 @@ export default function CurrencyOutputPanel({
           <BalanceWrapper>
             {!hideBalance && currency && selectedCurrencyBalance ? (
               <Trans>
-                Pool size: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {/* {currency.symbol} */}
+                Pool size: {poolSize} {/* {currency.symbol} */}
+                {/* Pool size: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {currency.symbol} */}
               </Trans>
             ) : null}
           </BalanceWrapper>
