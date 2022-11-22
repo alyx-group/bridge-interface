@@ -63,7 +63,7 @@ const BodyWrapper = styled.div`
   z-index: 1;
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    padding: 6rem 0px 16px 0px;
+    padding: 69px 0px 16px 0px;
   `};
   /* border: 3px solid green; */
   /* min-height: 500px; */

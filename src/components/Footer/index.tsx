@@ -11,9 +11,11 @@ const FooterFrame = styled.div`
   width: 100%;
   bottom: 0;
   /* padding: 1rem; */
-  z-index: 21;
+  /* z-index: 21; */
+  z-index: 5;
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
+  
   /* border: solid 3px green; */
 /* 
   ${({ theme }) => theme.mediaWidth.upToLarge`
@@ -38,7 +40,7 @@ const CopyRight = styled(Row)`
   /* bottom: 0; */
 `
 export default function Footer() {
-
+  
   return (
     <FooterFrame>
       <CopyRight padding={"5px"} justify="center">

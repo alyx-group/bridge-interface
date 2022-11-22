@@ -87,8 +87,11 @@ const SelectorLabel = styled.div`
     display: block;
     margin-right: 8px;
   }
+  
   ${({ theme }) => theme.mediaWidth.upToSmall`
     font-size: 10px;
+    text-decoration: underline;  
+    margin-right: 0px;
   `}
 `
 const SelectorControls = styled.div<{ interactive: boolean }>`
@@ -107,9 +110,11 @@ const SelectorControls = styled.div<{ interactive: boolean }>`
   width: 165px;
   height: 43px;
   border-radius: 15px;
+  
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 159px;
+    width: auto;
     height: 28px;
+    justify-content: flex-start;
   `}
 `
 const SelectorLogo = styled(Logo) <{ interactive?: boolean }>`
@@ -120,25 +125,27 @@ const SelectorLogo = styled(Logo) <{ interactive?: boolean }>`
   width: 24px;
   height: 24px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+    margin-right: 0px;
   `}
 `
 const SelectorWrapper = styled.div`
   width: auto;
   height: 41px;
-  border: 1px solid rgb(29, 103, 205);
+  border: 3px solid rgb(29, 103, 205);
   border-radius: 15px;
   :hover {
-    background-color: #689ADE;
+    /* background-color: #689ADE; */
   }
-  /* background-color: rgba(255, 255, 255, 0.3); */
+  background-color: rgba(255, 255, 255, 0.3);
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     position: relative;
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 159px;
     height: 28px;
+    border: none;
+    background-color: #132035;
   `}
 `
 const StyledChevronDown = styled(ChevronDown)`

@@ -30,6 +30,7 @@ import Loader from '../Loader'
 const Wrapper = styled.div`
   width: 100%;
   padding: 1rem;
+  z-index: 100;
 `
 const Section = styled(AutoColumn)<{ inline?: boolean }>`
   padding: ${({ inline }) => (inline ? '0' : '0')};

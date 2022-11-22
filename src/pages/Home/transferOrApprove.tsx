@@ -122,7 +122,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                 {
                     showApproveFlow ? (
                     // true ? (
-                        <Column style={{ width: '100%', margin:'40px 0 0 0'}} gap="12px" alignItems='center' >
+                        <Column style={{ width: '100%', margin:'40px 0 80px 0'}} gap="12px" alignItems='center' >
                             <ButtonConfirmed
                                 onClick={handleApprove}
                                 disabled={
@@ -130,15 +130,15 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                     approvalSubmitted ||
                                     signatureState === UseERC20PermitState.SIGNED
                                 }
-                                width="300px"
+                                // width="200px"
                                 altDisabledStyle={approvalState === ApprovalState.PENDING} // show solid button while waiting
                                 confirmed={
                                     approvalState === ApprovalState.APPROVED ||
                                     signatureState === UseERC20PermitState.SIGNED
                                 }
                             >
-                                <AutoRow justify="space-between" style={{ flexWrap: 'nowrap' }}>
-                                    <span style={{ display: 'flex', alignItems: 'center' }}>
+                                <AutoRow justify="center" style={{width: '100%', flexWrap: 'nowrap' }} >
+                                    <span style={{ display: 'flex', alignItems: 'center', fontSize:'20px', }}>
                                         <CurrencyLogo
                                             currency={currencies[Field.INPUT]}
                                             size={'20px'}
@@ -147,10 +147,10 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {/* we need to shorten this string on mobile */}
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
-                                            <Trans>Approved</Trans>
+                                            <Trans>{SelectedTokenSymbol} Approved</Trans>
                                         ) : (
                                             <Trans>
-                                                Approve
+                                                Approve {SelectedTokenSymbol}
                                             </Trans>
                                         )}
                                     </span>

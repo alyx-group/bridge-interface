@@ -77,10 +77,12 @@ export const ButtonPrimary = styled(BaseButton)`
     border: 1px solid transparent;
     outline: none;
   }
+  
   ${({theme}) => theme.mediaWidth.upToSmall`
-    height: 30px;
+    height: 65x;
     padding: 0;
-    width: 169px;
+    // width: 200px;
+    border-radius: 30px;
   `}
 `
 
@@ -256,7 +258,7 @@ const ButtonConfirmedStyle = styled(BaseButton)`
   ${({theme}) => theme.mediaWidth.upToSmall`
     height: 30px;
     padding: 0;
-    width: 169px;
+    // width: 169px;
   `}
 `
 

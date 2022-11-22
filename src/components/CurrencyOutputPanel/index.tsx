@@ -26,7 +26,7 @@ import Row, { RowBetween, RowFixed } from '../Row'
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import { FiatValue } from './FiatValue'
 
-const InputPanel = styled.div<{ hideInput?: boolean }>`
+const OutputPanel = styled.div<{ hideInput?: boolean }>`
   ${({ theme }) => theme.flexColumnNoWrap}
   position: relative;
   border-radius: ${({ hideInput }) => (hideInput ? '16px' : '20px')};
@@ -102,6 +102,7 @@ const CurrencySelect = styled(ButtonGray) <{ visible: boolean; selected: boolean
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     flex: 3;
+    width: auto;
     height: 60px;
     font-size: 11px;
     border-radius: 15px;
@@ -177,21 +178,18 @@ const StyledBalanceMax = styled.button<{ disabled?: boolean }>`
   color: ${({ theme }) => theme.primaryText1};
   opacity: ${({ disabled }) => (!disabled ? 1 : 0.4)};
   pointer-events: ${({ disabled }) => (!disabled ? 'initial' : 'none')};
-  /* margin-left: 0.25rem; */
+  margin-left: 0.25rem;
 
   :focus {
     outline: none;
   }
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-    // flex: 1;
-    // border: 1px solid red;
   `};
 `
 const StyledNumericalInputWrapper = styled.div`
-  flex: 5;
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: row;
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgb(29, 103, 205);
@@ -219,16 +217,16 @@ const StyledNumericalInput = styled(NumericalInput) <{ $loading: boolean }>`
   ${({ theme }) => theme.mediaWidth.upToSmall`
     flex: 5;
     width: 100px;
-    height: auto;
+    height: 28px;
     border: none;
     font-size: 20px;
     text-align: left;
-    background: transparent;
     padding-left: 5px;
+    background:transparent;
   `};
 `
 
-interface CurrencyInputPanelProps {
+interface CurrencyOutputPanelProps {
   value: string
   onUserInput: (value: string) => void
   onMax?: () => void
@@ -262,7 +260,7 @@ const BalanceWrapper = styled.div`
   `};
 `
 
-export default function CurrencyInputPanel({
+export default function CurrencyOutputPanel({
   value,
   onUserInput,
   onMax,
@@ -283,11 +281,11 @@ export default function CurrencyInputPanel({
   locked = false,
   loading = false,
   ...rest
-}: CurrencyInputPanelProps) {
+}: CurrencyOutputPanelProps) {
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
-  // console.log("CurrencyInputPanel->currency", currency)
+  // console.log("CurrencyOutputPanel->currency", currency)
   const theme = useTheme()
 
   const handleDismissSearch = useCallback(() => {
@@ -295,12 +293,12 @@ export default function CurrencyInputPanel({
   }, [setModalOpen])
 
   const allTokens = useAllTokens()
-  // console.log("CurrencyInputPanel->allTokens", allTokens)
+  // console.log("CurrencyOutputPanel->allTokens", allTokens)
   const tokenComparator = useTokenComparator(false)
   const firstToken: Token = useMemo(() => {
     return Object.values(allTokens).sort(tokenComparator)[0]
   }, [allTokens, tokenComparator])
-  // console.log("CurrencyInputPanel->firstToken", firstToken)
+  // console.log("CurrencyOutputPanel->firstToken", firstToken)
 
   useEffect(() => {
     if (onCurrencySelect && firstToken) {
@@ -310,13 +308,13 @@ export default function CurrencyInputPanel({
 
   if (isMobile) {
     return (
-      <InputPanel id={id} hideInput={hideInput} {...rest}>
+      <OutputPanel id={id} hideInput={hideInput} {...rest}>
         <Container hideInput={hideInput} id='container'>
           {/* <Row padding="20px 0"justify='flex-end'> */}
           <BalanceWrapper>
             {!hideBalance && currency && selectedCurrencyBalance ? (
               <Trans>
-                Balance: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {/* {currency.symbol} */}
+                Pool size: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {/* {currency.symbol} */}
               </Trans>
             ) : null}
           </BalanceWrapper>
@@ -356,6 +354,7 @@ export default function CurrencyInputPanel({
                     </StyledTokenName>
                   )}
                 </Row>
+                {/* {onCurrencySelect && <StyledDropDown selected={!!currency} />} */}
               </Aligner>
             </CurrencySelect>
             {!hideInput && (
@@ -365,12 +364,8 @@ export default function CurrencyInputPanel({
                   value={value}
                   onUserInput={onUserInput}
                   $loading={loading}
+                  disabled
                 />
-                <StyledBalanceMax onClick={onMax}>
-                  <Trans>MAX</Trans>
-                  {/* {showMaxButton && selectedCurrencyBalance ? (
-                  ) : <></>} */}
-                </StyledBalanceMax>
               </StyledNumericalInputWrapper>
             )}
           </Row>
@@ -387,11 +382,11 @@ export default function CurrencyInputPanel({
             />
           )}
         </Container>
-      </InputPanel>
+      </OutputPanel>
     )
   }
   return (
-    <InputPanel id={id} hideInput={hideInput} {...rest}>
+    <OutputPanel id={id} hideInput={hideInput} {...rest}>
       <Container hideInput={hideInput} id='container'>
         {/* <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={!onCurrencySelect}>
         </InputRow> */}
@@ -497,6 +492,6 @@ export default function CurrencyInputPanel({
           disableNonToken={disableNonToken}
         />
       )}
-    </InputPanel>
+    </OutputPanel>
   )
 }

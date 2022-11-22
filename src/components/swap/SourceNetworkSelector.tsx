@@ -85,6 +85,7 @@ const SelectorLabel = styled.div`
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
     font-size: 11px;
+    margin-left: 0px;
   `}
 `
 const SelectorControls = styled.div<{ interactive: boolean }>`
@@ -104,7 +105,7 @@ const SelectorControls = styled.div<{ interactive: boolean }>`
   height: 43px;
   border-radius: 15px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 159px;
+    width: 60px;
     height: 28px;
   `}
 `
@@ -116,8 +117,9 @@ const SelectorLogo = styled(Logo) <{ interactive?: boolean }>`
     margin-right: 8px;
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
   `}
 `
 const SelectorWrapper = styled.div`
@@ -132,8 +134,10 @@ const SelectorWrapper = styled.div`
     position: relative;
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 159px;
+    width: 60px;
     height: 28px;
+    border: none;
+    background-color: #142436;
   `}
 `
 const StyledChevronDown = styled(ChevronDown)`

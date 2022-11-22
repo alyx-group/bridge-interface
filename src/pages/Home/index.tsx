@@ -60,11 +60,13 @@ import AppBody from '../AppBody'
 
 import SwapLeft, { LogoTitle } from './left'
 import CurrencyInput from './currencyInput'
+import CurrencyOutput from './currencyOutput'
 import { isMobile, useDeviceData, deviceType } from 'react-device-detect'
 import ApproveFlow from './transferOrApprove'
 import LogoDiamond from '../../assets/images/diamond.gif'
 import { number } from '@lingui/core/cjs/formats'
-
+import SettingGaer from '../../assets/images/setting-gaer.png'
+import ReminderLogo from '../../assets/images/reminder.png'
 
 const SwapRight = styled.div`
   /* flex: 3; */
@@ -90,11 +92,15 @@ const ButtonWrapper = styled.div`
   margin-left: 217px;
   gap: 5px;
 
+  
   ${({ theme }) => theme.mediaWidth.upToSmall`
     width: 100%;
     height: 58px;
-    margin: 0px;
-    padding-top: 40px;
+    // margin: 0px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    // padding-top: 40px;
+    // padding-bottom: 40px;
     align-self: center;
     margin-left: 0px;    
   `};
@@ -107,6 +113,22 @@ const ReminderTitle = styled.div<{
   /* text-decoration: underline; */
   /* text-decoration: dotted; */
 `
+const ReminderHeader = styled.div<{
+  color?: string
+}>`
+  display: flex;
+  flex-direction: row;
+  color: ${props => props.color ?? "#B4B4B4"};
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -5px;
+  div:before{
+    /* content:"• "; */
+  }
+  /* text-decoration: underline; */
+  /* text-decoration: dotted; */
+`
 const Reminder = styled.div<{
   color?: string
 }>`
@@ -115,6 +137,9 @@ const Reminder = styled.div<{
   div:before{
     content:"• ";
   }
+  padding-left: 8px;
+  font-size: 10px;
+  font-family: montserrat;
   /* text-decoration: underline; */
   /* text-decoration: dotted; */
 `
@@ -135,9 +160,24 @@ const Triangle = styled.img<{
 // const supportedChains = [1, 128, 56]
 // const supportedTargets = [1, 128, 56]
 
+const NetworkWrapper = styled(Column) <{
+  width?: string
+  margin?: string
+}>`
+  /* display: flex; */
+  width: ${props => props.width ?? "inherit"};
+  margin: ${props => props.margin ?? "0"};
+  /* width: ${props => props.width ?? "inherit"}; */
+  flex-direction: column;
+  border: 1px solid #254699;
+  background-color: #122032;
+  border-radius: 12px;
+  /* margin-top: 15px; */
+`
 export default function Home({ history }: RouteComponentProps) {
   const { account, chainId } = useActiveWeb3React()
   // get version from the url
+
 
   const { supportedChains } = useGetBridgeSupportedChainsQuery(undefined, {
     // pollingInterval: ms`10s`,
@@ -216,6 +256,12 @@ export default function Home({ history }: RouteComponentProps) {
       ALL_SUPPORTED_CHAIN_SHORT_NAMES[supportedTargets[0]] &&
       onSwitchTargetChain(ALL_SUPPORTED_CHAIN_SHORT_NAMES[supportedTargets[0]])
   }, [supportedTargets, chainId, onSwitchTargetChain])
+
+  useEffect(() => {
+    if (account) {
+      onAddressInput(account)
+    }
+  }, [account, onAddressInput])
 
   const handleAddressInput = useCallback(
     (address: string) => {
@@ -333,7 +379,7 @@ export default function Home({ history }: RouteComponentProps) {
         <Text fontSize={"14px"} fontFamily="montserrat">
           {targetChain.slice(0, 1).toLocaleUpperCase() + targetChain.slice(1, targetChain.length)} Pool: {pairInfo.targetTokenBalance} {inputCurrency?.symbol}</Text>
       }
-      {
+      {/* {
         pairInfo &&
         <Text fontSize={isMobile ? "10px" : "14px"} fontFamily="montserrat">
           Fee rate: {pairInfo.feeRate * 100}%
@@ -343,7 +389,7 @@ export default function Home({ history }: RouteComponentProps) {
             </>
           }
         </Text>
-      }
+      } */}
       <ButtonError
         onClick={() => {
           setSwapState({
@@ -367,7 +413,7 @@ export default function Home({ history }: RouteComponentProps) {
 
 
 
-
+  const { innerHeight, innerWidth } = window
   // useDeviceData()
   if (isMobile) {
     return (
@@ -380,7 +426,7 @@ export default function Home({ history }: RouteComponentProps) {
               <Trans>Please Connect Wallet</Trans>
             </ButtonLight>
           ) : (
-            <Column>
+            <Column className='container'>
               <ConfirmBridgeSwapModal
                 isOpen={showConfirm}
                 onAcceptChanges={() => { return }}
@@ -392,50 +438,72 @@ export default function Home({ history }: RouteComponentProps) {
                 swapErrorMessage={swapErrorMessage}
                 onDismiss={handleConfirmDismiss}
               />
-              <Column gap='15px' justifyContent="center" alignItems="center" padding="50px 0 0 0">
-                <Text fontSize={"14px"}>From Chain</Text>
-                <SourceNetworkSelector supportedChains={supportedChains} />
-                {/* <SourceAddress></SourceAddress> */}
-              </Column>
-              <CurrencyInput></CurrencyInput>
+              <Row gap='15px' justify='center' alignItems="center" padding="50px 0 0 0">
+                <Text fontSize={"20px"}>Cross Chain</Text>
+                <img src={SettingGaer} width={"28px"} height={"28px"}></img>
+              </Row>
+              <NetworkWrapper padding="15px 10px 0px 10px" width={innerWidth * 88 / 100 + "px"} margin={"20px 0 0 0"}>
+                <Row gap='15px' justifyContent="center" alignItems="center" padding="0px 0px 0px 5px">
+                  <Text fontSize={"14px"} width="40px" textAlign={"left"}>From</Text>
+                  <SourceNetworkSelector supportedChains={supportedChains} />
+                </Row>
+                <Row gap='15px' justifyContent="center" alignItems="center" >
+                  <CurrencyInput></CurrencyInput>
+                </Row>
+              </NetworkWrapper>
               <ArrowWrapper clickable={false}>
-                <svg preserveAspectRatio="none" data-bbox="16.451 43.607 167.098 112.786" viewBox="16.451 43.607 167.098 112.786" height="30" width="46" fill="rgba(255,255,255, 1)" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="presentation" aria-hidden="true" aria-labelledby="svgcid-cwqqkl-k090dk"><title id="svgcid-cwqqkl-k090dk"></title>
+                <svg preserveAspectRatio="none" data-bbox="16.451 43.607 167.098 112.786" viewBox="16.451 43.607 167.098 112.786" height="25" width="35" fill="rgba(255,255,255, 1)" xmlns="http://www.w3.org/2000/svg" data-type="shape" role="presentation" aria-hidden="true" aria-labelledby="svgcid-cwqqkl-k090dk"><title id="svgcid-cwqqkl-k090dk"></title>
                   <g>
                     <path d="M100.316 98.235l54.312-54.312 28.921 28.921L100 156.393 16.451 72.844l29.237-29.237 54.628 54.628z"></path>
                   </g>
                 </svg>
               </ArrowWrapper>
-              <Column padding='20px 0 0 0' gap="15px" justifyContent="center" alignItems="center">
-                <Text fontSize={"14px"}>To</Text>
-                <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
-                <TargetAddressInput onUserInput={handleAddressInput} />
-                {targetChain && pairInfo && pairInfo.targetChain != "alyx" &&
-                  <Text fontSize={"14px"}>
-                    {targetChain.slice(0, 1).toLocaleUpperCase() + targetChain.slice(1, targetChain.length)} Pool: {pairInfo.targetTokenBalance} {inputCurrency?.symbol}</Text>
+              <NetworkWrapper padding="15px 10px 0px 10px"  width={innerWidth * 88 / 100 + "px"}>
+                <Row padding='0 0 0 5px' gap="15px" justifyContent="center" alignItems="center">
+                  <Text fontSize={"14px"} width="40px" textAlign={"left"}>To</Text>
+                  <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
+                  {/* <TargetAddressInput onUserInput={handleAddressInput} />
+                  {targetChain && pairInfo && pairInfo.targetChain != "alyx" &&
+                    <Text fontSize={"14px"}>
+                      {targetChain.slice(0, 1).toLocaleUpperCase() + targetChain.slice(1, targetChain.length)} Pool: {pairInfo.targetTokenBalance} {inputCurrency?.symbol}</Text>
+                  } */}
+                </Row>
+                <Row gap='15px' justifyContent="center" alignItems="center" >
+                  <CurrencyOutput></CurrencyOutput>
+                </Row>
+              </NetworkWrapper>
+              <NetworkWrapper padding="15px 10px 15px 10px"  width={innerWidth * 88 / 100 + "px"} margin={"20px 0 0 0"}>
+                {pairInfo ? <Column gap={"2px"} padding={"0px 0 0 0px"} alignItems='flex-start'>
+                  <ReminderHeader color="white">
+                    <img src={ReminderLogo} width={"35px"}></img>
+                    <Text fontSize="11px" fontFamily="montserrat_bold"> Reminder</Text>
+                  </ReminderHeader>
+                  <Reminder><Text>Crosschain Fee is {pairInfo.feeRate * 100}%, Minimum Crosschain Fee is {pairInfo.minimumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
+                  <Reminder><Text>Maximum Crosschain Fee is {pairInfo.maximumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
+                  <Reminder><Text>Minimum Crosschain Amount is {pairInfo.minimumCrossTransfer} {inputCurrency?.symbol}</Text></Reminder>
+                  <Reminder><Text>Maximum Crosschain Amount is {pairInfo.maximumCrossTransfer} {inputCurrency?.symbol}</Text></Reminder>
+                  <Reminder><Text>Estimated Time of Crosschain Arrival is 10-30 min</Text></Reminder>
+                  <Reminder><Text>Crosschain amount larger than {pairInfo.maximumCrossTransfer} {inputCurrency?.symbol} could take up to 12 hours</Text></Reminder>
+                </Column> :
+                  <Column gap={"2px"} padding={"0px 0 0 10px"} alignItems='flex-start'>
+                    <ReminderHeader color="white">
+                      <img src={ReminderLogo} width={"35px"}></img>
+                      <Text fontSize="11px" fontFamily="montserrat_bold"> Reminder</Text>
+                    </ReminderHeader>
+                    <Reminder><Text>Crosschain Fee is 0.5 %, Minimum Crosschain Fee is 1 USDC</Text></Reminder>
+                    <Reminder><Text>Maximum Crosschain Fee is 1,000 USDC</Text></Reminder>
+                    <Reminder><Text>Minimum Crosschain Amount is 12 USDC</Text></Reminder>
+                    <Reminder><Text>Maximum Crosschain Amount is 20,000,000 USDC</Text></Reminder>
+                    <Reminder><Text>Estimated Time of Crosschain Arrival is 10-30 min</Text></Reminder>
+                    <Reminder><Text>Crosschain amount larger than 5,000,000 USDC could take up to 12 hours</Text></Reminder>
+                  </Column>
                 }
-              </Column>
+
+              </NetworkWrapper>
               <ApproveFlow TransferButton={TransferButton}></ApproveFlow>
-              {pairInfo ? <Column gap={"10px"} padding={"50px 0 0 50px"} alignItems='flex-start'>
-                <Reminder color="white"><Text fontSize="11px" fontFamily="montserrat_bold">Reminder:</Text></Reminder>
-                <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain Fee is {pairInfo.feeRate * 100}%, Minimum Crosschain Fee is {pairInfo.minimumCrossFee} {inputCurrency?.symbol},</Text></Reminder>
-                <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Fee is {pairInfo.maximumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
-                <Reminder><Text fontSize="7px" fontFamily="montserrat">Minimum Crosschain Amount is {pairInfo.minimumCrossTransfer} {inputCurrency?.symbol}</Text></Reminder>
-                <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Amount is {pairInfo.maximumCrossTransfer} {inputCurrency?.symbol}</Text></Reminder>
-                <Reminder><Text fontSize="7px" fontFamily="montserrat">Estimated Time of Crosschain Arrival is 10-30 min</Text></Reminder>
-                <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain amount larger than {pairInfo.maximumCrossTransfer} {inputCurrency?.symbol} could take up to 12 hours</Text></Reminder>
-              </Column> :
-                <Column gap={"10px"} padding={"50px 0 0 50px"} alignItems='flex-start'>
-                  <Reminder color="white"><Text fontSize="11px" fontFamily="montserrat_bold">Reminder:</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain Fee is 0.5 %, Minimum Crosschain Fee is 1 USDC,</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Fee is 1,000 USDC</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Minimum Crosschain Amount is 12 USDC</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Amount is 20,000,000 USDC</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Estimated Time of Crosschain Arrival is 10-30 min</Text></Reminder>
-                  <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain amount larger than 5,000,000 USDC could take up to 12 hours</Text></Reminder>
-                </Column>
-              }
-              
-              <SwapLeft></SwapLeft>
+
+
+              {/* <SwapLeft></SwapLeft> */}
             </Column>
           )
           }
@@ -500,10 +568,11 @@ export default function Home({ history }: RouteComponentProps) {
                   </Column>
                 </Row>
               }
-
               <ApproveFlow TransferButton={TransferButton}></ApproveFlow>
               {pairInfo ? <Column gap={"10px"} padding={"50px 0 0 50px"} alignItems='flex-start'>
-                <Reminder color="white"><Text fontSize="11px" fontFamily="montserrat_bold">Reminder:</Text></Reminder>
+                <Reminder color="white">
+                  <Text fontSize="11px" fontFamily="montserrat_bold"> Reminder:</Text>
+                </Reminder>
                 <Reminder><Text fontSize="7px" fontFamily="montserrat">Crosschain Fee is {pairInfo.feeRate * 100}%, Minimum Crosschain Fee is {pairInfo.minimumCrossFee} {inputCurrency?.symbol},</Text></Reminder>
                 <Reminder><Text fontSize="7px" fontFamily="montserrat">Maximum Crosschain Fee is {pairInfo.maximumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
                 <Reminder><Text fontSize="7px" fontFamily="montserrat">Minimum Crosschain Amount is {pairInfo.minimumCrossTransfer} {inputCurrency?.symbol}</Text></Reminder>

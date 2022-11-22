@@ -27,6 +27,7 @@ export const Body = styled.main<{
   ${({theme}) => theme.mediaWidth.upToSmall`
     top: 0px;
     zoom: 100%;
+    background-color: #000;
   `}
 `
 
@@ -85,9 +86,9 @@ export default function AppBody({ children, ...rest }: { children: React.ReactNo
   const { innerHeight, innerWidth } = window
   if (isMobile) {
     return (
-      <Body>
-        <BackGroundImg src={MobileBackground}></BackGroundImg>
-        <BodyWrapper {...rest}>
+      <Body className='body'>
+        {/* <BackGroundImg src={MobileBackground}></BackGroundImg> */}
+        <BodyWrapper {...rest} className='BodyWrapper'>
           {children}
         </BodyWrapper>
       </Body>
