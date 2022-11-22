@@ -316,7 +316,7 @@ export default function CurrencyOutputPanel({
           <BalanceWrapper>
             {!hideBalance && currency && selectedCurrencyBalance ? (
               <Trans>
-                Pool size: {poolSize} {/* {currency.symbol} */}
+                Pool size: { poolSize } {/* {currency.symbol} */}
                 {/* Pool size: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {currency.symbol} */}
               </Trans>
             ) : null}

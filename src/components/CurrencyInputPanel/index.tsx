@@ -316,7 +316,7 @@ export default function CurrencyInputPanel({
           <BalanceWrapper>
             {!hideBalance && currency && selectedCurrencyBalance ? (
               <Trans>
-                Balance: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {/* {currency.symbol} */}
+                Balance: { formatCurrencyAmount(selectedCurrencyBalance, 8) } {/* {currency.symbol} */}
               </Trans>
             ) : null}
           </BalanceWrapper>
