@@ -152,10 +152,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                             </span>
                                         ) : (
                                             <span>
-                                                <Trans>
-                                                    Approve
-                                                </Trans>
-                                                {SelectedTokenSymbol}
+                                                <Trans>Approve </Trans>{SelectedTokenSymbol}
                                             </span>
                                         )}
                                     </span>
