@@ -296,6 +296,7 @@ export default function Home({ history }: RouteComponentProps) {
   )
 
   const isValid = !swapInputError
+
   // the callback to execute the swap
   const { callback: swapCallback, error: swapCallbackError } = useBridgeSwapCallback(signatureData)
 
@@ -373,6 +374,8 @@ export default function Home({ history }: RouteComponentProps) {
     },
     [independentField, parsedAmount, pairInfo]
   )
+  const toggleWalletModal = useWalletModalToggle()
+
   const TransferButton = () => (
     <ButtonWrapper>
       {targetChain && pairInfo && !isMobile && pairInfo.targetChain != "alyx" &&
@@ -392,16 +395,20 @@ export default function Home({ history }: RouteComponentProps) {
       } */}
       <ButtonError
         onClick={() => {
-          setSwapState({
-            showConfirm: true,
-            // tradeToConfirm: trade,
-            attemptingTxn: false,
-            swapErrorMessage: undefined,
-            txHash: undefined,
-          })
+          if (swapInputError?.includes("Connect Wallet")) {
+            toggleWalletModal()
+          } else {
+            setSwapState({
+              showConfirm: true,
+              // tradeToConfirm: trade,
+              attemptingTxn: false,
+              swapErrorMessage: undefined,
+              txHash: undefined,
+            })
+          }
         }}
         id="swap-button"
-        disabled={!isValid || !!swapCallbackError}
+        disabled={(!isValid || !!swapCallbackError) && !swapInputError?.includes("Connect Wallet")}
         error={!isValid && !swapCallbackError}
       >
         <Text fontSize={14} fontWeight={500}>
@@ -458,7 +465,7 @@ export default function Home({ history }: RouteComponentProps) {
                   </g>
                 </svg>
               </ArrowWrapper>
-              <NetworkWrapper padding="15px 10px 0px 10px"  width={innerWidth * 88 / 100 + "px"}>
+              <NetworkWrapper padding="15px 10px 0px 10px" width={innerWidth * 88 / 100 + "px"}>
                 <Row padding='0 0 0 5px' gap="15px" justifyContent="center" alignItems="center">
                   <Text fontSize={"14px"} width="40px" textAlign={"left"}>To</Text>
                   <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
@@ -472,7 +479,7 @@ export default function Home({ history }: RouteComponentProps) {
                   <CurrencyOutput ></CurrencyOutput>
                 </Row>
               </NetworkWrapper>
-              <NetworkWrapper padding="15px 10px 15px 10px"  width={innerWidth * 88 / 100 + "px"} margin={"20px 0 0 0"}>
+              <NetworkWrapper padding="15px 10px 15px 10px" width={innerWidth * 88 / 100 + "px"} margin={"20px 0 0 0"}>
                 {pairInfo ? <Column gap={"2px"} padding={"0px 0 0 0px"} alignItems='flex-start'>
                   <ReminderHeader color="white">
                     <img src={ReminderLogo} width={"35px"}></img>

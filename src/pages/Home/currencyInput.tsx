@@ -87,6 +87,7 @@ export default function CurrencyInput() {
       onCurrencySelection(Field.INPUT, inputCurrency)
     }, [onCurrencySelection]
   )
+  
   return (
     <CurrencyInputPanel
       label={

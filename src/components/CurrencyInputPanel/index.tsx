@@ -302,11 +302,23 @@ export default function CurrencyInputPanel({
   }, [allTokens, tokenComparator])
   // console.log("CurrencyInputPanel->firstToken", firstToken)
 
-  useEffect(() => {
-    if (onCurrencySelect && firstToken) {
-      onCurrencySelect(firstToken)
+  const firstToken0 = useMemo(() => {
+    for (const key in allTokens) {
+      if (Object.prototype.hasOwnProperty.call(allTokens, key)) {
+        const token = allTokens[key];
+        if (token?.symbol?.includes("USDT") || token?.symbol?.includes("usdt")) {
+          return token
+        }
+      }
     }
-  }, [onCurrencySelect, firstToken])
+    return null
+  }, [allTokens])
+
+  useEffect(() => {
+    if (onCurrencySelect && firstToken0) {
+      onCurrencySelect(firstToken0)
+    }
+  }, [onCurrencySelect, firstToken0])
 
   if (isMobile) {
     return (
@@ -316,7 +328,7 @@ export default function CurrencyInputPanel({
           <BalanceWrapper>
             {!hideBalance && currency && selectedCurrencyBalance ? (
               <Text>
-                Balance: { formatCurrencyAmount(selectedCurrencyBalance, 8) } {/* {currency.symbol} */}
+                Balance: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {/* {currency.symbol} */}
               </Text>
             ) : null}
           </BalanceWrapper>
