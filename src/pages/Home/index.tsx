@@ -445,13 +445,13 @@ export default function Home({ history }: RouteComponentProps) {
                 swapErrorMessage={swapErrorMessage}
                 onDismiss={handleConfirmDismiss}
               />
-              <Row gap='15px' justify='center' alignItems="center" padding="50px 0 0 0">
+              <Row gap='15px' justify='center' alignItems="center" padding="10px 0 0 0">
                 <Text fontSize={"20px"}>Cross Chain</Text>
-                <img src={SettingGaer} width={"28px"} height={"28px"}></img>
+                <img src={SettingGaer} width={"28px"} height={"30px"}></img>
               </Row>
               <NetworkWrapper padding="15px 10px 0px 10px" width={innerWidth * 88 / 100 + "px"} margin={"20px 0 0 0"}>
-                <Row gap='15px' justifyContent="center" alignItems="center" padding="0px 0px 0px 5px">
-                  <Text fontSize={"14px"} width="40px" textAlign={"left"}>From</Text>
+                <Row gap='5px' justifyContent="center" alignItems="center" padding="0px 0px 0px 5px">
+                  <Text fontSize={"16px"} width="50px" textAlign={"left"} >From</Text>
                   <SourceNetworkSelector supportedChains={supportedChains} />
                 </Row>
                 <Row gap='15px' justifyContent="center" alignItems="center" >
@@ -466,8 +466,8 @@ export default function Home({ history }: RouteComponentProps) {
                 </svg>
               </ArrowWrapper>
               <NetworkWrapper padding="15px 10px 0px 10px" width={innerWidth * 88 / 100 + "px"}>
-                <Row padding='0 0 0 5px' gap="15px" justifyContent="center" alignItems="center">
-                  <Text fontSize={"14px"} width="40px" textAlign={"left"}>To</Text>
+                <Row padding='0 0 0 5px' gap="5px" justifyContent="center" alignItems="center">
+                  <Text fontSize={"16px"} width="50px" textAlign={"left"}>To</Text>
                   <TargetNetworkSelector supportedChains={supportedTargets} onSwitchChain={handleSwitchChain} />
                   {/* <TargetAddressInput onUserInput={handleAddressInput} />
                   {targetChain && pairInfo && pairInfo.targetChain != "alyx" &&
@@ -483,7 +483,7 @@ export default function Home({ history }: RouteComponentProps) {
                 {pairInfo ? <Column gap={"2px"} padding={"0px 0 0 0px"} alignItems='flex-start'>
                   <ReminderHeader color="white">
                     <img src={ReminderLogo} width={"35px"}></img>
-                    <Text fontSize="11px" fontFamily="montserrat_bold"> Reminder</Text>
+                    <Text fontSize="11px" fontFamily="montserrat_bold" style={{marginLeft: "-5px", marginTop:"-1px"}}> Reminder</Text>
                   </ReminderHeader>
                   <Reminder><Text>Crosschain Fee is {pairInfo.feeRate * 100}%, Minimum Crosschain Fee is {pairInfo.minimumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
                   <Reminder><Text>Maximum Crosschain Fee is {pairInfo.maximumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
@@ -494,8 +494,8 @@ export default function Home({ history }: RouteComponentProps) {
                 </Column> :
                   <Column gap={"2px"} padding={"0px 0 0 10px"} alignItems='flex-start'>
                     <ReminderHeader color="white">
-                      <img src={ReminderLogo} width={"35px"}></img>
-                      <Text fontSize="11px" fontFamily="montserrat_bold"> Reminder</Text>
+                      <img src={ReminderLogo} width={"35px"}  ></img>
+                      <Text fontSize="11px" fontFamily="montserrat_bold" style={{marginLeft: "-5px", marginTop:"-1px"}}> Reminder</Text>
                     </ReminderHeader>
                     <Reminder><Text>Crosschain Fee is 0.5 %, Minimum Crosschain Fee is 1 USDC</Text></Reminder>
                     <Reminder><Text>Maximum Crosschain Fee is 1,000 USDC</Text></Reminder>

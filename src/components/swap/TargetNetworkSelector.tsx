@@ -89,7 +89,7 @@ const SelectorLabel = styled.div`
   }
   
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    font-size: 10px;
+    font-size: 16px;
     text-decoration: underline;  
     margin-right: 0px;
   `}
@@ -112,7 +112,7 @@ const SelectorControls = styled.div<{ interactive: boolean }>`
   border-radius: 15px;
   
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: auto;
+    width: 160px;
     height: 28px;
     justify-content: flex-start;
   `}

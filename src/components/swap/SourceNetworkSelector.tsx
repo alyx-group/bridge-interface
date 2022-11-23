@@ -84,7 +84,7 @@ const SelectorLabel = styled.div`
     margin-right: 8px;
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    font-size: 11px;
+    font-size: 16px;
     margin-left: 0px;
   `}
 `
@@ -105,8 +105,9 @@ const SelectorControls = styled.div<{ interactive: boolean }>`
   height: 43px;
   border-radius: 15px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 60px;
+    width: 160px;
     height: 28px;
+    justify-content: flex-start;
   `}
 `
 const SelectorLogo = styled(Logo) <{ interactive?: boolean }>`
@@ -134,7 +135,7 @@ const SelectorWrapper = styled.div`
     position: relative;
   }
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    width: 60px;
+    width: 160px;
     height: 28px;
     border: none;
     background-color: transparent;

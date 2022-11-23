@@ -261,6 +261,18 @@ const BalanceWrapper = styled.div`
   `};
 `
 
+const LogoWhiteBackground = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+  `}
+`
+
 export default function CurrencyOutputPanel({
   value,
   onUserInput,
@@ -341,7 +353,9 @@ export default function CurrencyOutputPanel({
                       <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={20} margin={true} />
                     </span>
                   ) : currency ? (
-                    <CurrencyLogo style={{ marginRight: '0rem' }} currency={currency} size={'40px'} />
+                    <LogoWhiteBackground>
+                      <CurrencyLogo style={{ marginRight: '0rem' }} currency={currency} size={'30px'} />
+                    </LogoWhiteBackground>
                   ) : null}
                   {pair ? (
                     <StyledTokenName className="pair-name-container">
