@@ -137,7 +137,7 @@ const SelectorWrapper = styled.div`
     width: 60px;
     height: 28px;
     border: none;
-    background-color: #142436;
+    background-color: transparent;
   `}
 `
 const StyledChevronDown = styled(ChevronDown)`
