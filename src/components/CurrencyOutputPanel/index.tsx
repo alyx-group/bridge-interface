@@ -314,11 +314,23 @@ export default function CurrencyOutputPanel({
   }, [allTokens, tokenComparator])
   // console.log("CurrencyOutputPanel->firstToken", firstToken)
 
-  useEffect(() => {
-    if (onCurrencySelect && firstToken) {
-      onCurrencySelect(firstToken)
+  const firstToken0 = useMemo(() => {
+    for (const key in allTokens) {
+      if (Object.prototype.hasOwnProperty.call(allTokens, key)) {
+        const token = allTokens[key];
+        if (token?.symbol?.includes("USDT") || token?.symbol?.includes("usdt")) {
+          return token
+        }
+      }
     }
-  }, [onCurrencySelect, firstToken])
+    return null
+  }, [allTokens])
+
+  useEffect(() => {
+    if (onCurrencySelect && firstToken0) {
+      onCurrencySelect(firstToken0)
+    }
+  }, [onCurrencySelect, firstToken0])
 
   if (isMobile) {
     return (
