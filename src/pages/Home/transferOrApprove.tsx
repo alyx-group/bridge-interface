@@ -148,11 +148,11 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
                                             <span>
-                                            {SelectedTokenSymbol}<Trans> Approved</Trans>
+                                            {SelectedTokenSymbol}<Trans>&nbsp;Approved</Trans>
                                             </span>
                                         ) : (
                                             <span>
-                                                <Trans>Approve </Trans>{SelectedTokenSymbol}
+                                                <Trans>Approve&nbsp;</Trans>{SelectedTokenSymbol}
                                             </span>
                                         )}
                                     </span>
