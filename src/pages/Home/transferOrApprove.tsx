@@ -47,7 +47,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
         inputError: swapInputError,
     } = useDerivedSwapInfo(toggledVersion)
 
-    
+
     const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
 
     const isArgentWallet = useIsArgentWallet()
@@ -66,20 +66,20 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
     //         approvalState === ApprovalState.PENDING ||
     //         (approvalSubmitted && approvalState === ApprovalState.APPROVED))
 
-    const showApproveFlow = useMemo(()=>{
+    const showApproveFlow = useMemo(() => {
         // console.log("ApproveFlow->!isArgentWallet", !isArgentWallet)
         // console.log("ApproveFlow->approvalState", approvalState)
         // console.log("ApproveFlow->approvalSubmitted", approvalSubmitted)
-        if (approvalState == ApprovalState.APPROVED){
+        if (approvalState == ApprovalState.APPROVED) {
             return false
         }
         return !isArgentWallet &&
-        // !swapInputError &&
-        (approvalState === ApprovalState.NOT_APPROVED ||
-            approvalState === ApprovalState.PENDING || approvalSubmitted)
+            // !swapInputError &&
+            (approvalState === ApprovalState.NOT_APPROVED ||
+                approvalState === ApprovalState.PENDING || approvalSubmitted)
 
     }, [isArgentWallet, approvalState, approvalSubmitted])
-    
+
     // mark when a user has submitted an approval, reset onTokenSelection for input field
     useEffect(() => {
         if (approvalState === ApprovalState.PENDING) {
@@ -121,8 +121,8 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
             <>
                 {
                     showApproveFlow ? (
-                    // true ? (
-                        <Column style={{ width: '100%', margin:'40px 0 80px 0'}} gap="12px" alignItems='center' >
+                        // true ? (
+                        <Column style={{ width: '100%', margin: '40px 0 80px 0' }} gap="12px" alignItems='center' >
                             <ButtonConfirmed
                                 onClick={handleApprove}
                                 disabled={
@@ -137,8 +137,8 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                     signatureState === UseERC20PermitState.SIGNED
                                 }
                             >
-                                <AutoRow justify="center" style={{width: '100%', flexWrap: 'nowrap' }} >
-                                    <span style={{ display: 'flex', alignItems: 'center', fontSize:'20px', }}>
+                                <AutoRow justify="center" style={{ width: '100%', flexWrap: 'nowrap' }} >
+                                    <span style={{ display: 'flex', alignItems: 'center', fontSize: '20px', }}>
                                         <CurrencyLogo
                                             currency={currencies[Field.INPUT]}
                                             size={'20px'}
@@ -147,15 +147,20 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {/* we need to shorten this string on mobile */}
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
-                                            <Trans>{SelectedTokenSymbol} Approved</Trans>
+                                            <span>
+                                            {SelectedTokenSymbol}<Trans> Approved</Trans>
+                                            </span>
                                         ) : (
-                                            <Trans>
-                                                Approve {SelectedTokenSymbol}
-                                            </Trans>
+                                            <span>
+                                                <Trans>
+                                                    Approve
+                                                </Trans>
+                                                {SelectedTokenSymbol}
+                                            </span>
                                         )}
                                     </span>
                                     {approvalState === ApprovalState.PENDING ? (
-                                        <Loader stroke="white" style={{ marginLeft: '8px', marginRight: '8px' }}/>
+                                        <Loader stroke="white" style={{ marginLeft: '8px', marginRight: '8px' }} />
                                     ) : (approvalSubmitted && approvalState === ApprovalState.APPROVED) ||
                                         signatureState === UseERC20PermitState.SIGNED ? (
                                         <CheckCircle size="20" color={theme.green1} style={{ marginLeft: '8px', marginRight: '8px' }} />
@@ -168,7 +173,7 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                                 </>
                                             }
                                         >
-                                            <HelpCircle size="20" color={'white'} style={{ marginLeft: '8px', marginRight: '8px', marginTop:'4px' }} />
+                                            <HelpCircle size="20" color={'white'} style={{ marginLeft: '8px', marginRight: '8px', marginTop: '4px' }} />
                                         </MouseoverTooltip>
                                     )}
                                 </AutoRow>
@@ -186,8 +191,8 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
             {
 
                 showApproveFlow ? (
-                // false ? (
-                // true ? (
+                    // false ? (
+                    // true ? (
                     <AutoRow style={{ flexWrap: 'nowrap', width: '408px', height: '45px', margin: '0 0 0 217px' }}>
                         <AutoColumn style={{ width: '100%', }} gap="12px">
                             <ButtonConfirmed
@@ -214,11 +219,11 @@ export default function ApproveFlow({ TransferButton }: ButtonProps) {
                                         {/* we need to shorten this string on mobile */}
                                         {approvalState === ApprovalState.APPROVED ||
                                             signatureState === UseERC20PermitState.SIGNED ? (
-                                            <>You can now transfer { SelectedTokenSymbol }</>
-                                            
+                                            <>You can now transfer {SelectedTokenSymbol}</>
+
                                         ) : (
                                             <span>
-                                                Allow alyx bridge to use your { SelectedTokenSymbol }
+                                                Allow alyx bridge to use your {SelectedTokenSymbol}
                                             </span>
                                             // <Trans>
                                             // </Trans>
