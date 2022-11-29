@@ -175,7 +175,7 @@ const NetworkWrapper = styled(Column) <{
   margin: ${props => props.margin ?? "0"};
   /* width: ${props => props.width ?? "inherit"}; */
   flex-direction: column;
-  border: 1px solid rgb(175,179,186);
+  /* border: 1px solid rgb(175,179,186); */
   background-color: rgb(32,46,76);
   border-radius: 25px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
