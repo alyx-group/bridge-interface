@@ -10,6 +10,7 @@ import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Lock } from 'react-feather'
 import { Text } from 'rebass'
+import { useSwapState } from 'state/swap/hooks'
 import styled from 'styled-components'
 import { formatCurrencyAmount } from 'utils/formatCurrencyAmount'
 
@@ -346,13 +347,16 @@ export default function CurrencyOutputPanel({
     }
   }, [onCurrencySelect, firstToken0])
 
+  const {
+    targetChain,
+  } = useSwapState()
   if (isMobile) {
     return (
       <OutputPanel id={id} hideInput={hideInput} {...rest}>
         <Container hideInput={hideInput} id='container'>
           {/* <Row padding="20px 0"justify='flex-end'> */}
           <BalanceWrapper>
-            {!hideBalance && currency && selectedCurrencyBalance ? (
+            {!hideBalance && currency && selectedCurrencyBalance && targetChain !== "alyx" ? (
               <Text>
                 Pool size: {poolSize} {/* {currency.symbol} */}
                 {/* Pool size: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {currency.symbol} */}
@@ -433,7 +437,7 @@ export default function CurrencyOutputPanel({
       <Container hideInput={hideInput} id='container'>
         {/* <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={!onCurrencySelect}>
         </InputRow> */}
-        {!hideInput && !hideBalance && (
+        {!hideInput && !hideBalance ? (
           <Row style={{ border: "0px solid red", justifyContent: "flex-end" }}>
             {/* <RowBetween> */}
             {account ? (
@@ -446,15 +450,23 @@ export default function CurrencyOutputPanel({
                   style={{ display: 'inline', cursor: 'pointer' }}
                 >
                   <Trans>Pool Size:&nbsp;</Trans>
-                  {!hideBalance && currency && selectedCurrencyBalance ? (
-                    renderBalance ? (
-                      renderBalance(selectedCurrencyBalance)
-                    ) : (
-                      <>
-                        &nbsp;&nbsp;{poolSize}
-                      </>
-                    )
-                  ) : null}
+                  {
+                    targetChain !== "alyx" ? <>
+                      {!hideBalance && currency && selectedCurrencyBalance ? (
+                        renderBalance ? (
+                          renderBalance(selectedCurrencyBalance)
+                        ) : (
+                          <>
+                            &nbsp;&nbsp;{poolSize}
+                          </>
+                        )
+                      ) : null}
+                    </>:<>
+                      &nbsp;&nbsp;Mint
+                    </>
+                  }
+                  
+
                 </TYPE.body>
               </RowFixed>
             ) : (
@@ -465,7 +477,11 @@ export default function CurrencyOutputPanel({
                   </LoadingOpacityContainer> */}
             {/* </RowBetween> */}
           </Row>
-        )}
+        ) : <>
+          <RowFixed style={{ height: '24px', border: "0px solid green", marginRight: "10px" }}>
+            <Trans>Pool Size:&nbsp;</Trans>
+          </RowFixed>
+        </>}
         <Row gap="10px">
           {/* <Text fontSize={"14px"}>Token</Text> */}
           <CurrencySelect

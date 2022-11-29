@@ -34,12 +34,12 @@ const Transition = styled.div`
     transform: translate(0, -100%);
   }
 `
-const HeaderFrame = styled.div<{ 
+const HeaderFrame = styled.div<{
   showBackground: boolean;
   width?: string;
-  }>`
+}>`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   justify-content: center;
   align-items: center;
@@ -118,7 +118,8 @@ const HeaderElement = styled.div`
 
 const HeaderLinks = styled(Row)`
   justify-self: center;
-  background-color: ${({ theme }) => theme.bg0};
+  
+  background-color: transparent;
   width: fit-content;
   padding: 4px;
   border-radius: 16px;
@@ -126,7 +127,12 @@ const HeaderLinks = styled(Row)`
   grid-auto-flow: column;
   grid-gap: 10px;
   overflow: auto;
-  align-items: center;
+  /* align-items: center; */
+  /* align-items: flex-end; */
+  justify-content: flex-end;
+  /* justify-items: flex-end; */
+  /* border: 1px solid green; */
+  width: 100%;
   ${({ theme }) => theme.mediaWidth.upToLarge`
     justify-self: start;  
     `};
@@ -261,6 +267,36 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
+const StyledLink = styled.a.attrs({
+  activeClassName,
+})`
+  ${({ theme }) => theme.flexRowNoWrap}
+  align-items: left;
+  border-radius: 3rem;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: ${({ theme }) => theme.text2};
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  word-break: break-word;
+  overflow: hidden;
+  white-space: nowrap;
+  &.${activeClassName} {
+    border-radius: 12px;
+    font-weight: 600;
+    justify-content: center;
+    color: ${({ theme }) => theme.text1};
+    background-color: ${({ theme }) => theme.bg2};
+  }
+
+  :hover,
+  :focus {
+    color: ${({ theme }) => darken(0.1, theme.text1)};
+  }
+`
+
 const StyledExternalLink = styled(ExternalLink).attrs({
   activeClassName,
 }) <{ isActive?: boolean }>`
@@ -325,15 +361,34 @@ export default function Header() {
             )}
           </UniIcon>
           <LogoText fontSize={isMobile ? "14px" : "16px"}>
-            ALYX Bridge
+            Alyx Bridge
           </LogoText>
         </Title>
+        {!isMobile && <>
+          <HeaderLinks>
+            <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
+              <Trans>Swap</Trans>
+            </StyledNavLink>
+            <StyledNavLink id={`swap-nav-link`} to={'/pool'}>
+              <Trans>Pool</Trans>
+            </StyledNavLink>
+            <StyledNavLink id={`swap-nav-link`} to={'/history'}>
+              <Trans>History</Trans>
+            </StyledNavLink>
+            <StyledLink id={`funding-nav-link`} href={"https://docs.alyxbridge.com/"} target="#">
+              <Trans>Docs</Trans>
+            </StyledLink>
+            {/* <StyledNavLink id={`swap-nav-link`} to={'/mine'}>
+          <Trans>Mine</Trans>
+        </StyledNavLink> */}
+          </HeaderLinks>
 
+        </>}
         <HeaderControls>
           <HeaderElement>
             <AccountElement active={!!account}>
               {account && userEthBalance ? (
-                <BalanceText style={{ flexShrink: 0, userSelect: 'none'}} pl="0.75rem" pr="0.5rem" fontWeight={500}>
+                <BalanceText style={{ flexShrink: 0, userSelect: 'none' }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                   <Trans>
                     {userEthBalance?.toSignificant(3) +
                       ' ' +

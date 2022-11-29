@@ -17,6 +17,7 @@ import Popups from '../components/Popups'
 import { ApplicationModal } from '../state/application/actions'
 import { useModalOpen, useToggleModal } from '../state/application/hooks'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
+import Swap from './Swap'
 import Home from './Home'
 import { isMobile, useDeviceData, deviceType } from 'react-device-detect'
 
@@ -131,7 +132,7 @@ export default function App() {
       {/* <Route component={GoogleAnalyticsReporter} /> */}
       <Route component={DarkModeQueryParamReader} />
       <Web3ReactManager>
-        <AppWrapper minHeigth={innerHeight+"px"}>
+        <AppWrapper minHeigth={innerHeight + "px"}>
           {/* <BackgroundGradient></BackgroundGradient> */}
           <HeaderWrapper>
             <Header />
@@ -139,9 +140,19 @@ export default function App() {
           <BodyWrapper>
             <Popups />
             <Polling />
-            <Switch>
-              <Route exact strict path="/" component={Home} />
-            </Switch>
+            {isMobile ? <>
+              <Switch>
+                <Route exact strict path="/" component={Swap} />
+              </Switch>
+            </> : <>
+              <Switch>
+                <Route exact strict path="/" component={Home} />
+              </Switch>
+              <Switch>
+                <Route exact strict path="/swap" component={Swap} />
+              </Switch>
+            </>
+            }
             <Marginer />
           </BodyWrapper>
           <Footer></Footer>
