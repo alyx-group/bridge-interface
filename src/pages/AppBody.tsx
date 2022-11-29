@@ -96,10 +96,10 @@ export default function AppBody({ children, ...rest }: { children: React.ReactNo
   }
   return (
     <Body minHeigth={(innerHeight - 72) + "px"}>
-      <BackGroundVedio
+      {/* <BackGroundVedio
         autoPlay loop muted>
         <source src='file.mp4' type='video/mp4'></source>
-      </BackGroundVedio>
+      </BackGroundVedio> */}
       {children}
       {/* <BodyWrapper minHeigth={(innerHeight - 72) + "px"}{...rest}> */}
       {/* </BodyWrapper> */}

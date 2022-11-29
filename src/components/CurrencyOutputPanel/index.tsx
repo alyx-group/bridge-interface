@@ -50,9 +50,9 @@ const FixedContainer = styled.div`
 
 const Container = styled.div<{ hideInput: boolean }>`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background: none;
-  gap: 50px;
+  gap: 2px;
   /* border: 1px solid red; */
   width: 100%;
   /* height: 50px; */
@@ -75,15 +75,15 @@ const Container = styled.div<{ hideInput: boolean }>`
 `
 
 const CurrencySelect = styled(ButtonGray) <{ visible: boolean; selected: boolean; hideInput?: boolean }>`
-  width: 167px;
-  height: 43px;
+  width: 200px;
+  height: 80px;
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   align-items: center;
   font-size: 14px;
   font-weight: 500;
   /* background-color: ${({ selected, theme }) => (selected ? theme.bg0 : theme.primary1)}; */
   color: ${({ selected, theme }) => (selected ? theme.text1 : theme.white)};
-  border-radius: 15px;
+  border-radius: 25px;
   /* box-shadow: ${({ selected }) => (selected ? 'none' : '0px 6px 10px rgba(0, 0, 0, 0.075)')}; */
   /* box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075); */
   outline: none;
@@ -92,7 +92,7 @@ const CurrencySelect = styled(ButtonGray) <{ visible: boolean; selected: boolean
   /* padding: 0 8px; */
   justify-content: space-between;
   /* margin-right: ${({ hideInput }) => (hideInput ? '0' : '12px')}; */
-  border: 1px solid rgb(29, 103, 205);
+  border: 1px solid rgb(175,179,186);
   background: rgba(0, 0, 0, 0.6);
 
   :focus,
@@ -158,7 +158,7 @@ const StyledDropDown = styled(DropDown) <{ selected: boolean }>`
 
 const StyledTokenName = styled.span<{ active?: boolean }>`
   ${({ active }) => (active ? '  margin: 0 0.25rem 0 0.25rem;' : '  margin: 0 0.25rem 0 0.25rem;')}
-  font-size:  ${({ active }) => (active ? '16px' : '16px')};
+  font-size:  ${({ active }) => (active ? '18px' : '18px')};
   font-family: montserrat_semi_bold;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     font-size: 15px;
@@ -168,31 +168,40 @@ const StyledTokenName = styled.span<{ active?: boolean }>`
 `
 
 const StyledBalanceMax = styled.button<{ disabled?: boolean }>`
-  background-color: transparent;
+   background-color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
+  
+  font-size: 18px;
+  font-weight: 800;
   cursor: pointer;
-  padding: 0;
-  color: ${({ theme }) => theme.primaryText1};
+  color: rgb(54,79,141);
   opacity: ${({ disabled }) => (!disabled ? 1 : 0.4)};
   pointer-events: ${({ disabled }) => (!disabled ? 'initial' : 'none')};
-  margin-left: 0.25rem;
-
+  margin-right: 1.25rem;
+  height: 30px;
+  width: 60px;
+  border-radius: 7px;
   :focus {
     outline: none;
   }
-
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    height: auto;
+    width: auto;
+    background-color: transparent;
+    margin-right: 0;
+    font-size: 14px;
+    color: ${({ theme }) => theme.primaryText1};
+    // flex: 1;
+    // border: 1px solid red;
   `};
 `
 const StyledNumericalInputWrapper = styled.div`
   display: flex;
+  flex: 5;
   flex-direction: row;
-  border-radius: 15px;
+  border-radius: 25px;
   background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgb(29, 103, 205);
+  border: 1px solid rgb(175,179,186);
   justify-content: center;
   align-items: center;
   padding-left: 15px;
@@ -208,12 +217,13 @@ const StyledNumericalInput = styled(NumericalInput) <{ $loading: boolean }>`
   ${loadingOpacityMixin}
   text-align: center;
   width: 406px;
-  height: 43px;
+  height: 80px;
   border-radius: 15px;
-  border: 1px solid rgb(29, 103, 205);
-  font-size: 14px;
-  background: rgba(0, 0, 0, 0.6);;
-  
+  /* border: 1px solid rgb(29, 103, 205); */
+  font-size: 30px;
+  background: transparent;
+  text-align: left;
+  padding-left: 5px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     flex: 5;
     width: 100px;
@@ -247,7 +257,7 @@ interface CurrencyOutputPanelProps {
   renderBalance?: (amount: CurrencyAmount<Currency>) => ReactNode
   locked?: boolean
   loading?: boolean
-  poolSize?: number|undefined
+  poolSize?: number | undefined
 }
 
 const BalanceWrapper = styled.div`
@@ -265,6 +275,10 @@ const LogoWhiteBackground = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50%;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     width: 40px;
     height: 40px;
@@ -340,7 +354,7 @@ export default function CurrencyOutputPanel({
           <BalanceWrapper>
             {!hideBalance && currency && selectedCurrencyBalance ? (
               <Text>
-                Pool size: { poolSize } {/* {currency.symbol} */}
+                Pool size: {poolSize} {/* {currency.symbol} */}
                 {/* Pool size: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {currency.symbol} */}
               </Text>
             ) : null}
@@ -419,8 +433,41 @@ export default function CurrencyOutputPanel({
       <Container hideInput={hideInput} id='container'>
         {/* <InputRow style={hideInput ? { padding: '0', borderRadius: '8px' } : {}} selected={!onCurrencySelect}>
         </InputRow> */}
-        <Column gap="5px">
-          <Text fontSize={"14px"}>Token</Text>
+        {!hideInput && !hideBalance && (
+          <Row style={{ border: "0px solid red", justifyContent: "flex-end" }}>
+            {/* <RowBetween> */}
+            {account ? (
+              <RowFixed style={{ height: '24px', border: "0px solid green", marginRight: "10px" }}>
+                <TYPE.body
+                  onClick={onMax}
+                  color={theme.text2}
+                  fontWeight={400}
+                  fontSize={14}
+                  style={{ display: 'inline', cursor: 'pointer' }}
+                >
+                  <Trans>Pool Size:&nbsp;</Trans>
+                  {!hideBalance && currency && selectedCurrencyBalance ? (
+                    renderBalance ? (
+                      renderBalance(selectedCurrencyBalance)
+                    ) : (
+                      <>
+                        &nbsp;&nbsp;{poolSize}
+                      </>
+                    )
+                  ) : null}
+                </TYPE.body>
+              </RowFixed>
+            ) : (
+              <span />
+            )}
+            {/* <LoadingOpacityContainer $loading={loading}>
+                    <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />
+                  </LoadingOpacityContainer> */}
+            {/* </RowBetween> */}
+          </Row>
+        )}
+        <Row gap="10px">
+          {/* <Text fontSize={"14px"}>Token</Text> */}
           <CurrencySelect
             visible={true}
             selected={!!currency}
@@ -433,13 +480,15 @@ export default function CurrencyOutputPanel({
             }}
           >
             <Aligner>
-              <Row justify="center">
+              <Row justify="center" gap='5px'>
                 {pair ? (
                   <span style={{ marginRight: '0.5rem' }}>
                     <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={24} margin={true} />
                   </span>
                 ) : currency ? (
-                  <CurrencyLogo style={{ marginRight: '0.5rem' }} currency={currency} size={'24px'} />
+                  <LogoWhiteBackground>
+                    <CurrencyLogo style={{ marginRight: '0rem' }} currency={currency} size={'40px'} />
+                  </LogoWhiteBackground>
                 ) : null}
                 {pair ? (
                   <StyledTokenName className="pair-name-container">
@@ -458,55 +507,18 @@ export default function CurrencyOutputPanel({
               {/* {onCurrencySelect && <StyledDropDown selected={!!currency} />} */}
             </Aligner>
           </CurrencySelect>
-        </Column>
-        {!hideInput && (
-          <Column gap="5px">
-            <Text fontSize={"14px"}>Amount</Text>
-            <StyledNumericalInput
-              className="token-amount-input"
-              value={value}
-              onUserInput={onUserInput}
-              $loading={loading}
-            />
-            {!hideInput && !hideBalance && (
-              <FiatRow>
-                {/* <RowBetween> */}
-                {account ? (
-                  <RowFixed style={{ height: '24px' }}>
-                    <TYPE.body
-                      onClick={onMax}
-                      color={theme.text2}
-                      fontWeight={400}
-                      fontSize={14}
-                      style={{ display: 'inline', cursor: 'pointer' }}
-                    >
-                      {!hideBalance && currency && selectedCurrencyBalance ? (
-                        renderBalance ? (
-                          renderBalance(selectedCurrencyBalance)
-                        ) : (
-                          <Trans>
-                            Balance: {formatCurrencyAmount(selectedCurrencyBalance, 8)} {currency.symbol}
-                          </Trans>
-                        )
-                      ) : null}
-                    </TYPE.body>
-                    {showMaxButton && selectedCurrencyBalance ? (
-                      <StyledBalanceMax onClick={onMax}>
-                        <Trans>(Max)</Trans>
-                      </StyledBalanceMax>
-                    ) : null}
-                  </RowFixed>
-                ) : (
-                  <span />
-                )}
-                {/* <LoadingOpacityContainer $loading={loading}>
-                    <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />
-                  </LoadingOpacityContainer> */}
-                {/* </RowBetween> */}
-              </FiatRow>
-            )}
-          </Column>
-        )}
+          {!hideInput && (
+            <StyledNumericalInputWrapper>
+              <StyledNumericalInput
+                className="token-amount-input"
+                value={value}
+                onUserInput={onUserInput}
+                $loading={loading}
+              />
+            </StyledNumericalInputWrapper>
+          )}
+        </Row>
+
 
       </Container>
       {onCurrencySelect && (

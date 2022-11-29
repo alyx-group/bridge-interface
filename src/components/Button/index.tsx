@@ -53,7 +53,7 @@ export const BaseButton = styled(RebassButton)<
 export const ButtonPrimary = styled(BaseButton)`
   background-color: ${({ theme }) => theme.primary1};
   color: white;
-  height: 45px;
+  height: 50px;
   border-radius: 16px;
  
   &:focus {
@@ -79,7 +79,7 @@ export const ButtonPrimary = styled(BaseButton)`
   }
   
   ${({theme}) => theme.mediaWidth.upToSmall`
-    height: 65x;
+    height: 45x;
     padding: 0;
     // width: 200px;
     border-radius: 30px;
@@ -265,7 +265,7 @@ const ButtonConfirmedStyle = styled(BaseButton)`
 const ButtonErrorStyle = styled(BaseButton)`
   background-color: ${({ theme }) => theme.red1};
   border: 1px solid ${({ theme }) => theme.red1};
-
+  
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.red1)};
     background-color: ${({ theme }) => darken(0.05, theme.red1)};
@@ -300,6 +300,7 @@ export function ButtonConfirmed({
 
 export function ButtonError({ error, ...rest }: { error?: boolean } & ButtonProps) {
   if (error) {
+    // return <></>
     return <ButtonErrorStyle {...rest} />
   } else {
     return <ButtonPrimary {...rest} />

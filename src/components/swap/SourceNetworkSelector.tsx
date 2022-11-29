@@ -79,6 +79,7 @@ const SelectorLabel = styled.div`
   // display: none;
   flex: 0 1 auto;
   margin-left: 4px;
+  font-size: 20px;
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     display: block;
     margin-right: 8px;
@@ -98,7 +99,8 @@ const SelectorControls = styled.div<{ interactive: boolean }>`
   flex-direction: row;
   align-items: center;
   font-weight: 500;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: flex-start;
   /* padding: 6px 8px; */
   /* height: auto; */
   width: 165px;
@@ -111,8 +113,8 @@ const SelectorControls = styled.div<{ interactive: boolean }>`
   `}
 `
 const SelectorLogo = styled(Logo) <{ interactive?: boolean }>`
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
   margin-right: ${({ interactive }) => (interactive ? 8 : 0)}px;
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     margin-right: 8px;
@@ -128,9 +130,11 @@ const SelectorWrapper = styled.div`
   /* border: 3px solid green; */
   width: 165px;
   height: 41px;
-  border: 1px solid rgb(29, 103, 205);
+  /* border: 1px solid rgb(29, 103, 205); */
+  border: none;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.3);
+  background-color: transparent;
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     position: relative;
   }

@@ -16,14 +16,15 @@ export const Wrapper = styled.div`
 `
 
 export const ArrowWrapper = styled.div<{ clickable: boolean }>`
-  width: 169px;
-  height: 45px;
+  width: 100%;
+  /* height: 45px; */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid green; */;
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    padding-top: 0px;
+    padding: 10px 0px;
     width: 100%;
   `};
 `

@@ -87,7 +87,8 @@ const SelectorLabel = styled.div`
     display: block;
     margin-right: 8px;
   }
-  
+  font-size: 20px;
+  text-decoration: underline;  
   ${({ theme }) => theme.mediaWidth.upToSmall`
     font-size: 16px;
     text-decoration: underline;  
@@ -104,7 +105,8 @@ const SelectorControls = styled.div<{ interactive: boolean }>`
   flex-direction: row;
   align-items: center;
   font-weight: 500;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: flex-start;
   /* padding: 6px 8px; */
   /* height: auto; */
   width: 165px;
@@ -122,8 +124,8 @@ const SelectorLogo = styled(Logo) <{ interactive?: boolean }>`
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     margin-right: 8px;
   }
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     width: 30px;
     height: 30px;
@@ -133,12 +135,13 @@ const SelectorLogo = styled(Logo) <{ interactive?: boolean }>`
 const SelectorWrapper = styled.div`
   width: auto;
   height: 41px;
-  border: 3px solid rgb(29, 103, 205);
+  /* border: 3px solid rgb(29, 103, 205); */
   border-radius: 15px;
   :hover {
     /* background-color: #689ADE; */
   }
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  /* background-color: rgba(255, 255, 255, 0.3); */
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     position: relative;
   }
