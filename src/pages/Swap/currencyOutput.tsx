@@ -120,10 +120,10 @@ export default function CurrencyInput() {
         outAmount = Number(typedValue) - pairInfo.minimumCrossFee
       }
     }
-    if (outAmount < 0){
-      return "0"
+    if (outAmount <= 0){
+      return "0.0"
     }
-    return outAmount
+    return String(outAmount)
   }, [typedValue, pairInfo])
   return (
     <CurrencyOutputPanel

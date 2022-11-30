@@ -16,9 +16,9 @@ export default function Home({ history }: RouteComponentProps) {
     return (
         <AppBody>
             <HomeWrapper>
-                <img src={HomeMain} width={innerWidth / 3 + 'px'}></img>
+                <img src={HomeMain} width={innerWidth / 2.5 + 'px'}></img>
             </HomeWrapper>
-            <Text fontSize={"50px"}>
+            <Text fontSize={"40px"}>
                 Mint & Burn Cross-Chain Protocol
             </Text>
             <NavLink to={'/swap'} >
@@ -27,7 +27,7 @@ export default function Home({ history }: RouteComponentProps) {
                     height: "50px",
                     borderRadius: "35px",
                     fontSize: "20px",
-                    fontWeight: 600,
+                    fontWeight: 400,
                     marginTop: "30px",
                     backgroundColor: rgb(32,74,169),
 

@@ -94,6 +94,8 @@ const ButtonWrapper = styled.div`
   /* margin-left: 217px; */
   gap: 5px;
   margin-top: 30px;
+  /* border: 1px solid green; */
+  border-radius: 50px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     width: 100%;
     min-width: 0px;
@@ -140,7 +142,7 @@ const Reminder = styled.div<{
     content:"• ";
   }
   padding-left: 40px;
-  font-size: 17px;
+  font-size: 16px;
   font-family: montserrat;
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
@@ -176,7 +178,8 @@ const NetworkWrapper = styled(Column) <{
   /* width: ${props => props.width ?? "inherit"}; */
   flex-direction: column;
   /* border: 1px solid rgb(175,179,186); */
-  background-color: rgb(32,46,76);
+  /* background-color: rgb(32,46,76); */
+  background-color: rgba(62,103,177, 0.5);
   border-radius: 25px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
       border-radius: 12px;
@@ -421,7 +424,7 @@ export default function Swap({ history }: RouteComponentProps) {
         disabled={(!isValid || !!swapCallbackError) && !swapInputError?.includes("Connect Wallet")}
         error={!isValid && !swapCallbackError}
       >
-        <Text fontSize={16} fontWeight={500}>
+        <Text fontSize={isMobile?16:20} fontWeight={isMobile?600:800}>
           {swapInputError ? swapInputError : <Trans>Transfer</Trans>}
         </Text>
       </ButtonError>

@@ -54,7 +54,7 @@ export const ButtonPrimary = styled(BaseButton)`
   background-color: ${({ theme }) => theme.primary1};
   color: white;
   height: 50px;
-  border-radius: 16px;
+  border-radius: 50px;
  
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.primary1)};
@@ -265,7 +265,7 @@ const ButtonConfirmedStyle = styled(BaseButton)`
 const ButtonErrorStyle = styled(BaseButton)`
   background-color: ${({ theme }) => theme.red1};
   border: 1px solid ${({ theme }) => theme.red1};
-  
+  border-radius: 30px;
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme }) => darken(0.05, theme.red1)};
     background-color: ${({ theme }) => darken(0.05, theme.red1)};

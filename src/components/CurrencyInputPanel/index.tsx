@@ -93,7 +93,7 @@ const CurrencySelect = styled(ButtonGray) <{ visible: boolean; selected: boolean
   justify-content: space-between;
   /* margin-right: ${({ hideInput }) => (hideInput ? '0' : '12px')}; */
   border: 1px solid rgb(175,179,186);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
 
   :focus,
   :hover {
@@ -199,7 +199,7 @@ const StyledNumericalInputWrapper = styled.div`
   display: flex;
   /* flex-direction: column; */
   border-radius: 25px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   border: 1px solid rgb(175,179,186);
   justify-content: center;
   align-items: center;
@@ -220,7 +220,7 @@ const StyledNumericalInput = styled(NumericalInput) <{ $loading: boolean }>`
   border-radius: 15px;
   /* border: 1px solid rgb(29, 103, 205); */
   font-size: 30px;
-  padding-left: 5px;
+  padding-left: 10px;
   background: transparent;
   text-align: left;
   ${({ theme }) => theme.mediaWidth.upToSmall`

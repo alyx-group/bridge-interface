@@ -94,7 +94,7 @@ const CurrencySelect = styled(ButtonGray) <{ visible: boolean; selected: boolean
   justify-content: space-between;
   /* margin-right: ${({ hideInput }) => (hideInput ? '0' : '12px')}; */
   border: 1px solid rgb(175,179,186);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
 
   :focus,
   :hover {
@@ -201,7 +201,7 @@ const StyledNumericalInputWrapper = styled.div`
   flex: 5;
   flex-direction: row;
   border-radius: 25px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   border: 1px solid rgb(175,179,186);
   justify-content: center;
   align-items: center;
@@ -224,7 +224,7 @@ const StyledNumericalInput = styled(NumericalInput) <{ $loading: boolean }>`
   font-size: 30px;
   background: transparent;
   text-align: left;
-  padding-left: 5px;
+  padding-left: 10px;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     flex: 5;
     width: 100px;
@@ -530,6 +530,7 @@ export default function CurrencyOutputPanel({
                 value={value}
                 onUserInput={onUserInput}
                 $loading={loading}
+                disabled
               />
             </StyledNumericalInputWrapper>
           )}
