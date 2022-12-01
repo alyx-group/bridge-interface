@@ -60,7 +60,7 @@ const TableData = styled.td`
 `
 const TableDataDetail = styled(TableData)`
     /* border-bottom: 1px solid darkgray; */
-    padding: 30px;
+    padding: 30px 0;
     background-color:rgb(33, 48, 62);
 `
 const CellWithImg = styled.div`
@@ -69,6 +69,7 @@ const CellWithImg = styled.div`
     align-items: center;
     align-content: center;
     justify-content: center;
+    /* border: 1px solid red; */
 
 `
 const TableRow = styled.tr<{
@@ -171,10 +172,10 @@ function Row(
                                     <TableRowDetail key={chain} >
                                         <TableDataDetail scope="row" >
                                             <CellWithImg >
-                                                <img src={targetChainInfo.logoUrl} width={"26px"} ></img>&nbsp;&nbsp;
-                                                <div style={{ flex: 3, textAlign: "right" }} >
-                                                    {formatChainName(chain)}
-                                                </div>
+                                                <img src={targetChainInfo.logoUrl} width={"26px"} ></img>&nbsp;{formatChainName(chain)}
+                                                {/* <div style={{  textAlign: "right" }} >
+                                                    
+                                                </div> */}
 
                                             </CellWithImg>
                                         </TableDataDetail>
@@ -233,7 +234,7 @@ export default function Pool({ history }: RouteComponentProps) {
                     <thead>
                         <tr>
                             <TableHeader style={{ fontSize: "22px" }} scope="col" width="140px">Token</TableHeader>
-                            <TableHeader style={{ fontSize: "22px" }} scope="col" width="480px">Mint At ALYX</TableHeader>
+                            <TableHeader style={{ fontSize: "22px" }} scope="col" width="480px">Minted At ALYX</TableHeader>
                             <TableHeader style={{ fontSize: "22px" }} scope="col" width="300px">Target Chains</TableHeader>
                             <TableHeader style={{ fontSize: "22px" }} scope="col" width="200px">Details</TableHeader>
                         </tr>
