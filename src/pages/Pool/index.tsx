@@ -123,21 +123,20 @@ function Row(
     showDetail: string,
     onClick: (key: string) => void,
 ) {
+    const LogoList = Object.keys(pair.targets).map((chain) => {
+        const targetToken = pair.targets[chain]
+        const targetChainInfo = CHAIN_INFO[targetToken.chainId]
+        return targetChainInfo.logoUrl
+    })
     const sourceChainInfo = CHAIN_INFO[pair.chainId]
     const chainString = Object.keys(pair.targets).reduce((previousChain, currentChain) => previousChain + "|" + currentChain)
     // const sourceBridgeAddress = BRIDGE_ADDRESSES[pair.chainId]
-    const LogoList = useMemo(() => {
-        return Object.keys(pair.targets).map((chain) => {
-            const targetToken = pair.targets[chain]
-            const targetChainInfo = CHAIN_INFO[targetToken.chainId]
-            return targetChainInfo.logoUrl
-        })
-    }, [pair])
+
     return (
         <>
             <TableRow key={pair.name} shadow={true} >
                 <TableData scope="row" colSpan={4}>
-                    <Table style={{ padding: "0",  borderRadius: "20px" }} width={"100%"} >
+                    <Table style={{ padding: "0", borderRadius: "20px" }} width={"100%"} >
                         <thead onClick={() => onClick(pair.address)} style={{ height: "100px", }}>
                             <tr >
                                 <TableHeader width="140px">
@@ -206,15 +205,19 @@ function Row(
 }
 
 export default function Pool({ history }: RouteComponentProps) {
+    const [showDetail, setShowDetail] = useState("")
     const { innerWidth } = window
     const { pairs } = useGetPairsQuery(null, {
         pollingInterval: ms`30s`,
         selectFromResult: ({ data }) => ({
-            pairs: data?.data,
-        }),
+            pairs: data?.data?.filter((token) => {
+                if (token.address.toLowerCase() !== "0x480bAacEa7d2DCDd28da31A5B31f49DfC4e6104E".toLowerCase()) {
+                    return true
+                }
+                return false
+            })
+        })
     })
-    const [showDetail, setShowDetail] = useState("")
-    // pairs[0].targets["bsc"].address
     const handleRowClick = (key: string) => {
         if (showDetail === key) {
             setShowDetail("")
@@ -237,6 +240,7 @@ export default function Pool({ history }: RouteComponentProps) {
                     </thead>
                     <tbody>
                         {pairs?.map(pair => {
+
                             return Row(pair, showDetail, handleRowClick)
                         })}
                     </tbody>
@@ -245,6 +249,7 @@ export default function Pool({ history }: RouteComponentProps) {
             {/* {
                 pairs?.length
             } */}
+            
         </AppBody>
     )
 }
