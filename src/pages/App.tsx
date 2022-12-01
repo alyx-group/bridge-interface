@@ -19,6 +19,7 @@ import { useModalOpen, useToggleModal } from '../state/application/hooks'
 import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import Swap from './Swap'
 import Home from './Home'
+import Pool from './Pool'
 import { isMobile, useDeviceData, deviceType } from 'react-device-detect'
 
 const AppWrapper = styled.div<{
@@ -147,6 +148,9 @@ export default function App() {
             </> : <>
               <Switch>
                 <Route exact strict path="/" component={Home} />
+              </Switch>
+              <Switch>
+                <Route exact strict path="/pool" component={Pool} />
               </Switch>
               <Switch>
                 <Route exact strict path="/swap" component={Swap} />

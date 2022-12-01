@@ -7,7 +7,8 @@ import {
   GetBridgeSupportedTargetNetworksResult,
   GetBridgeSupportedTokenResult,
   GetWithdrawTxHashResult,
-  getBridgePairInfo
+  getBridgePairInfo,
+  GetPairsResult,
 } from './types'
 
 export const bridgeApi = createApi({
@@ -33,6 +34,9 @@ export const bridgeApi = createApi({
     getTargetChainWithdrawTxHash: build.query<GetWithdrawTxHashResult, { proof: string }>({
       query: (args) => `/withdraw/hash?${qs.stringify(args)}`,
     }),
+    getPairs: build.query<GetPairsResult, null>({
+      query: () => `/pairs`,
+    }),
     getBridgePairInfo: build.query<getBridgePairInfo, {
       source_chain: string;
       token: string;
@@ -56,6 +60,7 @@ export const {
   useGetBridgeSupportedTokensQuery,
   useGetTargetChainWithdrawTxHashQuery,
   useGetBridgePairInfoQuery,
+  useGetPairsQuery,
 } = bridgeApi
 
 export const { } = bridgeApi.internalActions
