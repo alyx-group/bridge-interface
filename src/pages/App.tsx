@@ -20,6 +20,7 @@ import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import Swap from './Swap'
 import Home from './Home'
 import Pool from './Pool'
+import UserHistory from './History'
 import { isMobile, useDeviceData, deviceType } from 'react-device-detect'
 
 const AppWrapper = styled.div<{
@@ -151,6 +152,9 @@ export default function App() {
               </Switch>
               <Switch>
                 <Route exact strict path="/pool" component={Pool} />
+              </Switch>
+              <Switch>
+                <Route exact strict path="/user-history" component={UserHistory} />
               </Switch>
               <Switch>
                 <Route exact strict path="/swap" component={Swap} />

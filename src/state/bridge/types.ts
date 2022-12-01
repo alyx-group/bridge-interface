@@ -139,6 +139,7 @@ export interface BindAddressResult {
 //   }
 // },
 
+
 export interface PairTargets {
   [heco: string]: {
     chainId: number,
@@ -164,5 +165,26 @@ export interface PairToken {
 export interface GetPairsResult {
   code: number
   data: PairToken[]
+  msg: string
+}
+
+export interface UserHistory {
+  sourceChain: string
+  from: string
+  targetChain: string
+  to: string
+  amount: string
+  fee: string
+  proof: string
+  withdrawTxHash: string
+  doneTxHash: string
+  status: string
+}
+export interface GetUserHistoryResult {
+  code: number
+  data: {
+    total: number
+    list: UserHistory[]
+  }
   msg: string
 }

@@ -9,6 +9,7 @@ import {
   GetWithdrawTxHashResult,
   getBridgePairInfo,
   GetPairsResult,
+  GetUserHistoryResult,
 } from './types'
 
 export const bridgeApi = createApi({
@@ -37,6 +38,16 @@ export const bridgeApi = createApi({
     getPairs: build.query<GetPairsResult, null>({
       query: () => `/pairs`,
     }),
+    getUserHistory: build.query<GetUserHistoryResult, {
+      chain: string,
+      address: string,
+      page: number,
+      limit: number,
+      sort: string,
+      direction: string
+    }>({
+      query: (args) => `/user-history?chain=${args.chain}&address=${args.address}&page=${args.page}&limit=${args.limit}&direction=${args.direction}&sort=${args.sort}`,
+    }),
     getBridgePairInfo: build.query<getBridgePairInfo, {
       source_chain: string;
       token: string;
@@ -61,6 +72,7 @@ export const {
   useGetTargetChainWithdrawTxHashQuery,
   useGetBridgePairInfoQuery,
   useGetPairsQuery,
+  useGetUserHistoryQuery,
 } = bridgeApi
 
 export const { } = bridgeApi.internalActions

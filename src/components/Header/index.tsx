@@ -372,7 +372,7 @@ export default function Header() {
             <StyledNavLink id={`swap-nav-link`} to={'/pool'}>
               <Trans>Pool</Trans>
             </StyledNavLink>
-            <StyledNavLink id={`swap-nav-link`} to={'/history'}>
+            <StyledNavLink id={`swap-nav-link`} to={'/user-history'}>
               <Trans>History</Trans>
             </StyledNavLink>
             <StyledLink id={`funding-nav-link`} href={"https://docs.alyxbridge.com/"} target="#">
