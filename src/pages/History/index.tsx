@@ -238,67 +238,7 @@ export default function UserHistoryTransfer({ history }: RouteComponentProps) {
             })
         })
     })
-    const { sourceToken, targetToken } = useMemo(() => {
-        if (userHistoryList && pairs) {
-            for (let index = 0; index < userHistoryList.length; index++) {
-                const transfer = userHistoryList[index];
-                const parts = transfer.proof.split("_")
-                const token = parts[1]
-                if (transfer.sourceChain == "alyx") {
-                    const pair = pairs?.filter((pair) => {
-                        return pair.address.toLocaleLowerCase() === token.toLowerCase()
-                    })
-                    const targetToken = pair[0].targets[transfer.targetChain]
-                    if (pair[0]) {
-                        return {
-                            sourceToken: {
-                                address: pair[0].address,
-                                name: pair[0].name,
-                                symbol: pair[0].symbol,
-                                logoURI: pair[0].logoURI,
-                                decimals: pair[0].decimals,
-                            },
-                            targetToken: {
-                                address: targetToken.address,
-                                name: targetToken.name,
-                                symbol: targetToken.symbol,
-                                logoURI: targetToken.logoURI,
-                                decimals: targetToken.decimals,
-                            }
-                        }
-                    }
-                } else if (transfer.targetChain == "alyx") {
-                    const pair = pairs?.filter((pair) => {
-                        return pair.targets[transfer.sourceChain].address.toLocaleLowerCase() === token.toLowerCase()
-                    })
-                    console.log("transfer", transfer)
-                    console.log("pair", pair)
-                    if (pair[0] && pair[0].targets[transfer.sourceChain]) {
-                        return {
-                            sourceToken: {
-                                address: pair[0].targets[transfer.sourceChain].address,
-                                name: pair[0].targets[transfer.sourceChain].name,
-                                symbol: pair[0].targets[transfer.sourceChain].symbol,
-                                logoURI: pair[0].targets[transfer.sourceChain].logoURI,
-                                decimals: pair[0].targets[transfer.sourceChain].decimals,
-                            },
-                            targetToken: {
-                                address: pair[0].address,
-                                name: pair[0].name,
-                                symbol: pair[0].symbol,
-                                logoURI: pair[0].logoURI,
-                                decimals: pair[0].decimals,
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return {
-            sourceToken: null,
-            targetToken: null
-        }
-    }, [pairs, userHistoryList])
+    
 
     const getTokens = (transfer: UserHistory) => {
         const parts = transfer.proof.split("_")
