@@ -75,6 +75,11 @@ class MiniRpcProvider implements AsyncSendable {
     let json
     try {
       json = await response.json()
+      if (json.length){
+        console.log("response.json()", json)
+      }else{
+        json = [json]
+      }
     } catch (error) {
       batch.forEach(({ reject }) => reject(new Error('Failed to parse JSON response')))
       return
@@ -83,6 +88,9 @@ class MiniRpcProvider implements AsyncSendable {
       memo[current.request.id] = current
       return memo
     }, {})
+    console.log("json", json)
+    console.log("typeof json", typeof json)
+    // if (typeof json === "")
     for (const result of json) {
       const {
         resolve,

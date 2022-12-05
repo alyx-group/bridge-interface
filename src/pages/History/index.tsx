@@ -194,7 +194,7 @@ function Row(
 }
 
 export default function UserHistoryTransfer({ history }: RouteComponentProps) {
-    const { account, chainId } = useActiveWeb3React()
+    const { account, chainId, library } = useActiveWeb3React()
     const [showDetail, setShowDetail] = useState("")
     const [requestParams, setRequetParams] = useState({
         chain: "",
@@ -238,7 +238,7 @@ export default function UserHistoryTransfer({ history }: RouteComponentProps) {
             })
         })
     })
-    
+
 
     const getTokens = (transfer: UserHistory) => {
         const parts = transfer.proof.split("_")
@@ -298,13 +298,7 @@ export default function UserHistoryTransfer({ history }: RouteComponentProps) {
             targetToken: null
         }
     }
-    const handleRowClick = (key: string) => {
-        if (showDetail === key) {
-            setShowDetail("")
-        } else {
-            setShowDetail(key)
-        }
-    }
+    
     const tableWidth = innerWidth / 1.2 + 'px'
     const tableHeight = innerHeight / 1.2 + 30 + 'px'
     return (
@@ -333,6 +327,7 @@ export default function UserHistoryTransfer({ history }: RouteComponentProps) {
                     </tfoot>
                 </Table>
             }
+
             {/* {userHistoryList?.length} */}
             {/* {JSON.stringify(userHistoryList)} */}
 

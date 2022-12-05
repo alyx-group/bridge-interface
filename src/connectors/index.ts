@@ -75,7 +75,7 @@ export const portis = new PortisConnector({
 // mainnet only
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URLS[SupportedChainId.MAINNET],
-  appName: 'EqualSignBridge',
+  appName: 'AlyxBridge',
   // appLogoUrl: UNISWAP_LOGO_URL,
   appLogoUrl: App_Logo,
 })

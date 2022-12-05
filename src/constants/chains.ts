@@ -166,6 +166,16 @@ export const CHAIN_INFO: ChainInfo = {
     label: 'Ethereum',
     logoUrl: ethereumLogoUrl,
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+    rpcUrls: [
+      'https://rpc.ankr.com/eth',
+      'https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7',
+      'https://api.bitstack.com/v1/wNFxbiJyQsSeLrX8RRCHi7NpRxrlErZk/DjShIqLishPCTB9HiMkPHXjUM9CNM9Na/ETH/mainnet',
+      'https://uk.rpc.blxrbdn.com',
+      'https://eth-rpc.gateway.pokt.network',
+      'https://api.zmok.io/mainnet/oaen6dy8ff6hju9k',
+      'https://virginia.rpc.blxrbdn.com',
+      'https://rpc.flashbots.net'
+    ],
   },
   [SupportedChainId.ALYX]: {
     docs: 'https://docs.alyxchain.com/',
@@ -174,6 +184,7 @@ export const CHAIN_INFO: ChainInfo = {
     label: 'ALYX',
     logoUrl: alyxLogoUrl,
     nativeCurrency: { name: 'ALYX', symbol: 'ALYX', decimals: 18 },
+    rpcUrls: ['https://rpc.alyxchain.com'],
   },
   [SupportedChainId.HECO]: {
     docs: 'https://docs.hecochain.com/',
@@ -182,6 +193,12 @@ export const CHAIN_INFO: ChainInfo = {
     label: 'HECO',
     logoUrl: hecoLogoUrl,
     nativeCurrency: { name: 'HT', symbol: 'HT', decimals: 18 },
+    rpcUrls: [
+      'https://http-mainnet.hecochain.com',
+      'https://pub001.hg.network/rpc',
+      'https://http-mainnet-node.huobichain.com',
+      'wss://ws-mainnet.hecochain.com'
+    ],
   },
   [SupportedChainId.BSC]: {
     docs: 'https://docs.binance.org/smart-chain/guides/bsc-intro.html',
@@ -190,6 +207,13 @@ export const CHAIN_INFO: ChainInfo = {
     label: 'BSC',
     logoUrl: bscLogoUrl,
     nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
+    rpcUrls:[
+      'https://bsc-dataseed2.binance.org',
+      'https://bsc-dataseed.binance.org',
+      'https://bsc-dataseed4.binance.org',
+      'https://bsc-dataseed1.binance.org',
+      'https://bsc-dataseed2.ninicoin.io',
+    ]
   },
   [SupportedChainId.POLYGON]: {
     docs: 'https://polygon.technology/developers',
@@ -198,6 +222,12 @@ export const CHAIN_INFO: ChainInfo = {
     label: 'Polygon',
     logoUrl: polygonLogoUrl,
     nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
+    rpcUrls:[
+      'https://polygon-rpc.com',
+      'https://rpc.ankr.com/polygon',
+      'https://poly-rpc.gateway.pokt.network',
+      'https://matic-mainnet-full-rpc.bwarelabs.com',
+    ]
   },
   [SupportedChainId.RINKEBY]: {
     docs: 'https://docs.uniswap.org/',

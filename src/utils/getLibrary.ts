@@ -16,6 +16,7 @@ export default function getLibrary(provider: any): Web3Provider {
       ? parseInt(provider.chainId)
       : 'any'
   )
+  // library.
   library.pollingInterval = 15_000
   library.detectNetwork().then((network) => {
     const networkPollingInterval = NETWORK_POLLING_INTERVALS[network.chainId]

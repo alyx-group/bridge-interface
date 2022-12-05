@@ -9,6 +9,7 @@ import MediumLogo from '../../assets/images/Medium-w.png'
 import DiscordLogo from '../../assets/images/Discord-w.png'
 import GithubLogo from '../../assets/images/Github-w.png'
 import AppBody from '../AppBody'
+import HomeGif from '../../assets/images/home.gif'
 const HomeWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -68,7 +69,9 @@ export default function Home({ history }: RouteComponentProps) {
     return (
         <AppBody>
             <HomeWrapper>
-                <img src={HomeMain} width={innerWidth / 2.5 + 'px'}></img>
+                <img src={HomeGif} width={innerWidth / 2.5 + 'px'}></img>
+                {/* <img src={HomeGif}></img> */}
+                {/* <img src={HomeMain} width={innerWidth / 2.5 + 'px'}></img> */}
             </HomeWrapper>
             <Text fontSize={"40px"}>
                 Mint & Burn Cross-Chain Protocol
