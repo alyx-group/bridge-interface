@@ -80,6 +80,7 @@ const SelectorLabel = styled.div`
   flex: 0 1 auto;
   margin-left: 4px;
   font-size: 20px;
+  text-decoration: underline; 
   @media screen and (min-width: ${MEDIA_WIDTHS.upToSmall}px) {
     display: block;
     margin-right: 8px;
@@ -87,6 +88,7 @@ const SelectorLabel = styled.div`
   ${({ theme }) => theme.mediaWidth.upToSmall`
     font-size: 16px;
     margin-left: 0px;
+    text-decoration: none; 
   `}
 `
 const SelectorControls = styled.div<{ interactive: boolean }>`
