@@ -29,8 +29,12 @@ export const bridgeApi = createApi({
     >({
       query: (args) => `/supported/target-networks?${qs.stringify(args)}`,
     }),
-    getBridgeSupportedTokens: build.query<GetBridgeSupportedTokenResult, { chainId: SupportedChainId }>({
-      query: (args) => `/supported/tokens?${qs.stringify(args)}`,
+    getBridgeSupportedTokens: build.query<GetBridgeSupportedTokenResult,
+      { sourceChain: string | undefined | null, targetChain: string | undefined | null }
+      // { chainId: SupportedChainId | undefined, sourceChain: String | undefined, targetChain: String | undefined }
+    >({
+      query: (args) => `/supported/tokens?source_chain=${args.sourceChain}&target_chain=${args.targetChain}`,
+      // query: (args) => `/supported/tokens?${qs.stringify(args)}`,
     }),
     getTargetChainWithdrawTxHash: build.query<GetWithdrawTxHashResult, { proof: string }>({
       query: (args) => `/withdraw/hash?${qs.stringify(args)}`,

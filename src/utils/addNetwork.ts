@@ -25,10 +25,23 @@ export async function addNetwork({ library, chainId, info }: AddNetworkArguments
           rpcUrls: info.rpcUrls,
           nativeCurrency: info.nativeCurrency,
           blockExplorerUrls: [info.explorer],
+          iconUrls: [info.logoUrl],
         },
       ],
     })
   } catch (error) {
     console.error('error adding eth network: ', chainId, info, error)
+  }
+}
+
+interface WatchAssetParams {
+  library: Web3Provider
+  chainId: SupportedChainId
+  token: {
+    type: string
+    address: string
+    symbol: string
+    decimals: number
+    image: string
   }
 }

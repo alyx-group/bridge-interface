@@ -5,11 +5,13 @@ const Column = styled.div<{
   padding?: string,
   alignItems?: 'stretch' | 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'space-between'
   justifyContent?: 'stretch' | 'center' | 'start' | 'end' | 'flex-start' | 'flex-end' | 'space-between'
+  width?: string,
 }>`
   display: flex;
   flex-direction: column;
   gap: ${({ gap }) => gap ?? "0px"};
   padding: ${({ padding }) => padding ?? "0 0 0 0"};;
+  width: ${({ width }) => width ?? "auto"};;
   text-align: center;
   /* justify-content: center;
   justify-items: center; */

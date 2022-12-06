@@ -30,7 +30,10 @@ export default function CopyHelper(props: { toCopy: string; children?: React.Rea
   const [isCopied, setCopied] = useCopyClipboard()
 
   return (
-    <CopyIcon onClick={() => setCopied(props.toCopy)}>
+    <CopyIcon onClick={(event) => {
+      console.log("event at CopyHelper", JSON.stringify((event.target as Element).id))
+      setCopied(props.toCopy)
+    }} style={{ zIndex: 1000 }} >
       {isCopied ? (
         <TransactionStatusText>
           <CheckCircle size={'16'} />
@@ -39,8 +42,8 @@ export default function CopyHelper(props: { toCopy: string; children?: React.Rea
           </TransactionStatusText>
         </TransactionStatusText>
       ) : (
-        <TransactionStatusText>
-          <Copy size={'16'} />
+        <TransactionStatusText >
+          <Copy size={'16'} id="copyAddressIcon" />
         </TransactionStatusText>
       )}
       {isCopied ? '' : props.children}

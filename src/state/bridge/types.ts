@@ -32,13 +32,32 @@ export interface GetWithdrawTxHashResult {
   msg: string
 }
 
+export interface SupportedToken{
+  address: string
+  chainId: number
+  decimals: number
+  logoURI: string
+  name: string
+  symbol: string
+}
 export interface GetBridgeSupportedTokenResult {
   code: number
+  // data: {
+  //   address: string
+  //   name: string
+  //   symbol: string
+  // }[]
   data: {
-    address: string
+    keywords: string[]
+    logoURI: string
     name: string
-    symbol: string
-  }[]
+    tokens: SupportedToken[],
+    version: {
+      major: number
+      minor: number
+      patch: number
+    } 
+  }
   msg: string
 }
 

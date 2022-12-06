@@ -12,7 +12,7 @@ import { ArrowDown, CheckCircle, HelpCircle, Info } from 'react-feather'
 import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
-import { useGetBridgePairInfoQuery, useGetBridgeSupportedChainsQuery, useGetBridgeSupportedTargetNetworksQuery } from 'state/bridge/slice'
+import { useGetBridgeSupportedTokensQuery, useGetBridgePairInfoQuery, useGetBridgeSupportedChainsQuery, useGetBridgeSupportedTargetNetworksQuery } from 'state/bridge/slice'
 import styled, { ThemeContext } from 'styled-components'
 
 import { ButtonConfirmed, ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
@@ -67,6 +67,7 @@ import LogoDiamond from '../../assets/images/diamond.gif'
 import { number } from '@lingui/core/cjs/formats'
 import SettingGaer from '../../assets/images/setting-gaer.png'
 import ReminderLogo from '../../assets/images/reminder.png'
+import { watchAsset } from 'utils/watchAsset'
 
 const SwapRight = styled.div`
   /* flex: 3; */
@@ -188,7 +189,7 @@ const NetworkWrapper = styled(Column) <{
   `};
 `
 export default function Swap({ history }: RouteComponentProps) {
-  const { account, chainId } = useActiveWeb3React()
+  const { account, chainId, library } = useActiveWeb3React()
   // get version from the url
 
 
@@ -229,7 +230,7 @@ export default function Swap({ history }: RouteComponentProps) {
     currencies,
     inputError: swapInputError,
   } = useDerivedSwapInfo(toggledVersion)
-
+  
   const { wrapType, execute: onWrap, inputError: wrapInputError } = useWrapCallback(
     currencies[Field.INPUT],
     currencies[Field.OUTPUT],
@@ -424,7 +425,7 @@ export default function Swap({ history }: RouteComponentProps) {
         disabled={(!isValid || !!swapCallbackError) && !swapInputError?.includes("Connect Wallet")}
         error={!isValid && !swapCallbackError}
       >
-        <Text fontSize={isMobile?16:20} fontWeight={isMobile?600:800}>
+        <Text fontSize={isMobile ? 16 : 20} fontWeight={isMobile ? 600 : 800}>
           {swapInputError ? swapInputError : <Trans>Transfer</Trans>}
         </Text>
       </ButtonError>
@@ -496,7 +497,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 {pairInfo ? <Column gap={"2px"} padding={"0px 0 0 0px"} alignItems='flex-start'>
                   <ReminderHeader color="white">
                     <img src={ReminderLogo} width={"35px"}></img>
-                    <Text fontSize="11px" fontFamily="montserrat_bold" style={{marginLeft: "-5px", marginTop:"-1px"}}> Reminder</Text>
+                    <Text fontSize="11px" fontFamily="montserrat_bold" style={{ marginLeft: "-5px", marginTop: "-1px" }}> Reminder</Text>
                   </ReminderHeader>
                   <Reminder><Text>Crosschain Fee is {pairInfo.feeRate * 100}%, Minimum Crosschain Fee is {pairInfo.minimumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
                   <Reminder><Text>Maximum Crosschain Fee is {pairInfo.maximumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
@@ -508,7 +509,7 @@ export default function Swap({ history }: RouteComponentProps) {
                   <Column gap={"2px"} padding={"0px 0 0 10px"} alignItems='flex-start'>
                     <ReminderHeader color="white">
                       <img src={ReminderLogo} width={"35px"}  ></img>
-                      <Text fontSize="11px" fontFamily="montserrat_bold" style={{marginLeft: "-5px", marginTop:"-1px"}}> Reminder</Text>
+                      <Text fontSize="11px" fontFamily="montserrat_bold" style={{ marginLeft: "-5px", marginTop: "-1px" }}> Reminder</Text>
                     </ReminderHeader>
                     <Reminder><Text>Crosschain Fee is 0.5 %, Minimum Crosschain Fee is 1 USDC</Text></Reminder>
                     <Reminder><Text>Maximum Crosschain Fee is 1,000 USDC</Text></Reminder>
@@ -604,7 +605,7 @@ export default function Swap({ history }: RouteComponentProps) {
               {/* <Row>
                 <CurrencyInput></CurrencyInput>
               </Row> */}
-              
+
               {/* {supportedTargets && supportedTargets.length > 0 &&
                 <Row gap={"50px"}>
                   <Column gap="5px">
@@ -621,7 +622,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 {pairInfo ? <Column gap={"2px"} padding={"0px 0 0 0px"} alignItems='flex-start'>
                   <ReminderHeader color="white">
                     <img src={ReminderLogo} width={"45px"}></img>
-                    <Text fontSize="18px" fontFamily="montserrat_bold" style={{marginLeft: "-5px", marginTop:"0px"}}> Reminder</Text>
+                    <Text fontSize="18px" fontFamily="montserrat_bold" style={{ marginLeft: "-5px", marginTop: "0px" }}> Reminder</Text>
                   </ReminderHeader>
                   <Reminder><Text>Crosschain Fee is {pairInfo.feeRate * 100}%, Minimum Crosschain Fee is {pairInfo.minimumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
                   <Reminder><Text>Maximum Crosschain Fee is {pairInfo.maximumCrossFee} {inputCurrency?.symbol}</Text></Reminder>
@@ -633,7 +634,7 @@ export default function Swap({ history }: RouteComponentProps) {
                   <Column gap={"2px"} padding={"0px 0 0 10px"} alignItems='flex-start'>
                     <ReminderHeader color="white">
                       <img src={ReminderLogo} width={"35px"}  ></img>
-                      <Text fontSize="11px" fontFamily="montserrat_bold" style={{marginLeft: "-5px", marginTop:"-1px"}}> Reminder</Text>
+                      <Text fontSize="11px" fontFamily="montserrat_bold" style={{ marginLeft: "-5px", marginTop: "-1px" }}> Reminder</Text>
                     </ReminderHeader>
                     <Reminder><Text>Crosschain Fee is 0.5 %, Minimum Crosschain Fee is 1 USDC</Text></Reminder>
                     <Reminder><Text>Maximum Crosschain Fee is 1,000 USDC</Text></Reminder>
@@ -645,7 +646,7 @@ export default function Swap({ history }: RouteComponentProps) {
                 }
               </NetworkWrapper>
               <ApproveFlow TransferButton={TransferButton}></ApproveFlow>
-              
+
             </SwapRight>
           </Row >
 

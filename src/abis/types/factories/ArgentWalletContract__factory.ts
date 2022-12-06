@@ -73,7 +73,7 @@ export class ArgentWalletContract__factory {
   static createInterface(): ArgentWalletContractInterface {
     return new utils.Interface(_abi) as ArgentWalletContractInterface
   }
-  static connect(address: string, signerOrProvider: Signer | Provider): ArgentWalletContract {
+  static connect(address: string, signerOrProvider: Signer | Provider | undefined): ArgentWalletContract {
     return new Contract(address, _abi, signerOrProvider) as ArgentWalletContract
   }
 }

@@ -7,6 +7,7 @@ import useTheme from 'hooks/useTheme'
 import { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
+import { SupportedToken } from 'state/bridge/types'
 import styled from 'styled-components'
 
 import TokenListLogo from '../../assets/svg/tokenlist.svg'
@@ -20,10 +21,15 @@ import { isTokenOnList } from '../../utils'
 import Column from '../Column'
 import CurrencyLogo from '../CurrencyLogo'
 import Loader from '../Loader'
-import { RowBetween, RowFixed } from '../Row'
+import Row, { RowBetween, RowFixed } from '../Row'
 import { MouseoverTooltip } from '../Tooltip'
 import ImportRow from './ImportRow'
 import { MenuItem } from './styleds'
+import { Web3Provider } from "@ethersproject/providers";
+import { watchAsset } from 'utils/watchAsset'
+import CopyHelper from 'components/AccountDetails/Copy'
+import MetamaskSvg from '../../assets/svg/metamask.svg'
+import { isMobile } from 'react-device-detect'
 
 function currencyKey(currency: Currency): string {
   return currency.isToken ? currency.address : 'ETHER'
@@ -100,8 +106,64 @@ function TokenTags({ currency }: { currency: Currency }) {
   )
 }
 
+function AddAssetButton(
+  {
+    token,
+    library,
+  }: {
+    token?: SupportedToken,
+    library?: Web3Provider | undefined,
+  }
+) {
+  function handleWatchAsset(
+    library: Web3Provider | undefined,
+    token: SupportedToken,
+  ) {
+    try {
+      if (library) {
+        console.log("library", library)
+        watchAsset({
+          library,
+          token: {
+            type: "ERC20",
+            address: token.address,
+            symbol: token.symbol,
+            decimals: token.decimals,
+            image: token.logoURI,
+          }
+        })
+      }
+    }
+    catch {
+    }
+  }
+  if (token && library) {
+    return (
+      <>
+        <CopyHelper toCopy={token.address} ></CopyHelper>&nbsp;
+        {
+          !isMobile &&
+          <img
+            onClick={() => handleWatchAsset(library, token)}
+            id="watchAssetIcon" style={{ marginTop: "2px", cursor: "pointer" }} src={MetamaskSvg} width="22px"></img>
+        }
+      </>
+    )
+  } else {
+    return (
+      <>
+        <CopyHelper toCopy={"none"}></CopyHelper>&nbsp;
+        {
+          !isMobile && <img id="watchAssetIcon" style={{ marginTop: "2px", cursor: "pointer" }} src={MetamaskSvg} width="22px"></img>
+        }
+      </>
+    )
+  }
+}
+
+
 function CurrencyRow({
-  index, 
+  index,
   currency,
   onSelect,
   isSelected,
@@ -117,7 +179,7 @@ function CurrencyRow({
   style: CSSProperties
   showCurrencyAmount?: boolean
 }) {
-  const { account, chainId } = useActiveWeb3React()
+  const { account, chainId, library } = useActiveWeb3React()
   const key = currencyKey(currency)
   const selectedTokenList = useCombinedActiveList()
   const isOnSelectedList = isTokenOnList(selectedTokenList, currency.isToken ? currency : undefined)
@@ -160,23 +222,45 @@ function CurrencyRow({
     <MenuItem
       style={style}
       className={`token-item-${key}`}
-      onClick={() => (isSelected ? null : onSelect())}
-      disabled={isSelected}
+      onClick={(event) => {
+        // console.log("event",)
+        console.log("event", JSON.stringify((event.target as Element).id))
+        if ((event.target as Element).id !== "copyAddressIcon" && (event.target as Element).id !== "watchAssetIcon") {
+          // onClick(pair.address)
+          // onSelect()
+          (isSelected ? null : onSelect())
+        }
+      }
+      }
+      // disabled={isSelected}
       selected={otherSelected}
     >
       <CurrencyLogo currency={currency} size={'24px'} />
-      <Column>
-        <Text title={currency.name} fontWeight={500}>
-          {symbol}
-        </Text>
-        <TYPE.darkGray ml="0px" fontSize={'12px'} fontWeight={300}>
-          {!currency.isNative && !isOnSelectedList && customAdded ? (
-            <Trans>{currency.name} • Added by user</Trans>
-          ) : (
-            name
-          )}
-        </TYPE.darkGray>
-      </Column>
+      <Row justify='center'>
+        <Column width={isMobile ? '200px' : '200px'}>
+          <Text title={currency.name} fontWeight={500}>
+            {symbol}
+          </Text>
+          <TYPE.darkGray ml="0px" fontSize={'12px'} fontWeight={300}>
+            {!currency.isNative && !isOnSelectedList && customAdded ? (
+              <Trans>{currency.name} • Added by user</Trans>
+            ) : (
+              name
+            )}
+          </TYPE.darkGray>
+        </Column>
+        {/* {!isMobile && */}
+        <AddAssetButton token={{
+          address: currency.wrapped.address,
+          chainId: currency.chainId,
+          decimals: currency.decimals,
+          logoURI: currency instanceof WrappedTokenInfo ? currency.logoURI ?? "" : "",
+          name: currency.name ?? "",
+          symbol: currency.symbol ?? "",
+        }} library={library}
+        ></AddAssetButton>
+        {/* } */}
+      </Row>
       <TokenTags currency={currency} />
       {showCurrencyAmount && (
         <RowFixed style={{ justifySelf: 'flex-end' }}>

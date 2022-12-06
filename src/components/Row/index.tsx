@@ -23,7 +23,7 @@ const Row = styled(Box)<{
   border-radius: ${({ borderRadius }) => borderRadius};
   gap: ${({ gap }) => gap};
 
-  /* border: 3px solid green; */
+  /* border: 1px solid green; */
 `
 
 export const RowBetween = styled(Row)`
